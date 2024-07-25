@@ -1,12 +1,21 @@
 package main
 
 import (
+	"fmt"
 	"github.com/Longfei1/lorca"
 	"log"
+	"os"
+	"path/filepath"
 )
 
 func main() {
-	ui, err := lorca.New("https://baidu.com", "", 1024, 768, "--remote-allow-origins=*")
+	workPath, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ui, err := lorca.New(fmt.Sprintf("file:///%s", filepath.Join(workPath, "ui/index.html")),
+		"", 1024, 768, "--remote-allow-origins=*")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>机器人工具</title>
+    <link rel="icon" href="./res/icon.png"/>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .left-panel {
+            flex: 7;
+        }
+        .right-panel {
+            flex: 3;
+            background-color: #f4f4f4;
+        }
+        .menu {
+            margin-left: 5px;
+        }
+        .button-menu {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左边的列表 -->
+        <div class="left-panel">
+            <h2>输出内容列表</h2>
+            <ul>
+                <li>项目 1</li>
+                <li>项目 2</li>
+                <li>项目 3</li>
+                <!-- 更多列表项 -->
+            </ul>
+        </div>
+        <!-- 右边的菜单 -->
+        <div class="right-panel">
+            <div class="menu">
+                <h3>选择菜单</h3>
+                <!-- 选择菜单的内容，例如下拉列表 -->
+                <select>
+                    <option>选项 1</option>
+                    <option>选项 2</option>
+                    <option>选项 3</option>
+                    <!-- 更多选项 -->
+                </select>
+            </div>
+            <div class="button-menu">
+                <h3>按钮菜单</h3>
+                <!-- 按钮菜单，可以根据需要添加更多的按钮 -->
+                <button>按钮 1</button>
+                <button>按钮 2</button>
+                <button>按钮 3</button>
+                <!-- 更多按钮 -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
