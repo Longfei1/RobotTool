@@ -31,3 +31,9 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### 可选插件
+1. 支持setup中name属性的语法
+```sh
+npm i vite-plugin-vue-setup-extend -D
+```
