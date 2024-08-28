@@ -32,8 +32,12 @@ npm run dev
 npm run build
 ```
 
-### 可选插件
+### 插件
 1. 支持setup中name属性的语法
 ```sh
 npm i vite-plugin-vue-setup-extend -D
+```
+2. 解决commonjs问题，具体看json-editor-vue3组件文档
+```sh
+npm i @originjs/vite-plugin-commonjs -D
 ```

@@ -1,20 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Longfei1/lorca"
 	"log"
-	"os"
-	"path/filepath"
 )
 
 func main() {
-	workPath, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
+	//workPath, err := os.Getwd()
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
 
-	ui, err := lorca.New(fmt.Sprintf("file:///%s", filepath.Join(workPath, "ui/index.html")),
+	ui, err := lorca.New("http://localhost:5173",
 		"", 1024, 768, "--remote-allow-origins=*")
 	if err != nil {
 		log.Fatal(err)
