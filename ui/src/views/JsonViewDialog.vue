@@ -24,7 +24,7 @@
 
   function close() {
     show.value = false
-    props.onClose?.(jsonData)
+    props.onClose?.(jsonData.value)
   }
 </script>
 

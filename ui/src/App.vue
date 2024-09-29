@@ -14,7 +14,7 @@
 <style scoped>
   .mainFrame {
     height: 100vh;
-    min-width: 1024px;
-    min-height: 768px;
+    /* min-width: 1024px;
+    min-height: 768px; */
   }
 </style>

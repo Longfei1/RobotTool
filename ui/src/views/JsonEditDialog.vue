@@ -29,12 +29,12 @@
 
   function close() {
     show.value = false
-    props.onClose?.(jsonData)
+    props.onClose?.(jsonData.value)
   }
 
   function save() {
     show.value = false
-    props.onSave?.(jsonData)
+    props.onSave?.(jsonData.value)
   }
 </script>
 

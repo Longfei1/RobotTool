@@ -6,7 +6,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 
 class JsonEditor {
-    static OpenJsonEditDialog(data: object, onSave: (d: object) => void, onClose: (d: object) => void){
+    static OpenJsonEditDialog(data: object, onSave?: (d: object) => void, onClose?: (d: object) => void){
         let closed = false;
         let mountNode = document.createElement("div"); 
         let dlg = createApp(JsonEditDialog, {
