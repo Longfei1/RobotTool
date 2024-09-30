@@ -1,28 +1,25 @@
 package main
 
 import (
-	"github.com/Longfei1/lorca"
-	"log"
+	app2 "RobotTool/src/app"
+	log "github.com/sirupsen/logrus"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 func main() {
-	//workPath, err := os.Getwd()
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
+	log.SetLevel(log.DebugLevel)
+	log.SetFormatter(&log.JSONFormatter{})
 
-	ui, err := lorca.New("http://localhost:5173",
-		"", 1024, 768, "--remote-allow-origins=*")
-	if err != nil {
-		log.Fatal(err)
+	// 设置 Logrus 的输出为 lumberjack 日志滚动对象
+	logger := &lumberjack.Logger{
+		Filename:   "logs/app.log", // 日志文件路径
+		MaxSize:    10,             // 最大文件大小（MB）
+		MaxBackups: 3,              // 最多保留旧文件的数量
+		MaxAge:     30,             // 最大文件保存天数
+		Compress:   true,           // 是否压缩/归档旧文件
 	}
-	defer ui.Close()
+	log.SetOutput(logger)
 
-	// 绑定 Go 函数到 JS 的 'go' 对象
-	_ = ui.Bind("hello", func() string {
-		return "Hello from Go!"
-	})
-
-	// 等待 UI 窗口关闭
-	<-ui.Done()
+	app := app2.NewApp()
+	app.Run()
 }

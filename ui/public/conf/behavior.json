@@ -1,0 +1,48 @@
+{
+  "version": "0.3.0",
+  "scope": "project",
+  "selectedTree": "6de5b7d0-2e0a-4d5e-8674-3dd4e8d0124b",
+  "trees": [
+    {
+      "version": "0.3.0",
+      "scope": "tree",
+      "id": "6de5b7d0-2e0a-4d5e-8674-3dd4e8d0124b",
+      "title": "A behavior tree",
+      "description": "",
+      "root": "e7128f3e-c13a-47db-808b-341fa49f2388",
+      "properties": {},
+      "nodes": {
+        "e7128f3e-c13a-47db-808b-341fa49f2388": {
+          "id": "e7128f3e-c13a-47db-808b-341fa49f2388",
+          "name": "Login",
+          "category": "action",
+          "title": "登录",
+          "description": "登录动作",
+          "properties": {},
+          "display": {
+            "x": -24,
+            "y": -84
+          }
+        }
+      },
+      "display": {
+        "camera_x": 492,
+        "camera_y": 380.5,
+        "camera_z": 1,
+        "x": -180,
+        "y": -84
+      }
+    }
+  ],
+  "custom_nodes": [
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Login",
+      "category": "action",
+      "title": "登录",
+      "description": "登录动作",
+      "properties": {}
+    }
+  ]
+}
