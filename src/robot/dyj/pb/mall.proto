@@ -1,0 +1,25 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/mall.proto
+// protoc-go-inject-tag -input="./pbgo/mall.pb.go"
+// goctl model mongo -e -dir ./model -t Mall --home template -c
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+message MallItem{
+  // @inject_tag: bson:"merchandiseId"
+  uint32 merchandiseId = 1;
+  // @inject_tag: bson:"buyCnt"
+  uint32 buyCnt = 2;  //! 已购买次数
+  // @inject_tag: bson:"lastBuyTime"
+  uint32 lastBuyTime = 3;  //! 未刷新前购买时间戳
+}
+
+message Mall{
+  // @inject_tag: bson:"_id"
+  string uid = 1;
+  // @inject_tag: bson:"mallItemList"
+  repeated MallItem mallItemList = 2;
+  // @inject_tag: bson:"seq"
+  uint64 seq = 3;
+}

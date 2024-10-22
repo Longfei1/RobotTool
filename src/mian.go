@@ -2,6 +2,7 @@ package main
 
 import (
 	app2 "RobotTool/src/app"
+	"RobotTool/src/robot/dyj"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
@@ -9,6 +10,7 @@ import (
 func main() {
 	log.SetLevel(log.DebugLevel)
 	log.SetFormatter(&log.JSONFormatter{})
+	log.SetReportCaller(true)
 
 	// 设置 Logrus 的输出为 lumberjack 日志滚动对象
 	logger := &lumberjack.Logger{
@@ -20,6 +22,6 @@ func main() {
 	}
 	log.SetOutput(logger)
 
-	app := app2.NewApp()
+	app := app2.NewApp(dyj.NewRobotDyj())
 	app.Run()
 }

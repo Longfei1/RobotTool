@@ -1,0 +1,26 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/clientReport.proto
+// protoc-go-inject-tag -input="./pbgo/clientReport.pb.go"
+// goctl model mongo -e -dir ./model -t ClientReport --home template -c
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+message ClientReport {
+  // @inject_tag: bson:"openId"
+  string openId = 1;
+  // @inject_tag: bson:"msg"
+  string msg = 2;
+  // @inject_tag: bson:"level"
+  string level = 3;
+  // @inject_tag: bson:"ext1"
+  string ext1 = 4;
+  // @inject_tag: bson:"ext2"
+  string ext2 = 5;
+  // @inject_tag: bson:"ext3"
+  string ext3 = 6;
+  // @inject_tag: bson:"trace"
+  string trace = 7;
+  // @inject_tag: bson:"createTime"
+  int64 createTime = 8;
+}

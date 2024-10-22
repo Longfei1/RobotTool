@@ -1,0 +1,92 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/lianliankan.proto
+// protoc-go-inject-tag -input="./pbgo/lianliankan.pb.go"
+// goctl model mongo -e -dir ./model -t LLKRoom --home template -c
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+import "world.proto";
+import "user_base.proto";
+
+enum LLKOperaType {
+  EXXL_INVALID = 0;  //!
+  EXXL_NORMAL = 1;   //! 正常操作
+  EXXL_PROPS = 2;    //! 使用道具
+  EXXL_TIMEOUT = 3;    //! 超时结束
+  EXXL_FLEET = 4;    //! 逃跑
+}
+
+enum ELLKGameUserCnt {
+  ELLKGUC_INVALID = 0;  //! 无效操作
+  ELLKGUC_TWO = 2;  //! 游戏人数
+}
+
+message LLKOpera{
+  LLKOperaType operaType = 1; // 操作类型
+  // @inject_tag: bson:"posList"
+  repeated Position posList = 2; //操作类型EXXL_NORMAL:传入2个位置
+  // @inject_tag: bson:"propsID"
+  uint32 propsID = 3;  //操作类型EXXL_PROPS:传入道具ID
+  // @inject_tag: bson:"timestamp"
+  uint32 timestamp = 4; //操作的时间戳(可用于回放或者验证)
+  // @inject_tag: bson:"randomCount"
+  uint32 randomCount = 5; //随机计数(用于快速恢复最新进度)
+  // @inject_tag: bson:"comboFlag"
+  bool comboFlag = 6; //是否为连击，前台不用赋值, 后台赋值后广播
+}
+
+message LLKGameUser{
+  // @inject_tag: bson:"uid"
+  string uid = 1;
+  // @inject_tag: bson:"score"
+  int32 score = 2;
+  // @inject_tag: bson:"seedNum"
+  uint32 seedNum = 3;
+  // @inject_tag: bson:"rmCount"
+  uint32 rmCount = 4; //! 单位 对,双
+  // @inject_tag: bson:"ComboCnt"
+  uint32 ComboCnt = 6; //! 连击次数 规定时间没连击，会被重置
+  // @inject_tag: bson:"lastComboTime"
+  uint32 lastRmTime = 7; //! 上一次移除时间
+  // @inject_tag: bson:"operaRecord"
+  repeated LLKOpera operaRecord = 8;
+}
+
+message LLKGameEnd{
+  // @inject_tag: bson:"winUser"
+  string winUser = 1;
+  // @inject_tag: bson:"llkInfoList"
+  repeated LLKInfo llkInfoList = 2; // 这里只是变化量 score就是结算的时候的分
+}
+
+message LLKRoom{
+  // @inject_tag: bson:"_id"
+  string roomId = 1;
+  // @inject_tag: bson:"matchedId"
+  string matchedId = 2;
+  // @inject_tag: bson:"endTime"
+  uint32 endTime = 3; //! 结束时间
+  // @inject_tag: bson:"difficulty"
+  uint32 difficulty = 4; //! 地图的长和宽
+  // @inject_tag: bson:"gameUserList"
+  repeated LLKGameUser gameUserList = 5;
+  // @inject_tag: bson:"gameEnd"
+  LLKGameEnd gameEnd = 6;
+}
+
+enum ELLKPlayerStatus {
+  ELLKPS_INVALID = 0;  // 无效操作
+  ELLKPS_MATCHING= 1;  // 匹配中
+  ELLKPS_MATCHED = 2;  // 匹配成功
+  ELLKPS_GAMEING = 3;  // 游戏中
+}
+
+message LLKPlayerInfo {
+  string uin = 1;
+  ELLKPlayerStatus status = 2;
+  string applyId = 3;        // 用于超时取消的时候，判断当前和异步任务中记录的一致，不一致代表不用超时取消
+  uint32 rank = 4;
+  string matchedId = 5;
+  string roomId = 6;
+  bool offFlag = 7; // 240613 掉线标志 解决玩家中游戏中掉线 然后一直没回来，或者回来一直没操作
+}

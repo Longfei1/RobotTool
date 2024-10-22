@@ -32,5 +32,5 @@
   .editor {
       width: 700px;
       height: 480px;
-    }
+  }
 </style>

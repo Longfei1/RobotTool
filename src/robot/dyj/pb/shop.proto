@@ -1,0 +1,32 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/shop.proto
+// protoc-go-inject-tag -input="./pbgo/shop.pb.go"
+// goctl model mongo -e -dir ./model -t Shop --home template -c
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+enum EShopType {
+  EST_Invalid = 0;
+  EST_Seed = 1; //! 种子商店
+  EST_LLK = 2;  //! 连连看商店
+  EST_TaskPlan = 3;  //! 战令商店
+}
+
+message ShopItem{
+  // @inject_tag: bson:"shopId"
+  uint32 shopId = 1;
+  // @inject_tag: bson:"buyCnt"
+  uint32 buyCnt = 2;  //! 已购买次数
+  // @inject_tag: bson:"lastBuyTime"
+  uint32 lastBuyTime = 3;  //! 未刷新前购买时间戳
+}
+
+message Shop{
+  // @inject_tag: bson:"_id"
+  string uid = 1;
+  // @inject_tag: bson:"shopItemList"
+  repeated ShopItem shopItemList = 2;
+  // @inject_tag: bson:"seq"
+  uint64 seq = 3;
+}

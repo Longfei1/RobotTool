@@ -1,8 +1,8 @@
 [
   {
     "name": "dev",
-    "addr": "175.27.143.154:8023",
-    "userId": "test",
+    "addr": "wss://dyj.qq.com/server",
+    "userId": "66c828b732738185623b72ad",
     "password": "123"
   }
 ]

@@ -1,0 +1,47 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/task.proto
+// protoc-go-inject-tag -input="./pbgo/task.pb.go"
+// goctl model mongo -e -dir ./model -t Task --home template -c
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+import "common.proto";
+package model;
+option go_package = "server/pbgo";
+
+// 用于redis的消息队列的数据载体
+message TaskCondDataInfo {
+  ETaskEventId needEventId = 1;
+  TaskCondData TaskCondData = 2;
+}
+
+message TaskCondData {
+  // @inject_tag: bson:"globalItemId"
+  uint32 globalItemId = 2;
+  // @inject_tag: bson:"num"
+  uint32 num = 3;
+}
+
+
+message Task {
+  // index为uid和taskId，唯一id系统生成
+  // @inject_tag: bson:"uid"
+  string uid = 1;
+  // @inject_tag: bson:"taskId"
+  uint32 taskId = 2;
+  // @inject_tag: bson:"updateAt"
+  uint32 updateAt = 3;               //! 更新时间
+  // @inject_tag: bson:"taskDataList"
+  repeated TaskCondData taskDataList = 4;      //! 完成条件的数据
+  // @inject_tag: bson:"taskStatus"
+  ETaskStatus taskStatus = 5;
+  // @inject_tag: bson:"needEventId"
+  ETaskEventId needEventId = 6;
+}
+
+
+message TaskChange {
+  string uid = 1;
+  repeated TaskCondData taskChangeList = 2;      //! 条件的数据
+}
+
+
+

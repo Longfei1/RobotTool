@@ -1,0 +1,147 @@
+// protoc --proto_path=./docproj/msg --go_out=./pbgo --go_opt=paths=source_relative ./docproj/msg/common.proto
+
+
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+enum ECommon {
+  EC_Invalid = 0;
+  EC_MaxProductListLen  = 6;
+  EC_MaxPlantEventLen  = 4;
+}
+
+enum EBuildingType {
+  EBT_Invalid = 0;
+  EBT_Common = 1;
+  EBT_DecorationUnlimited = 1005;
+  EBT_DecorationLimited = 1006;
+}
+
+enum ETaskId {
+  ETI_Invalid = 0;
+}
+
+enum EPetBufferBase {
+  EPBB_Invalid = 0;
+  EPBB_Step = 100000;
+}
+
+enum EPropId {
+  EPI_Invalid                        = 0;
+  EPI_Gold                           = 10010001; //! 金币
+  EPI_Diamond                        = 10010002; //! 钻石
+  EPI_Llk_Coin                       = 10010003; //! 连连看游戏币
+  EPI_Exp                            = 10010004; //! 经验道具 需要取数量来计算等级
+  EPI_Lvl                            = 10010005; //! 玩家等级
+  EPI_Comfort                        = 10010006; //! 舒适度道具 需要取数量来计算等级
+  EPI_ComfortLimit                   = 10010007; //! 舒适度上限 需要取数量来计算等级
+  EPI_Llk_Score                      = 10010010; //! 连连看积分
+  EPI_MonthSupply                    = 10010011; //! 月卡
+  EPI_ActLevelUpgrade                = 10010012; //! 冲级活动额外奖励
+  EPI_ActTaskPlan                    = 10010013; //! 战令额外奖励
+  EPI_ComfortVirtual                 = 10010126; //! 虚拟舒适度
+  EPI_Farm                           = 100200003; //! 田地
+  EPI_MainHouse                      = 100200030; //! 修复好的主屋
+  EPI_Delivery                       = 100200007; //! 电商驿站建筑
+  EPI_SPEED                          = 10520008; //! 加速道具
+  EPI_Restock                        = 10520009; //! 补货道具
+  EPI_TaskOrder                      = 40111008; //! 提交一次订单
+  EPI_PlantBufferInvalid             = 50010000; //! 表示不需要随机出plantBuffer
+  EPI_WaterShortage                  = 50010004; //! 缺水道具
+  EPI_PlantBufferSpeedUp             = 50010110;   //! 加速
+  EPI_PlantBufferSpeedUpMonthCard    = 50010111;   //! 月卡加速
+
+//  EPI_PlantBufferFarm = 50010005; //! 植物道具-农田增产
+}
+
+enum EPlantEventId {
+  EPEI_Invalid  = 0;
+  EPEI_Water    = 50010003;      //! 浇水
+  EPEI_Rip      = 50010018;        //! 松土
+  EPEI_Weed     = 50010020;       //! 除草
+  EPEI_DeInsect = 50010022;   //! 驱虫
+}
+
+enum ESciencePropId {
+  ESPI_Invalid  = 0;
+  ESPI_Start    = 10010101; //! 科技道具起始id
+  ESPI_End      = 10010121;   //! 科技道具结束id
+}
+
+enum EPlantBuffOp {
+  EPBO_Invalid = 0;
+  EPBO_Prune   = 30010012;  //! 剪枝
+  EPBO_Graft   = 30010013;  //! 嫁接
+}
+
+enum ETaskEventId {
+  ETEI_Invalid        = 0;
+  ETEI_Bag            = 1;              //! 背包
+  ETEI_Building       = 2;              //! 建筑列表
+  ETEI_Exp            = 40011000;       //! 玩家经验统计事件
+  ETEI_Build          = 40011001;       //! 建造完成事件
+  ETEI_Plant          = 40011002;       //! 种植事件
+  ETEI_Harvest        = 40011004;       //! 收获事件
+  ETEI_Product        = 40011006;       //! 制造事件
+  ETEI_Order          = 40011008;       //! 交付订单事件
+  ETEI_LvlUpgrade     = 40011009;       //! 玩家等级提升事件
+  ETEI_OwnItem        = 40011010;       //! 物品变化 舒适度也是道具(存量)
+  ETEI_RepairEnd      = 40011011;       //! 建筑修复完成
+  ETEI_CostItem       = 40011012;       //! 消耗道具
+  ETEI_AddItem        = 40011013;       //! 获得道具
+  ETEI_Formula        = 40011021;       //! 完成配方研究
+  ETEI_DeliveryEnd    = 40011022;       //! 电商驿站发货回来完成
+  ETEI_ScienceOpt     = 40011023;       //! 科技树操作
+  ETEI_DeliveryStart  = 40011024;       //! 电商驿站开始发货
+  ETEI_PetAssign      = 40011033;       //! 宠物工作
+  ETEI_GotPet         = 40011037;       //! 领养宠物
+  ETEI_BuildStart     = 40011038;       //! 开始建造
+  ETEI_PetUpgrade     = 40011039;       //! 宠物喂养
+  ETEI_RepairStart    = 40011040;       //! 开始修复
+  ETEI_DecorateAdd    = 40011041;       //! 地块建造
+  ETEI_DecorateRem    = 40011042;       //! 地块拆除
+  ETEI_RemoveEnd      = 40011043;       //! 建筑拆除完成
+  ETEI_RechargeNum    = 40011044;       //! 充值数量
+  ETEI_RechargeAmount = 40011045;       //! 充值金额
+}
+
+enum ECommonRefreshType{
+  ECRT_None   = 0;  //! 不刷新
+  ECRT_Day    = 1;  //! 每日刷新
+  ECRT_Week   = 2;  //! 每周刷新
+  ECRT_Mon    = 3;  //! 每月刷新
+  ECRT_Time   = 4;  //! 按时刷新
+}
+
+enum ETaskStatus {
+  ETS_Invalid = 0;
+  ETS_Accept = 1;  //! 客户端已接受 只用于客户端红点显示,没接受一样可以累计
+  ETS_Rewarded = 2; //! 已完成的任务
+}
+
+enum ERefreshType {
+  ETRT_None = 0;
+  ETRT_Day = 1;
+  ETRT_Week = 2;
+  ETRT_Month = 3;
+  ETRT_MonthWeek = 4; //每月第x个周y
+}
+
+// 玩家操作, 账单用
+enum EUserOperId {
+  EPOI_Invalid           = 0;
+  EPOI_Act_TaskPlan      = 1000;   //! 活动_战令
+  EPOI_Act_LvlUpgrade    = 2000;   //! 活动_冲级
+}
+
+// 配置文件中的刷新id（定义成枚举，供特定情形下使用）
+enum EFlushId {
+  EFI_None = 0;
+  EFI_Day = 1; //每日6点
+  EFI_Week = 2;  //每周一6点
+  EFI_Month = 3;  //每月1日6点
+  EFI_Day0 = 4; //每日0点
+  EFI_Month2Week = 5; //每月第2周周1
+  EFI_Month4Week = 6; //每月第4周周1
+}

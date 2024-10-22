@@ -1,0 +1,194 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/activity.proto
+// protoc-go-inject-tag -input="./pbgo/activity.pb.go"
+// goctl model mongo -e -dir ./model -t Activity --home template -c
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+enum EActivityType {
+  EAT_Invalid = 0;
+  EAT_PersonalCharge = 1; // 个人累充
+  EAT_GlobalCharge = 2; // 全服累充
+  EAT_LevelUpgrade = 3; // 冲级活动
+  EAT_TaskPlan = 4; // 战令
+  EAT_SevenDaySign = 5; // 七日签到
+  EAT_SuperRechargeGift = 6; // 超值充值礼包
+  EAT_TimeLimitedTask = 7; // 限时任务
+  EAT_DailyTask = 8; // 每日任务
+  EAT_GlobalRebate = 9; //全民返利
+  EAT_TriggerGift = 10; // 精细化礼包（触发式礼包）
+  EAT_FoundationInvest = 11; //基金投资
+  EAT_ExchangeCodeGift = 12; //兑换码礼包
+  EAT_Max = 13;
+}
+
+message ActDataPersonalCharge{
+  // @inject_tag: bson:"hasGot"
+  repeated bool hasGot = 1;
+}
+
+message ActDataGlobalCharge{
+  // @inject_tag: bson:"hasGot"
+  repeated bool hasGot = 1;
+}
+
+message ActDataLevelUpgrade{
+  // @inject_tag: bson:"extraUnlock"
+  bool extraUnlock = 1;
+  // @inject_tag: bson:"hasGot"
+  repeated bool hasGot = 2;
+  // @inject_tag: bson:"extraHasGot"
+  repeated bool extraHasGot = 3;
+}
+
+message ActDataTaskPlanQuestItem{
+  // @inject_tag: bson:"cfgId"
+  uint32 cfgId = 1;
+  // @inject_tag: bson:"hasGot"
+  bool hasGot = 2;
+  // @inject_tag: bson:"lastGotTime"
+  uint32 lastGotTime = 3;
+}
+
+message ActDataTaskPlanAwardItem{
+  // @inject_tag: bson:"cfgId"
+  uint32 cfgId = 1;
+  // @inject_tag: bson:"hasGot"
+  bool hasGot = 2;
+  // @inject_tag: bson:"extraHasGot"
+  bool extraHasGot = 3;
+}
+
+message ActDataTaskPlan{
+  // @inject_tag: bson:"exp"
+  uint32 exp = 1;
+  // @inject_tag: bson:"extraUnlock"
+  bool extraUnlock = 2;
+  // @inject_tag: bson:"awardData"
+  repeated ActDataTaskPlanAwardItem awardData = 3; // 奖励领取数据
+  // @inject_tag: bson:"questData"
+  repeated ActDataTaskPlanQuestItem questData = 4; // 任务领取数据
+}
+
+message ActDataSevenDaySign {
+  // @inject_tag: bson:"lastSignTime"
+  uint32 lastSignTime = 1; //上次签到时间
+  // @inject_tag: bson:"signDays"
+  uint32 signDays = 2; //已经签到的天数
+}
+
+message ActDataSuperRechargeGift {
+  // @inject_tag: bson:"buyTime"
+  uint32 buyTime = 1; //购买时间
+}
+
+message TimeLimitedTaskItem{
+  // @inject_tag: bson:"cfgId"
+  uint32 cfgId = 1;   // 对应ActTimeLimitTaskQuest中的ID   限时任务需要刷新 是否需要刷新是两个条件 1. 刷新周期，2.本周期是否做该任务，没做就不用刷新
+  // @inject_tag: bson:"hasGot"
+  bool hasGot = 2;
+}
+
+message ActDataTimeLimitedTask {
+  // @inject_tag: bson:"taskAwardData"
+  repeated TimeLimitedTaskItem taskAwardData = 1; // 礼包和限时任务合为一起 前2条是固定的礼包任务
+  // @inject_tag: bson:"dayId"
+  uint32 dayId = 2; // 玩家当前任务天数 这个每次加1 其实就是任务进度，每天最多可以领取1次进度
+  // @inject_tag: bson:"updateDayId"
+  uint32 updateDayId = 3; // 玩家上一次刷新时间的具体天数
+  // @inject_tag: bson:"lastUpdate"
+  uint32 lastUpdate = 4;
+}
+
+message ActDataDailyTask {
+  // @inject_tag: bson:"awardStatus"
+  map<uint32, bool> awardStatus = 1; // 领奖状态 <配置id, 是否已领取>
+  // @inject_tag: bson:"lastUpdate"
+  int64 lastUpdate = 2; //更新时间
+}
+
+message ActDataGlobalRebate {
+  // @inject_tag: bson:"globalAwardStatus"
+  map<uint32, bool> globalAwardStatus = 1; // 领奖状态 <配置id, 是否已领取>
+  // @inject_tag: bson:"personAwardStatus"
+  map<uint32, bool> personAwardStatus = 2; // 领奖状态 <配置id, 是否已领取>
+}
+
+message DbTriggerGiftItem {
+  // @inject_tag: bson:"cfgId"
+  uint32 cfgId = 1; //对应ActTriggerGift中的ID
+  // @inject_tag: bson:"triggerTime"
+  int64 triggerTime = 2; //上次触发时间
+  // @inject_tag: bson:"endTime"
+  int64 endTime = 3; //结束时间（为0）
+  // @inject_tag: bson:"buy"
+  bool buy = 4; //是否已购买
+}
+
+message ActDataTriggerGift {
+  // @inject_tag: bson:"items"
+  map<uint32, DbTriggerGiftItem> items = 1; // 礼包数据 <id, item>
+}
+
+message ActDataFoundationInvest {
+  // @inject_tag: bson:"awardStatus"
+  map<uint32, bool> awardStatus = 1; // 领奖状态 <配置id, 是否已领取>
+  // @inject_tag: bson:"buyTime"
+  int64 buyTime = 2; // 购买时间（0表示未购买）
+}
+
+message DbExchangeCodeRecord {
+  // @inject_tag: bson:"codeData"
+  map<string, int64> codeData = 1; //兑换码
+}
+
+message ActDataExchangeCodeGift {
+  // @inject_tag: bson:"record"
+  map<uint64, DbExchangeCodeRecord> record = 1; //兑换记录 <期数, 兑换记录>
+}
+
+message Activity{
+  // index为"uid_actType"，唯一id系统生成
+  // @inject_tag: bson:"uid"
+  string uid = 1;
+  // @inject_tag: bson:"actType"
+  EActivityType actType = 2;
+  // @inject_tag: bson:"lastActDataClearTime"
+  uint32 lastActDataClearTime = 3;
+  // @inject_tag: bson:"seq"
+  uint64 seq = 4;
+  // @inject_tag: bson:"periodTag"
+  string periodTag = 5;
+  // @inject_tag: bson:"finished"
+  bool finished = 6;
+  // @inject_tag: bson:"lastUpdateTime"
+  int64 lastUpdateTime = 7;
+  // @inject_tag: bson:"ActivityData"
+  oneof ActivityData {
+    // @inject_tag: bson:"actDataPersonalCharge"
+    ActDataPersonalCharge actDataPersonalCharge = 11;
+    // @inject_tag: bson:"actDataGlobalCharge"
+    ActDataGlobalCharge actDataGlobalCharge = 12;
+    // @inject_tag: bson:"actDataLevelUpgrade"
+    ActDataLevelUpgrade actDataLevelUpgrade = 13;
+    // @inject_tag: bson:"actDataTaskPlan"
+    ActDataTaskPlan actDataTaskPlan = 14;
+    // @inject_tag: bson:"actDataSevenDaySign"
+    ActDataSevenDaySign actDataSevenDaySign = 15;
+    // @inject_tag: bson:"actDataSuperRechargeGift"
+    ActDataSuperRechargeGift actDataSuperRechargeGift = 16;
+    // @inject_tag: bson:"actDataTimeLimitedTask"
+    ActDataTimeLimitedTask actDataTimeLimitedTask = 17;
+    // @inject_tag: bson:"actDataDailyTask"
+    ActDataDailyTask actDataDailyTask = 18;
+    // @inject_tag: bson:"actDataGlobalRebate"
+    ActDataGlobalRebate actDataGlobalRebate = 19;
+    // @inject_tag: bson:"actDataTriggerGift"
+    ActDataTriggerGift actDataTriggerGift = 20;
+    // @inject_tag: bson:"actDataFoundationInvest"
+    ActDataFoundationInvest actDataFoundationInvest = 21;
+    // @inject_tag: bson:"actDataExchangeCodeGift"
+    ActDataExchangeCodeGift actDataExchangeCodeGift = 22;
+  }
+}

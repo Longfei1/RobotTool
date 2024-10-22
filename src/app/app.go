@@ -1,22 +1,26 @@
 package app
 
 import (
+	"RobotTool/src/common"
+	"RobotTool/src/config"
 	"RobotTool/src/robot"
 	"errors"
 	"fmt"
 	"github.com/Longfei1/lorca"
 	b3 "github.com/magicsea/behavior3go"
-	"github.com/magicsea/behavior3go/config"
+	bevCfg "github.com/magicsea/behavior3go/config"
 	"github.com/magicsea/behavior3go/core"
 	"github.com/magicsea/behavior3go/loader"
 	log "github.com/sirupsen/logrus"
+	"time"
 )
 
 type App struct {
 	ui lorca.UI
 
 	robot        robot.IRobot
-	btProjectCfg *config.BTProjectCfg
+	btProjectCfg *bevCfg.BTProjectCfg
+	serverCfg    *config.ServerConfig
 }
 
 func NewApp(r robot.IRobot) *App {
@@ -26,24 +30,30 @@ func NewApp(r robot.IRobot) *App {
 }
 
 func (a *App) Run() {
-	if err := a.initUi(); err != nil {
-		log.Error(err)
-		return
-	}
-
 	if err := a.initBev(); err != nil {
 		log.Error(err)
 		return
 	}
 
+	if err := a.initUi(); err != nil {
+		log.Error(err)
+		return
+	}
+
+	a.robot.SetCallback(a) //注册回调
+
+	log.Info("app run ...")
+
 	// 等待 UI 窗口关闭
 	defer a.ui.Close()
 	<-a.ui.Done()
+
+	_ = a.robot.Close()
 }
 
 func (a *App) initUi() error {
 	ui, err := lorca.New("http://localhost:5173",
-		"", 1024, 768, "--remote-allow-origins=*")
+		"", 1024, 768)
 	if err != nil {
 		return err
 	}
@@ -52,6 +62,8 @@ func (a *App) initUi() error {
 	_ = ui.Bind("hello", func() string {
 		return "Hello from Go!"
 	})
+	_ = ui.Bind("execBevTree", a.execBevTree)
+	_ = ui.Bind("initServerConfig", a.initServerConfig)
 
 	a.ui = ui
 
@@ -59,7 +71,7 @@ func (a *App) initUi() error {
 }
 
 func (a *App) initBev() error {
-	projectCfg, ok := config.LoadProjectCfg("ui/public/conf/behavior.b3")
+	projectCfg, ok := bevCfg.LoadProjectCfg("ui/public/conf/behavior.json")
 	if !ok {
 		return errors.New("load behavior config failed")
 	}
@@ -68,7 +80,7 @@ func (a *App) initBev() error {
 	return nil
 }
 
-func (a *App) ExecBevTree(id string) error {
+func (a *App) execBevTree(id string) error {
 	//自定义节点注册
 	maps := b3.NewRegisterStructMaps()
 	a.robot.RegisterBevMap(maps)
@@ -89,9 +101,31 @@ func (a *App) ExecBevTree(id string) error {
 
 	//输入板
 	board := core.NewBlackboard()
-	//循环每一帧
-	for i := 0; i < 5; i++ {
-		_ = tree.Tick(i, board)
-	}
+	board.SetMem(common.Robot, a.robot)
+	board.SetMem(common.ServerConfig, a.serverCfg)
+
+	go func() {
+		var cnt int
+		for {
+			ret := tree.Tick(cnt, board)
+			if ret == b3.RUNNING {
+				cnt++
+				time.Sleep(time.Millisecond * 100)
+				continue
+			}
+
+			log.Infof("bev tree ret:%v", ret)
+			break
+		}
+	}()
 	return nil
+}
+
+func (a *App) initServerConfig(cfg *config.ServerConfig) error {
+	a.serverCfg = cfg
+	return nil
+}
+
+func (a *App) OnMessage(msg interface{}) {
+	log.Infof("app OnMessage %v", msg)
 }

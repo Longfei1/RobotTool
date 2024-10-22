@@ -1,0 +1,31 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/petDispatch.proto
+// protoc-go-inject-tag -input="./pbgo/petDispatch.pb.go"
+// goctl model mongo -e -dir ./model -t PetDispatch --home template -c
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+message PetDispatchInfo{
+  // @inject_tag: bson:"pointId"
+  uint32 pointId = 1;                   // 派遣点id
+  // @inject_tag: bson:"taskId"
+  uint32 taskId = 2;                    // 派遣任务id 这个任务是单独的
+  // @inject_tag: bson:"dispatchEndTime"
+  uint32 dispatchEndTime = 3;
+  // @inject_tag: bson:"petUidList"
+  repeated string petUidList = 4;           // 是否派遣宠物
+  // @inject_tag: bson:"rewardFlag"
+  bool rewardFlag = 5;            // 是否领取奖励
+}
+
+message PetDispatch {
+  // @inject_tag: bson:"_id"
+  string uid = 1;
+  // @inject_tag: bson:"lastRefreshTime"
+  uint32 lastRefreshTime = 2;
+  // @inject_tag: bson:"petDispatchInfos"
+  repeated PetDispatchInfo petDispatchInfos  = 3;
+  // @inject_tag: bson:"seq"
+  uint64 seq = 4;
+}
+

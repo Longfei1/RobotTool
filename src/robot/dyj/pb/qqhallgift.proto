@@ -1,0 +1,23 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/qqhallgift.proto
+// protoc-go-inject-tag -input="./pbgo/qqhallgift.pb.go"
+// goctl model mongo -e -dir ./model -t QQHallGift --home template -c
+// qq大厅礼包相关
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+enum EQQHallGiftType {
+  EQQHGT_Invalid          = 0;
+  EQQHGT_Daily            = 1;    // 每日礼包
+  EQQHGT_Novices          = 2;    // 新手礼包
+  EQQHGT_Growth           = 3;    // 成长礼包
+}
+
+message QQHallGift {
+  // @inject_tag: bson:"_id"
+  string uid = 1;
+  // @inject_tag: bson:"rewardTimes"
+  repeated uint32 rewardTimes = 2;
+  // @inject_tag: bson:"seq"
+  uint64 seq = 3;
+}

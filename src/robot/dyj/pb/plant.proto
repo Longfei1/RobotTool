@@ -1,0 +1,46 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/plant.proto
+// protoc-go-inject-tag -input="./pbgo/plant.pb.go"
+// goctl model mongo -e -dir ./model -t PlantInfoList --home template -c
+//!!!!!!! 删除生成的worldtypes, 代码成替换成model对象
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+
+message PlantOperaInfo{
+  // @inject_tag: bson:"globalItemId"
+  uint32 buffGlobalItemId = 1;      //! buff等id
+  // @inject_tag: bson:"startTime"
+  uint32 startTime = 2;             //! 生效时间
+  // @inject_tag: bson:"endTime"
+  uint32 endTime = 3;
+  // @inject_tag: bson:"operaBaseValue"
+  uint32 operaBaseValue = 4;  //! 如果是0就不用管，如果有值，就是宠物属性计算后的operaValue
+}
+
+message PlantInfo{
+  // @inject_tag: bson:"plantUid"
+  string plantUid = 1;
+  // @inject_tag: bson:"buildUid"
+  string buildUid = 2;                //! 依附的建唯一id, 比如农田的唯一id
+  // @inject_tag: bson:"buildGlobalItemId"
+  uint32 buildGlobalItemId = 3;            //! 依附建筑的全局id，方便查他的生长速度等
+  // @inject_tag: bson:"globalItemId"
+  uint32 globalItemId = 4;            //! 植物的全局id
+  // @inject_tag: bson:"startTime"
+  uint32 startTime = 5;             //! 生效时间
+  // @inject_tag: bson:"plantOperaList"
+  repeated PlantOperaInfo plantOperaList = 6;
+  // @inject_tag: bson:"pruneTimes"
+  repeated uint32 pruneTimes = 7;  //! 剪枝 两个状态可以剪
+  // 嫁接不入道具buff队列，直接清空 嫁接不限制次数
+}
+
+message PlantInfoList{
+  // @inject_tag: bson:"_id"
+  string uid = 1;
+  // @inject_tag: bson:"plantList"
+  repeated PlantInfo plantList = 2;
+  // @inject_tag: bson:"seq"
+  uint64 seq = 3;
+}

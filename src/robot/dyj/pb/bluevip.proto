@@ -1,0 +1,48 @@
+// protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/bluevip.proto
+// protoc-go-inject-tag -input="./pbgo/bluevip.pb.go"
+// goctl model mongo -e -dir ./model -t BlueVip --home template -c
+// 蓝钻相关
+syntax = "proto3";
+package model;
+option go_package = "server/pbgo";
+
+enum EBlueVip {
+  EBV_Invalid           = 0;
+  EBV_Lvl1DayId         = 1;    // 蓝钻1级每日礼包id
+  EBV_Lv2DayId          = 2;    // 蓝钻2级每日礼包id
+  EBV_Lv3DayId          = 3;    // 蓝钻3级每日礼包id
+  EBV_Lv4DayId          = 4;    // 蓝钻4级每日礼包id
+  EBV_Lv5DayId          = 5;    // 蓝钻5级每日礼包id
+  EBV_Lv6DayId          = 6;    // 蓝钻6级每日礼包id
+  EBV_Lv7DayId          = 7;    // 蓝钻7级每日礼包id
+  EBV_SuperDayId        = 8;    // 蓝钻豪华每日礼包id
+  EBV_YearDayId         = 9;    // 蓝钻年费每日礼包id
+  EBV_LvlId             = 10;   // 蓝钻贵族新手礼包id
+  EBV_YearLvlStartId    = 11;   // 蓝钻豪华新手等级开始礼包id
+  EBV_YearLvlMaxId      = 40;   // 蓝钻豪华新手最大等级礼包id  可以根据配置先预留，预留不够的情况下，直接往后加就可以
+}
+
+enum EBlueVipType {
+  EBVT_Invalid          = 0;
+  EBVT_Common           = 1;    // 普通蓝钻
+  EBVT_Super            = 2;    // 豪华蓝钻
+  EBVT_Year             = 3;    // 年费蓝钻
+}
+
+enum EBlueVipGiftType {
+  EBVGT_Invalid          = 0;
+  EBVGT_Daily            = 1;    // 每日蓝钻礼包
+  EBVGT_DailySuper       = 2;    // 每日豪华礼包
+  EBVGT_DailyYear        = 3;    // 每日年费礼包
+  EBVGT_Novices          = 4;    // 新手礼包
+  EBVGT_Level            = 5;    // 等级礼包
+}
+
+message BlueVip {
+  // @inject_tag: bson:"_id"
+  string uid = 1;
+  // @inject_tag: bson:"rewardTimes"
+  repeated uint32 rewardTimes = 2;
+  // @inject_tag: bson:"seq"
+  uint64 seq = 3;
+}
