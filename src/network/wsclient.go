@@ -11,8 +11,9 @@ import (
 
 type IMsgHandle interface {
 	HeartbeatInterval() time.Duration
-	HeartbeatData() []byte
+	OnHeartbeat()
 	HandleMessage(data []byte)
+	OnClose()
 }
 
 type WsClient struct {
@@ -77,6 +78,11 @@ func (w *WsClient) Close() error {
 
 	w.close = true
 	close(w.send)
+
+	if w.msgHandler != nil {
+		w.msgHandler.OnClose()
+	}
+
 	return nil
 }
 
@@ -136,11 +142,7 @@ func (w *WsClient) write() {
 			}
 		case <-tick.C:
 			if w.msgHandler != nil {
-				data := w.msgHandler.HeartbeatData()
-				err := w.wsConn.WriteMessage(websocket.BinaryMessage, data)
-				if err != nil {
-					log.Error(err)
-				}
+				w.msgHandler.OnHeartbeat()
 			}
 		}
 	}

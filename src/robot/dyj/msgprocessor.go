@@ -47,7 +47,15 @@ func (p *MsgProcessor) Register(msg proto.Message, eventType uint16) {
 	p.msgID[msgType] = eventType
 }
 
-func (p *MsgProcessor) Unmarshal(data []byte) (interface{}, error) {
+func (p *MsgProcessor) GetMsgType(id uint16) reflect.Type {
+	return p.msgInfo[id]
+}
+
+func (p *MsgProcessor) GetMsgId(tp reflect.Type) uint16 {
+	return p.msgID[tp]
+}
+
+func (p *MsgProcessor) Unmarshal(data []byte) (proto.Message, error) {
 	if len(data) < 2 {
 		return nil, errors.New("protobuf data too short")
 	}
@@ -66,7 +74,7 @@ func (p *MsgProcessor) Unmarshal(data []byte) (interface{}, error) {
 
 	// msg
 	msg := reflect.New(msgType.Elem()).Interface()
-	return msg, proto.Unmarshal(data[2:], msg.(proto.Message))
+	return msg.(proto.Message), proto.Unmarshal(data[2:], msg.(proto.Message))
 }
 
 func (p *MsgProcessor) Marshal(msg interface{}) ([]byte, error) {

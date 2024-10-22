@@ -39,7 +39,7 @@ class JsonEditor {
         document.body.appendChild(mountNode)
     }
 
-    static OpenJsonViewDialog(data: object, onClose: (d: object) => void){
+    static OpenJsonViewDialog(data: object, onClose?: (d: object) => void){
         let closed = false;
         let mountNode = document.createElement("div"); 
         let dlg = createApp(JsonViewDialog, {

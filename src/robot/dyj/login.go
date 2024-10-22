@@ -2,7 +2,7 @@ package dyj
 
 import (
 	"RobotTool/src/common"
-	"RobotTool/src/config"
+	"RobotTool/src/jsdef/config"
 	"RobotTool/src/robot"
 	"RobotTool/src/robot/dyj/pbgo"
 	b3 "github.com/magicsea/behavior3go"

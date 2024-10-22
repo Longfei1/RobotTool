@@ -78,7 +78,6 @@
     if (selectServerData) {
       try {
         let ret = await window.initServerConfig(selectServerData)
-        console.log(ret);
       } catch (e) {
         alert(e);
       }

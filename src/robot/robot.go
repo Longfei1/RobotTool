@@ -1,6 +1,9 @@
 package robot
 
-import "github.com/magicsea/behavior3go"
+import (
+	"RobotTool/src/app/api"
+	"github.com/magicsea/behavior3go"
+)
 
 type INetWork interface {
 	Connect(url string) error
@@ -9,13 +12,9 @@ type INetWork interface {
 	SendMsg(args ...interface{}) error
 }
 
-type IRobotCallback interface {
-	OnMessage(msg interface{})
-}
-
 type IRobot interface {
 	INetWork
 
 	RegisterBevMap(mp *behavior3go.RegisterStructMaps)
-	SetCallback(callback IRobotCallback)
+	SetAppApi(appApi api.IAppApi)
 }

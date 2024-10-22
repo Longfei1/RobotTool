@@ -2,8 +2,10 @@ package app
 
 import (
 	"RobotTool/src/common"
-	"RobotTool/src/config"
+	"RobotTool/src/jsdef/config"
+	"RobotTool/src/jsdef/jsmsg"
 	"RobotTool/src/robot"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/Longfei1/lorca"
@@ -40,7 +42,7 @@ func (a *App) Run() {
 		return
 	}
 
-	a.robot.SetCallback(a) //注册回调
+	a.robot.SetAppApi(a) //注册回调
 
 	log.Info("app run ...")
 
@@ -126,6 +128,25 @@ func (a *App) initServerConfig(cfg *config.ServerConfig) error {
 	return nil
 }
 
-func (a *App) OnMessage(msg interface{}) {
-	log.Infof("app OnMessage %v", msg)
+// **** js函数 ****//
+func (a *App) AddShowMsg(msg *jsmsg.ShowMessage) {
+	arg, err := json.Marshal(msg)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	_ = a.ui.Eval(fmt.Sprintf("addShowMsg('%s')", string(arg)))
 }
+
+func (a *App) AddTipTag(tag *jsmsg.TipTag) {
+	arg, err := json.Marshal(tag)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	_ = a.ui.Eval(fmt.Sprintf("addTipTag('%s')", string(arg)))
+}
+
+// **** js函数 ****//
