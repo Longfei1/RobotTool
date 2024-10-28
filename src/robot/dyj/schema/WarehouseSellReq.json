@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/WarehouseSellReq",
+    "definitions": {
+        "WarehouseSellReq": {
+            "properties": {
+                "itemId": {
+                    "type": "integer"
+                },
+                "num": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Warehouse Sell Req"
+        }
+    }
+}

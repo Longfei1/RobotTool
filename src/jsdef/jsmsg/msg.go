@@ -22,5 +22,12 @@ const (
 type TipTag struct {
 	Name string      `json:"name"`
 	Type UiClassType `json:"type"`
-	Msg  interface{} `json:"msg"`
+	Msg  string      `json:"msg"`
+}
+
+type ProtoMsg struct {
+	Id           interface{} `json:"id"` //唯一标识
+	Name         string      `json:"name"`
+	Schema       interface{} `json:"schema"`       //描述schema的对象
+	DefaultValue interface{} `json:"defaultValue"` //默认值
 }

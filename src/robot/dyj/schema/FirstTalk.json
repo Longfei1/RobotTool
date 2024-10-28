@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/FirstTalk",
+    "definitions": {
+        "FirstTalk": {
+            "properties": {
+                "npcId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "First Talk",
+            "description": "! 进行初见任务"
+        }
+    }
+}

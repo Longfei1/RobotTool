@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TimeLimitedTaskItem",
+    "definitions": {
+        "TimeLimitedTaskItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\"  对应ActTimeLimitTaskQuest中的ID   限时任务需要刷新 是否需要刷新是两个条件 1. 刷新周期，2.本周期是否做该任务，没做就不用刷新"
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Time Limited Task Item"
+        }
+    }
+}

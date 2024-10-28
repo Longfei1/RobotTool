@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PetSkillUpgrade",
+    "definitions": {
+        "PetSkillUpgrade": {
+            "properties": {
+                "skillIndex": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Skill Upgrade",
+            "description": "技能升级"
+        }
+    }
+}

@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2STaskActivity",
+    "definitions": {
+        "C2STaskActivity": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "taskActivityGetReq": {
+                    "$ref": "#/definitions/msg.TaskActivityGetReq",
+                    "additionalProperties": true
+                },
+                "taskActivityRewardReq": {
+                    "$ref": "#/definitions/msg.TaskActivityRewardReq",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "taskActivityGetReq"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "taskActivityRewardReq"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "taskActivityGetReq"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "taskActivityRewardReq"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "C 2 S Task Activity"
+        },
+        "msg.TaskActivityGetReq": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Activity Get Req"
+        },
+        "msg.TaskActivityRewardReq": {
+            "properties": {
+                "taskId": {
+                    "type": "integer",
+                    "description": "taskId为0的时候代表是一键领取"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Activity Reward Req"
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TalentInfo",
+    "definitions": {
+        "TalentInfo": {
+            "properties": {
+                "talentId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"talentId\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Talent Info",
+            "description": "天赋等级是觉醒等级+1"
+        }
+    }
+}

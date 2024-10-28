@@ -1,0 +1,85 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/OrderInfo",
+    "definitions": {
+        "OrderInfo": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "buildUid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"buildUid\""
+                },
+                "orderList": {
+                    "items": {
+                        "$ref": "#/definitions/model.OrderItem"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"orderList\"  ! 长度一定与格子数量相等"
+                },
+                "endTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"endTime\"  ! 提交订单的结束时间戳(s)"
+                },
+                "lastRefreshTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastRefreshTime\"  ! 上次刷新时间 用于是否需要重置todayRefreshCnt"
+                },
+                "todayRefreshCnt": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"todayRefreshCnt\"  ! 今日刷新次数"
+                },
+                "seq": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"seq\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Order Info"
+        },
+        "model.BaseItemInfo": {
+            "properties": {
+                "itemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"itemId\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Base Item Info"
+        },
+        "model.OrderItem": {
+            "properties": {
+                "orderGlobalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"orderGlobalItemId\""
+                },
+                "fromPoolId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"fromPoolId\"  ! 来源于哪个池子,用于限量"
+                },
+                "costItemList": {
+                    "items": {
+                        "$ref": "#/definitions/model.BaseItemInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"costItemList\""
+                },
+                "refreshTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"refreshTime\"  ! 下次可刷新时间"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Order Item"
+        }
+    }
+}

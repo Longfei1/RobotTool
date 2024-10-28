@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/NPCOperaRecord",
+    "definitions": {
+        "NPCOperaRecord": {
+            "properties": {
+                "time": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"time\"  操作时间"
+                },
+                "operaId": {
+                    "enum": [
+                        "NOI_Invalid",
+                        "NOI_Invite",
+                        "NOI_Feed"
+                    ],
+                    "type": "string",
+                    "title": "Npc Opera Id"
+                },
+                "operaValue": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"operaValue\"  操作对应的值，比如增加好感度等"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "NPC Opera Record",
+            "description": "npc每天的操作记录"
+        }
+    }
+}

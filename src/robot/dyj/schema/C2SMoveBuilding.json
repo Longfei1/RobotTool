@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SMoveBuilding",
+    "definitions": {
+        "C2SMoveBuilding": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "pos": {
+                    "$ref": "#/definitions/model.Position",
+                    "additionalProperties": true
+                },
+                "direction": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Move Building"
+        },
+        "model.Position": {
+            "properties": {
+                "x": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"x\""
+                },
+                "y": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"y\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Position"
+        }
+    }
+}

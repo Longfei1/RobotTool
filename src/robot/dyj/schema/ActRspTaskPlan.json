@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActRspTaskPlan",
+    "definitions": {
+        "ActRspTaskPlan": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1 拉取, 2 完成任务, 3领取奖励 , 4 一键完成任务 , 5 一键领取奖励"
+                },
+                "exp": {
+                    "type": "integer"
+                },
+                "extraUnlock": {
+                    "type": "boolean"
+                },
+                "awardInfo": {
+                    "items": {
+                        "$ref": "#/definitions/model.ActDataTaskPlanAwardItem"
+                    },
+                    "type": "array",
+                    "description": "奖励领取数据"
+                },
+                "questInfo": {
+                    "items": {
+                        "$ref": "#/definitions/msg.ActTaskPlanQuest"
+                    },
+                    "type": "array",
+                    "description": "任务数据"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Task Plan"
+        },
+        "model.ActDataTaskPlanAwardItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\""
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                },
+                "extraHasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"extraHasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Task Plan Award Item"
+        },
+        "msg.ActTaskPlanQuest": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer"
+                },
+                "progress": {
+                    "type": "integer",
+                    "description": "进度"
+                },
+                "hasGot": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Task Plan Quest",
+            "description": "战令"
+        }
+    }
+}

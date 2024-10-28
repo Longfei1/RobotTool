@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/BuyMerchandise",
+    "definitions": {
+        "BuyMerchandise": {
+            "properties": {
+                "merchandiseId": {
+                    "type": "integer"
+                },
+                "cnt": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Buy Merchandise",
+            "description": "道具/装饰商城"
+        }
+    }
+}

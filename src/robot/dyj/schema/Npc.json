@@ -1,0 +1,111 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Npc",
+    "definitions": {
+        "Npc": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "npcList": {
+                    "items": {
+                        "$ref": "#/definitions/model.NPCInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"npcList\""
+                },
+                "seq": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"seq\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Npc"
+        },
+        "model.NPCDayInfo": {
+            "properties": {
+                "lastInvitedTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastInvitedTime\"  上次被邀请时间"
+                },
+                "feedTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"feedTime\"  被投喂次数"
+                },
+                "talkFlag": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"talkFlag\"  今日是否谈天说地的标志位"
+                },
+                "operaRecordList": {
+                    "items": {
+                        "$ref": "#/definitions/model.NPCOperaRecord"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"operaRecordList\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "NPC Day Info",
+            "description": "npc每天需要刷新的信息"
+        },
+        "model.NPCInfo": {
+            "properties": {
+                "npcId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"npcId\""
+                },
+                "favorAbility": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"favorAbility\"  好感度"
+                },
+                "npcDayInfo": {
+                    "$ref": "#/definitions/model.NPCDayInfo",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"npcDayInfo\""
+                },
+                "rewardedTokenList": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"rewardedTokenList\"  已领取信物奖励的信物id列表"
+                },
+                "firstTalk": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"firstTalk\"  是否进行初见任务"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "NPC Info"
+        },
+        "model.NPCOperaRecord": {
+            "properties": {
+                "time": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"time\"  操作时间"
+                },
+                "operaId": {
+                    "enum": [
+                        "NOI_Invalid",
+                        "NOI_Invite",
+                        "NOI_Feed"
+                    ],
+                    "type": "string",
+                    "title": "Npc Opera Id"
+                },
+                "operaValue": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"operaValue\"  操作对应的值，比如增加好感度等"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "NPC Opera Record",
+            "description": "npc每天的操作记录"
+        }
+    }
+}

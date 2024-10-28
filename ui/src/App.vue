@@ -8,7 +8,6 @@
 <script setup lang="ts">
   import OutputView from "./views/OutputView.vue";
   import MainMenuView from "./views/MainMenuView.vue";
-
 </script>
 
 <style scoped>

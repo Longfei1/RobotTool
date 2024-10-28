@@ -8,7 +8,8 @@
   >
     <json-editor-vue class="editor" v-model="jsonData" 
       :modeList="['view']"
-      :currentMode="'view'">
+      :currentMode="'view'"
+      :options="options">
     </json-editor-vue>
   </el-dialog>
 </template>
@@ -17,10 +18,11 @@
   import JsonEditorVue from 'json-editor-vue3'
   import {ref} from "vue"
 
-  let props = defineProps(["data", "onClose"])
+  let props = defineProps(["data", "onClose", "options"])
 
   let jsonData = ref(props.data)
   let show = ref(true)
+  let options = props.options
 
   function close() {
     show.value = false

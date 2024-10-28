@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PetSkillChangeConfirm",
+    "definitions": {
+        "PetSkillChangeConfirm": {
+            "properties": {
+                "skillIndex": {
+                    "type": "integer"
+                },
+                "skillGlobalItemId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Skill Change Confirm",
+            "description": "确定技能重置"
+        }
+    }
+}

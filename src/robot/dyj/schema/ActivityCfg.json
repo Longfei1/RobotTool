@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActivityCfg",
+    "definitions": {
+        "ActivityCfg": {
+            "properties": {
+                "ID": {
+                    "type": "integer",
+                    "description": "id"
+                },
+                "Type": {
+                    "type": "integer"
+                },
+                "OpenLvl": {
+                    "type": "integer",
+                    "description": "string Name = 3;    // 不读了, csv不是utf8会报错"
+                },
+                "BeginTime": {
+                    "type": "integer"
+                },
+                "EndTime": {
+                    "type": "integer"
+                },
+                "EndRewardTime": {
+                    "type": "integer"
+                },
+                "RankType": {
+                    "type": "integer"
+                },
+                "TimeNo": {
+                    "type": "integer",
+                    "description": "时间编号"
+                },
+                "EffectType": {
+                    "enum": [
+                        "EAET_Always",
+                        "EAET_TimeSection",
+                        "EAET_Period",
+                        "EAET_NewUser"
+                    ],
+                    "type": "string",
+                    "title": "E Act Effect Type",
+                    "description": "生效类型"
+                },
+                "FlushId": {
+                    "enum": [
+                        "EFI_None",
+                        "EFI_Day",
+                        "EFI_Week",
+                        "EFI_Month",
+                        "EFI_Day0",
+                        "EFI_Month2Week",
+                        "EFI_Month4Week"
+                    ],
+                    "type": "string",
+                    "title": "E Flush Id",
+                    "description": "配置文件中的刷新id（定义成枚举，供特定情形下使用）"
+                },
+                "Duration": {
+                    "type": "string",
+                    "description": "持续时间"
+                },
+                "RewardEmailId": {
+                    "type": "integer",
+                    "description": "奖励邮件id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Activity Cfg"
+        }
+    }
+}

@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/S2CTaskActivity",
+    "definitions": {
+        "S2CTaskActivity": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "taskActivityGetRsp": {
+                    "$ref": "#/definitions/msg.TaskActivityGetRsp",
+                    "additionalProperties": true
+                },
+                "taskActivityRewardRsp": {
+                    "$ref": "#/definitions/msg.TaskActivityRewardRsp",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "taskActivityGetRsp"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "taskActivityRewardRsp"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "taskActivityGetRsp"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "taskActivityRewardRsp"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "S 2 C Task Activity"
+        },
+        "msg.TaskActivityGetRsp": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Activity Get Rsp"
+        },
+        "msg.TaskActivityRewardRsp": {
+            "properties": {
+                "taskId": {
+                    "type": "integer",
+                    "description": "taskId为0的时候代表是一键领取"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Activity Reward Rsp"
+        }
+    }
+}

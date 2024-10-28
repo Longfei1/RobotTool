@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SCreateBuilding",
+    "definitions": {
+        "C2SCreateBuilding": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "createBuildingOpera": {
+                    "enum": [
+                        "CreateBuildingOperaInvalid",
+                        "BuildStart",
+                        "BuildEnd",
+                        "BuildAccelerate"
+                    ],
+                    "type": "string",
+                    "title": "Create Building Opera"
+                },
+                "buildModel": {
+                    "$ref": "#/definitions/model.Model",
+                    "additionalProperties": true
+                },
+                "buyFlag": {
+                    "type": "boolean"
+                },
+                "buildUid": {
+                    "type": "string"
+                },
+                "propId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Create Building"
+        },
+        "model.Model": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"id\""
+                },
+                "direction": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"direction\""
+                },
+                "x": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"x\""
+                },
+                "y": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"y\""
+                },
+                "p": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"p\""
+                },
+                "params": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"params\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Model"
+        }
+    }
+}

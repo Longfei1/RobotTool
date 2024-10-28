@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActDataExchangeCodeGift",
+    "definitions": {
+        "ActDataExchangeCodeGift": {
+            "properties": {
+                "record": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/model.DbExchangeCodeRecord",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"record\"  兑换记录 \u003c期数, 兑换记录\u003e"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Exchange Code Gift"
+        },
+        "model.DbExchangeCodeRecord": {
+            "properties": {
+                "codeData": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"codeData\"  兑换码"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Db Exchange Code Record"
+        }
+    }
+}

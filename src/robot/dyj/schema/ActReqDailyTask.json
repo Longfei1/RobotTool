@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActReqDailyTask",
+    "definitions": {
+        "ActReqDailyTask": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "DTRT_Info",
+                        "DTRT_Reward"
+                    ],
+                    "type": "string",
+                    "title": "Daily Task Req Type",
+                    "description": "每日任务"
+                },
+                "taskId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Daily Task"
+        }
+    }
+}

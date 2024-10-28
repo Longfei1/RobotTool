@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SBuyGoods",
+    "definitions": {
+        "C2SBuyGoods": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "directBuyId": {
+                    "type": "integer",
+                    "description": "直购id"
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "openid": {
+                    "type": "string"
+                },
+                "openKey": {
+                    "type": "string"
+                },
+                "pf": {
+                    "type": "string"
+                },
+                "pfKey": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Buy Goods",
+            "description": "直购"
+        }
+    }
+}

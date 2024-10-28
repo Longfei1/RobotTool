@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SFetchActCfg",
+    "definitions": {
+        "C2SFetchActCfg": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Fetch Act Cfg",
+            "description": "拉取活动配置"
+        }
+    }
+}

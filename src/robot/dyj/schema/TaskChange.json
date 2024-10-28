@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TaskChange",
+    "definitions": {
+        "TaskChange": {
+            "properties": {
+                "uid": {
+                    "type": "string"
+                },
+                "taskChangeList": {
+                    "items": {
+                        "$ref": "#/definitions/model.TaskCondData"
+                    },
+                    "type": "array",
+                    "description": "! 条件的数据"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Change"
+        },
+        "model.TaskCondData": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Cond Data"
+        }
+    }
+}

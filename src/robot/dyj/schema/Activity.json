@@ -1,0 +1,560 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Activity",
+    "definitions": {
+        "Activity": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "index为\"uid_actType\"，唯一id系统生成 @inject_tag: bson:\"uid\""
+                },
+                "actType": {
+                    "enum": [
+                        "EAT_Invalid",
+                        "EAT_PersonalCharge",
+                        "EAT_GlobalCharge",
+                        "EAT_LevelUpgrade",
+                        "EAT_TaskPlan",
+                        "EAT_SevenDaySign",
+                        "EAT_SuperRechargeGift",
+                        "EAT_TimeLimitedTask",
+                        "EAT_DailyTask",
+                        "EAT_GlobalRebate",
+                        "EAT_TriggerGift",
+                        "EAT_FoundationInvest",
+                        "EAT_ExchangeCodeGift",
+                        "EAT_Max"
+                    ],
+                    "type": "string",
+                    "title": "E Activity Type"
+                },
+                "lastActDataClearTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastActDataClearTime\""
+                },
+                "seq": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"seq\""
+                },
+                "periodTag": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"periodTag\""
+                },
+                "finished": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"finished\""
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"lastUpdateTime\""
+                },
+                "actDataPersonalCharge": {
+                    "$ref": "#/definitions/model.ActDataPersonalCharge",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataPersonalCharge\""
+                },
+                "actDataGlobalCharge": {
+                    "$ref": "#/definitions/model.ActDataGlobalCharge",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataGlobalCharge\""
+                },
+                "actDataLevelUpgrade": {
+                    "$ref": "#/definitions/model.ActDataLevelUpgrade",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataLevelUpgrade\""
+                },
+                "actDataTaskPlan": {
+                    "$ref": "#/definitions/model.ActDataTaskPlan",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataTaskPlan\""
+                },
+                "actDataSevenDaySign": {
+                    "$ref": "#/definitions/model.ActDataSevenDaySign",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataSevenDaySign\""
+                },
+                "actDataSuperRechargeGift": {
+                    "$ref": "#/definitions/model.ActDataSuperRechargeGift",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataSuperRechargeGift\""
+                },
+                "actDataTimeLimitedTask": {
+                    "$ref": "#/definitions/model.ActDataTimeLimitedTask",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataTimeLimitedTask\""
+                },
+                "actDataDailyTask": {
+                    "$ref": "#/definitions/model.ActDataDailyTask",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataDailyTask\""
+                },
+                "actDataGlobalRebate": {
+                    "$ref": "#/definitions/model.ActDataGlobalRebate",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataGlobalRebate\""
+                },
+                "actDataTriggerGift": {
+                    "$ref": "#/definitions/model.ActDataTriggerGift",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataTriggerGift\""
+                },
+                "actDataFoundationInvest": {
+                    "$ref": "#/definitions/model.ActDataFoundationInvest",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataFoundationInvest\""
+                },
+                "actDataExchangeCodeGift": {
+                    "$ref": "#/definitions/model.ActDataExchangeCodeGift",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"actDataExchangeCodeGift\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "actDataPersonalCharge"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataGlobalCharge"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataLevelUpgrade"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataTaskPlan"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataSevenDaySign"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataSuperRechargeGift"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataTimeLimitedTask"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataDailyTask"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataGlobalRebate"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataTriggerGift"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataFoundationInvest"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "actDataExchangeCodeGift"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "actDataPersonalCharge"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataGlobalCharge"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataLevelUpgrade"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataTaskPlan"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataSevenDaySign"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataSuperRechargeGift"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataTimeLimitedTask"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataDailyTask"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataGlobalRebate"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataTriggerGift"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataFoundationInvest"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "actDataExchangeCodeGift"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "Activity"
+        },
+        "model.ActDataDailyTask": {
+            "properties": {
+                "awardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"awardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                },
+                "lastUpdate": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"lastUpdate\"  更新时间"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Daily Task"
+        },
+        "model.ActDataExchangeCodeGift": {
+            "properties": {
+                "record": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/model.DbExchangeCodeRecord",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"record\"  兑换记录 \u003c期数, 兑换记录\u003e"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Exchange Code Gift"
+        },
+        "model.ActDataFoundationInvest": {
+            "properties": {
+                "awardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"awardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                },
+                "buyTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"buyTime\"  购买时间（0表示未购买）"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Foundation Invest"
+        },
+        "model.ActDataGlobalCharge": {
+            "properties": {
+                "hasGot": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Global Charge"
+        },
+        "model.ActDataGlobalRebate": {
+            "properties": {
+                "globalAwardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"globalAwardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                },
+                "personAwardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"personAwardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Global Rebate"
+        },
+        "model.ActDataLevelUpgrade": {
+            "properties": {
+                "extraUnlock": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"extraUnlock\""
+                },
+                "hasGot": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                },
+                "extraHasGot": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"extraHasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Level Upgrade"
+        },
+        "model.ActDataPersonalCharge": {
+            "properties": {
+                "hasGot": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Personal Charge"
+        },
+        "model.ActDataSevenDaySign": {
+            "properties": {
+                "lastSignTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastSignTime\"  上次签到时间"
+                },
+                "signDays": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"signDays\"  已经签到的天数"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Seven Day Sign"
+        },
+        "model.ActDataSuperRechargeGift": {
+            "properties": {
+                "buyTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"buyTime\"  购买时间"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Super Recharge Gift"
+        },
+        "model.ActDataTaskPlan": {
+            "properties": {
+                "exp": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"exp\""
+                },
+                "extraUnlock": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"extraUnlock\""
+                },
+                "awardData": {
+                    "items": {
+                        "$ref": "#/definitions/model.ActDataTaskPlanAwardItem"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"awardData\"  奖励领取数据"
+                },
+                "questData": {
+                    "items": {
+                        "$ref": "#/definitions/model.ActDataTaskPlanQuestItem"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"questData\"  任务领取数据"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Task Plan"
+        },
+        "model.ActDataTaskPlanAwardItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\""
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                },
+                "extraHasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"extraHasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Task Plan Award Item"
+        },
+        "model.ActDataTaskPlanQuestItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\""
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                },
+                "lastGotTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastGotTime\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Task Plan Quest Item"
+        },
+        "model.ActDataTimeLimitedTask": {
+            "properties": {
+                "taskAwardData": {
+                    "items": {
+                        "$ref": "#/definitions/model.TimeLimitedTaskItem"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"taskAwardData\"  礼包和限时任务合为一起 前2条是固定的礼包任务"
+                },
+                "dayId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"dayId\"  玩家当前任务天数 这个每次加1 其实就是任务进度，每天最多可以领取1次进度"
+                },
+                "updateDayId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"updateDayId\"  玩家上一次刷新时间的具体天数"
+                },
+                "lastUpdate": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastUpdate\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Time Limited Task"
+        },
+        "model.ActDataTriggerGift": {
+            "properties": {
+                "items": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/model.DbTriggerGiftItem",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"items\"  礼包数据 \u003cid, item\u003e"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Trigger Gift"
+        },
+        "model.DbExchangeCodeRecord": {
+            "properties": {
+                "codeData": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"codeData\"  兑换码"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Db Exchange Code Record"
+        },
+        "model.DbTriggerGiftItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\"  对应ActTriggerGift中的ID"
+                },
+                "triggerTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"triggerTime\"  上次触发时间"
+                },
+                "endTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"endTime\"  结束时间（为0）"
+                },
+                "buy": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"buy\"  是否已购买"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Db Trigger Gift Item"
+        },
+        "model.TimeLimitedTaskItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\"  对应ActTimeLimitTaskQuest中的ID   限时任务需要刷新 是否需要刷新是两个条件 1. 刷新周期，2.本周期是否做该任务，没做就不用刷新"
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Time Limited Task Item"
+        }
+    }
+}

@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SProductOpera",
+    "definitions": {
+        "C2SProductOpera": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "operaCmd": {
+                    "enum": [
+                        "ProductOperaCmdInvalid",
+                        "GetProduct",
+                        "ProductStart",
+                        "ProductEnd",
+                        "UnlockField",
+                        "Accelerate"
+                    ],
+                    "type": "string",
+                    "title": "Product Opera Cmd"
+                },
+                "buildUid": {
+                    "type": "string"
+                },
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "! 生产时需要的生产id"
+                },
+                "productIndex": {
+                    "type": "integer",
+                    "description": "! 领取生产物品的时候需要带上"
+                },
+                "addFieldId": {
+                    "type": "integer",
+                    "description": "解锁格子(对应配置里的id)"
+                },
+                "propId": {
+                    "type": "integer",
+                    "description": "对应配置中的id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "globalItemId"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "productIndex"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "addFieldId"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "propId"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "globalItemId"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "productIndex"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "addFieldId"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "propId"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "C 2 S Product Opera"
+        }
+    }
+}

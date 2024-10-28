@@ -19,9 +19,10 @@ func (this *Login) OnTick(tick *core.Tick) b3.Status {
 	rob := tick.Blackboard.GetMem(common.Robot).(robot.IRobot)
 	serverCfg := tick.Blackboard.GetMem(common.ServerConfig).(*config.ServerConfig)
 
+	_ = rob.Close()
 	err := rob.Connect(serverCfg.Addr)
 	if err != nil {
-		log.Error(err)
+		common.LogError(tick, err)
 		return b3.ERROR
 	}
 
@@ -32,7 +33,7 @@ func (this *Login) OnTick(tick *core.Tick) b3.Status {
 
 	err = rob.SendMsg(loginReq)
 	if err != nil {
-		log.Error(err)
+		common.LogError(tick, err)
 		return b3.ERROR
 	}
 

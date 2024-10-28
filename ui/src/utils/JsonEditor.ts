@@ -6,7 +6,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 
 class JsonEditor {
-    static OpenJsonEditDialog(data: object, onSave?: (d: object) => void, onClose?: (d: object) => void){
+    static OpenJsonEditDialog(data: object, onSave?: (d: object) => void, onClose?: (d: object) => void, options: object = {}){
         let closed = false;
         let mountNode = document.createElement("div"); 
         let dlg = createApp(JsonEditDialog, {
@@ -33,13 +33,14 @@ class JsonEditor {
                     }
                 }
             },
+            options: options,
         })
         dlg.use(ElementPlus)
         dlg.mount(mountNode)
         document.body.appendChild(mountNode)
     }
 
-    static OpenJsonViewDialog(data: object, onClose?: (d: object) => void){
+    static OpenJsonViewDialog(data: object, onClose?: (d: object) => void, options: object = {},){
         let closed = false;
         let mountNode = document.createElement("div"); 
         let dlg = createApp(JsonViewDialog, {
@@ -55,6 +56,7 @@ class JsonEditor {
                     }
                 }
             },
+            options: options,
         })
         dlg.use(ElementPlus)
         dlg.mount(mountNode)

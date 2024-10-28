@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SQQHallGiftReq",
+    "definitions": {
+        "C2SQQHallGiftReq": {
+            "properties": {
+                "uid": {
+                    "type": "integer"
+                },
+                "getReq": {
+                    "$ref": "#/definitions/msg.QQHallGiftGetReq",
+                    "additionalProperties": true
+                },
+                "rewardReq": {
+                    "$ref": "#/definitions/msg.QQHallGiftRewardReq",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "getReq"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rewardReq"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "getReq"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rewardReq"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "C 2 SQQ Hall Gift Req"
+        },
+        "msg.QQHallGiftGetReq": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "QQ Hall Gift Get Req"
+        },
+        "msg.QQHallGiftRewardReq": {
+            "properties": {
+                "rewardId": {
+                    "type": "integer",
+                    "description": "配置里的id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "QQ Hall Gift Reward Req"
+        }
+    }
+}

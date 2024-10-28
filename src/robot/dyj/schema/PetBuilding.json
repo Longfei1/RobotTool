@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PetBuilding",
+    "definitions": {
+        "PetBuilding": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "petBuildingInfoList": {
+                    "items": {
+                        "$ref": "#/definitions/model.PetBuildingInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"petBuildingInfoList\""
+                },
+                "seq": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"seq\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Building"
+        },
+        "model.PetBuildingInfo": {
+            "properties": {
+                "poolId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"poolId\""
+                },
+                "endTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"endTime\"  ! 时间戳(秒)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Building Info"
+        }
+    }
+}

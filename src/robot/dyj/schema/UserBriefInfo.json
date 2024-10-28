@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/UserBriefInfo",
+    "definitions": {
+        "UserBriefInfo": {
+            "properties": {
+                "uid": {
+                    "type": "string"
+                },
+                "nickName": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "integer"
+                },
+                "headFrame": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "User Brief Info"
+        }
+    }
+}

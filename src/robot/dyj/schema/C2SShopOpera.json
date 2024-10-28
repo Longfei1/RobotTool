@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SShopOpera",
+    "definitions": {
+        "C2SShopOpera": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "shopType": {
+                    "enum": [
+                        "EST_Invalid",
+                        "EST_Seed",
+                        "EST_LLK",
+                        "EST_TaskPlan"
+                    ],
+                    "type": "string",
+                    "title": "E Shop Type"
+                },
+                "shopOperaCmd": {
+                    "enum": [
+                        "SO_Get",
+                        "SO_Buy"
+                    ],
+                    "type": "string",
+                    "title": "Shop Opera Cmd"
+                },
+                "globalItemId": {
+                    "type": "integer"
+                },
+                "cnt": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Shop Opera"
+        }
+    }
+}

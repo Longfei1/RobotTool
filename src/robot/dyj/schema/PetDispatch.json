@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PetDispatch",
+    "definitions": {
+        "PetDispatch": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "lastRefreshTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastRefreshTime\""
+                },
+                "petDispatchInfos": {
+                    "items": {
+                        "$ref": "#/definitions/model.PetDispatchInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"petDispatchInfos\""
+                },
+                "seq": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"seq\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Dispatch"
+        },
+        "model.PetDispatchInfo": {
+            "properties": {
+                "pointId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"pointId\"  派遣点id"
+                },
+                "taskId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"taskId\"  派遣任务id 这个任务是单独的"
+                },
+                "dispatchEndTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"dispatchEndTime\""
+                },
+                "petUidList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"petUidList\"  是否派遣宠物"
+                },
+                "rewardFlag": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"rewardFlag\"  是否领取奖励"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Dispatch Info"
+        }
+    }
+}

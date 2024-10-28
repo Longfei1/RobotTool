@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ProductItem",
+    "definitions": {
+        "ProductItem": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\""
+                },
+                "startTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"startTime\"  ! 时间戳(秒)"
+                },
+                "endTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"endTime\"  ! 时间戳(秒)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Product Item"
+        }
+    }
+}

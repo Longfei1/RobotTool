@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActReqTriggerGift",
+    "definitions": {
+        "ActReqTriggerGift": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "TGRT_Info",
+                        "TGRT_Trigger"
+                    ],
+                    "type": "string",
+                    "title": "Trigger Gift Req Type",
+                    "description": "触发礼包"
+                },
+                "giftId": {
+                    "type": "integer",
+                    "description": "触发的礼包id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Trigger Gift"
+        }
+    }
+}

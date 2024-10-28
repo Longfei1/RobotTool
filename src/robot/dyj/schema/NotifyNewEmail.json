@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/NotifyNewEmail",
+    "definitions": {
+        "NotifyNewEmail": {
+            "properties": {
+                "UserLvl": {
+                    "type": "integer",
+                    "description": "玩家等级条件(大于等于，0不限制)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Notify New Email"
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/DayUserLvStatsDB",
+    "definitions": {
+        "DayUserLvStatsDB": {
+            "properties": {
+                "day": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "totalRegister": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"totalRegister\"  历史注册"
+                },
+                "registerUser": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"registerUser\"  当日注册"
+                },
+                "dayLvCnt": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"dayLvCnt\"  停留在每个等级的人数(下标0对应等级1)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Day User Lv Stats DB",
+            "description": "每天的等级驻留统计"
+        }
+    }
+}

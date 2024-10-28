@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/LLKInfo",
+    "definitions": {
+        "LLKInfo": {
+            "properties": {
+                "score": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"score\""
+                },
+                "coin": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"coin\""
+                },
+                "totalCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"totalCount\"  总局数"
+                },
+                "winCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"winCount\"  胜局数"
+                },
+                "loseCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"loseCount\"  胜局数"
+                },
+                "drawCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"drawCount\"  平局数"
+                },
+                "fleeCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"fleeCount\"  逃跑数"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Info"
+        }
+    }
+}

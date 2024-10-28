@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SDailySign",
+    "definitions": {
+        "C2SDailySign": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "operType": {
+                    "enum": [
+                        "DSOT_Get",
+                        "DSOT_Sign",
+                        "DSOT_ReSign"
+                    ],
+                    "type": "string",
+                    "title": "E Daily Sign Oper Type",
+                    "description": "签到"
+                },
+                "targetDay": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Daily Sign"
+        }
+    }
+}

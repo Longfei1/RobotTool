@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "enum": [
+        "EPBO_Invalid",
+        "EPBO_Prune",
+        "EPBO_Graft"
+    ],
+    "type": "string",
+    "title": "E Plant Buff Op"
+}

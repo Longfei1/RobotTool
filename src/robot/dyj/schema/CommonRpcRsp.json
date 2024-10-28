@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/CommonRpcRsp",
+    "definitions": {
+        "CommonRpcRsp": {
+            "properties": {
+                "data": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "userClientContext": {
+                    "$ref": "#/definitions/msg.UserClientContext",
+                    "additionalProperties": true
+                },
+                "uinList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "用于发team消息"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Common Rpc Rsp"
+        },
+        "msg.UserClientContext": {
+            "properties": {
+                "Uid": {
+                    "type": "string"
+                },
+                "IP": {
+                    "type": "string"
+                },
+                "gateSeverId": {
+                    "type": "string"
+                },
+                "idNum": {
+                    "type": "integer",
+                    "description": "! 居民证id 登录后下发，然后其他情况下不用下发，其他协议发到gamesvr带上，主要用于gamesvr打印日志"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "User Client Context"
+        }
+    }
+}

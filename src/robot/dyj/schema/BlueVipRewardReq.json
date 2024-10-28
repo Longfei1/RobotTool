@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/BlueVipRewardReq",
+    "definitions": {
+        "BlueVipRewardReq": {
+            "properties": {
+                "rewardId": {
+                    "type": "integer",
+                    "description": "配置里的id"
+                },
+                "rewardAll": {
+                    "type": "integer",
+                    "description": "一键领取每日奖励"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Blue Vip Reward Req"
+        }
+    }
+}

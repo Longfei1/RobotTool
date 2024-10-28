@@ -1,0 +1,601 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/S2CLianLianKan",
+    "definitions": {
+        "S2CLianLianKan": {
+            "properties": {
+                "errCode": {
+                    "enum": [
+                        "OK",
+                        "UNKNOWN_ERROR",
+                        "NOT_AUTH",
+                        "TOKEN_INVALID",
+                        "PLAYER_NOT_FOUND",
+                        "REDIRECT",
+                        "IDLE_TIMEOUT",
+                        "DUP_LOGIN",
+                        "PARAM_ERROR",
+                        "SERVER_CLOSED",
+                        "SYSTEM_ERR",
+                        "SCORE_LIMIT",
+                        "BUILDING_NOT_FOUND",
+                        "BUILDING_STATUS_STARTING",
+                        "BUILDING_CAN_NOT_PUT",
+                        "BUILDING_CAN_NOT_REMOVE",
+                        "BUILDING_CAN_NOT_ADD",
+                        "BUILDING_COMFORT_LIMIT",
+                        "BUILDING_USER_LVL_LIMIT",
+                        "BUILDING_NUM_LIMIT",
+                        "BUILDING_COMFORT_ENOUGH",
+                        "PLANT_ATTACH_BUILDING_NOT_FOUND",
+                        "PLANT_ATTACH_BUILDING_TYPE_ERR",
+                        "PLANT_ATTACH_BUILDING_HAVE_ATTACHED",
+                        "PLANT_NOT_FOUND",
+                        "PLANT_NOT_MATURE",
+                        "PLANT_PRUNE_STEP_ERR",
+                        "PLANT_PRUNE_TIME_ZERO",
+                        "PLANT_GRAFT_STEP_ERR",
+                        "PLANT_NOT_FOUND_CAN_DE_BUFFER",
+                        "PLANT_ALREADY_DE_BUFFER",
+                        "ITEM_NOT_FOUND",
+                        "PROP_NOT_FOUND",
+                        "PROP_NOT_ENOUGH",
+                        "ORDER_NOT_FOUND",
+                        "ORDER_SUBMIT_CD",
+                        "WAREHOUSE_CAPACITY_ERR",
+                        "PRODUCT_NOT_FOUND",
+                        "PRODUCT_NOT_END",
+                        "CHANGE_NICK_CD_ERR",
+                        "SHOP_EXCEED_LIMIT",
+                        "TASK_REWARDED",
+                        "TASK_COND_NOT_COM",
+                        "TASK_PRE_NOT_COM",
+                        "FORMULA_NOT_MATCH",
+                        "DELIVERY_GOODS_ALREADY_LOAD",
+                        "DELIVERY_CARGO_FIN",
+                        "DELIVERY_CARGO_NOT_FIN",
+                        "DELIVERY_GOODS_ALREADY_REWARD",
+                        "DELIVERY_CARGO_STARTED",
+                        "XIAO_XIAO_LE_MATCH_TIME_OUT",
+                        "XIAO_XIAO_LE_GAME_END",
+                        "ACTIVITY_LVL_NOT_MET",
+                        "ACTIVITY_NOT_IN_TIME",
+                        "EXCHANGE_CODE_INVALID",
+                        "EXCHANGE_CODE_EXPIRE",
+                        "EXCHANGE_CODE_TIME_NOT_OPEN",
+                        "EXCHANGE_CODE_USED",
+                        "EXCHANGE_CODE_BATCH_COUNT_LIMIT"
+                    ],
+                    "type": "string",
+                    "title": "STATUS",
+                    "description": "protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/msg.proto错误码"
+                },
+                "uiId": {
+                    "type": "integer"
+                },
+                "operaType": {
+                    "enum": [
+                        "ELLKO_GET",
+                        "ELLKO_MATCHING",
+                        "ELLKO_MATCHED",
+                        "ELLKO_GAMING",
+                        "ELLKO_GAME_END"
+                    ],
+                    "type": "string",
+                    "title": "E Lian Lian Kan Opera"
+                },
+                "getRsp": {
+                    "$ref": "#/definitions/msg.LianLianKanGetRsp",
+                    "additionalProperties": true,
+                    "description": "如果断线进来，是返回玩家当前状态, 玩家点确认就直接用这个数据，点取消的话就按以前的发EXXL_FLEET"
+                },
+                "matching": {
+                    "enum": [
+                        "ELLKM_INVALID",
+                        "ELLKM_APPLY",
+                        "ELLKM_TIME_OUT",
+                        "ELLKM_CANCEL"
+                    ],
+                    "type": "string",
+                    "title": "E Lian Lian Kan Match"
+                },
+                "matched": {
+                    "$ref": "#/definitions/msg.LLKMatched",
+                    "additionalProperties": true
+                },
+                "gaming": {
+                    "$ref": "#/definitions/model.LLKRoom",
+                    "additionalProperties": true
+                },
+                "gameEnd": {
+                    "$ref": "#/definitions/msg.LLKGameEndEx",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "getRsp"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "matching"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "matched"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "gaming"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "gameEnd"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "getRsp"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "matching"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "matched"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "gaming"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "gameEnd"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "S 2 C Lian Lian Kan",
+            "description": "! 分三个阶段! 匹配中 可以操作的请求匹配 取消匹配 匹配超时! 匹配成功 可以操作的是确认匹配和拒绝匹配! 游戏中 道具使用和连线操作"
+        },
+        "model.FirstChargeInfo": {
+            "properties": {
+                "directBuyId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"directBuyId\"  档位"
+                },
+                "ChargeTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"firstChargeTime\"  首充时间"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "First Charge Info"
+        },
+        "model.ItemInfo": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\""
+                },
+                "level": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"level\""
+                },
+                "itemType": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"itemType\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                },
+                "invalidTimeStamp": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"invalidTimeStamp\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Item Info"
+        },
+        "model.LLKGameEnd": {
+            "properties": {
+                "winUser": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"winUser\""
+                },
+                "llkInfoList": {
+                    "items": {
+                        "$ref": "#/definitions/model.LLKInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"llkInfoList\"  这里只是变化量 score就是结算的时候的分"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Game End"
+        },
+        "model.LLKGameUser": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"uid\""
+                },
+                "score": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"score\""
+                },
+                "seedNum": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"seedNum\""
+                },
+                "rmCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"rmCount\"  ! 单位 对,双"
+                },
+                "ComboCnt": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"ComboCnt\"  ! 连击次数 规定时间没连击，会被重置"
+                },
+                "lastRmTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastComboTime\"  ! 上一次移除时间"
+                },
+                "operaRecord": {
+                    "items": {
+                        "$ref": "#/definitions/model.LLKOpera"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"operaRecord\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Game User"
+        },
+        "model.LLKInfo": {
+            "properties": {
+                "score": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"score\""
+                },
+                "coin": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"coin\""
+                },
+                "totalCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"totalCount\"  总局数"
+                },
+                "winCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"winCount\"  胜局数"
+                },
+                "loseCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"loseCount\"  胜局数"
+                },
+                "drawCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"drawCount\"  平局数"
+                },
+                "fleeCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"fleeCount\"  逃跑数"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Info"
+        },
+        "model.LLKOpera": {
+            "properties": {
+                "operaType": {
+                    "enum": [
+                        "EXXL_INVALID",
+                        "EXXL_NORMAL",
+                        "EXXL_PROPS",
+                        "EXXL_TIMEOUT",
+                        "EXXL_FLEET"
+                    ],
+                    "type": "string",
+                    "title": "LLK Opera Type"
+                },
+                "posList": {
+                    "items": {
+                        "$ref": "#/definitions/model.Position"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"posList\"  操作类型EXXL_NORMAL:传入2个位置"
+                },
+                "propsID": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"propsID\"  操作类型EXXL_PROPS:传入道具ID"
+                },
+                "timestamp": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"timestamp\"  操作的时间戳(可用于回放或者验证)"
+                },
+                "randomCount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"randomCount\"  随机计数(用于快速恢复最新进度)"
+                },
+                "comboFlag": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"comboFlag\"  是否为连击，前台不用赋值, 后台赋值后广播"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Opera"
+        },
+        "model.LLKRoom": {
+            "properties": {
+                "roomId": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "matchedId": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"matchedId\""
+                },
+                "endTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"endTime\"  ! 结束时间"
+                },
+                "difficulty": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"difficulty\"  ! 地图的长和宽"
+                },
+                "gameUserList": {
+                    "items": {
+                        "$ref": "#/definitions/model.LLKGameUser"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"gameUserList\""
+                },
+                "gameEnd": {
+                    "$ref": "#/definitions/model.LLKGameEnd",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"gameEnd\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Room"
+        },
+        "model.Position": {
+            "properties": {
+                "x": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"x\""
+                },
+                "y": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"y\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Position"
+        },
+        "model.UserBase": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "idNum": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"idNum\"  ! 居民证id"
+                },
+                "nickName": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"nickName\""
+                },
+                "sex": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"sex\"  0是女1是男，国际通用"
+                },
+                "lastChangeNickTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastChangeNickTime\""
+                },
+                "headFrame": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"headFrame\""
+                },
+                "lastLoginTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastLoginTime\""
+                },
+                "rewardList": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"rewardList\"  ! 第0个索引为已领取等级奖励的等级，第1个索引为舒适度等级"
+                },
+                "llkInfo": {
+                    "$ref": "#/definitions/model.LLKInfo",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"llkInfo\""
+                },
+                "supplyExpireTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"supplyExpireTime\"  ! 月卡过期时间"
+                },
+                "supplyGetRewardTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"supplyGetRewardTime\"  ! 月卡每日奖励领取时间"
+                },
+                "firstChargeInfo": {
+                    "items": {
+                        "$ref": "#/definitions/model.FirstChargeInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"firstChargeInfo\"  ! 首抽信息"
+                },
+                "is_blue_vip": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"is_blue_vip\""
+                },
+                "is_blue_year_vip": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"is_blue_year_vip\""
+                },
+                "blue_vip_level": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"blue_vip_level\""
+                },
+                "is_super_blue_vip": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"is_super_blue_vip\""
+                },
+                "registerTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"registerTime\""
+                },
+                "lastLoginOutTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastLoginOutTime\""
+                },
+                "seq": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"seq\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "User Base"
+        },
+        "msg.LLKGameEndEx": {
+            "properties": {
+                "modelGameEnd": {
+                    "$ref": "#/definitions/model.LLKGameEnd",
+                    "additionalProperties": true
+                },
+                "llkReward": {
+                    "items": {
+                        "$ref": "#/definitions/msg.LLKReward"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Game End Ex"
+        },
+        "msg.LLKMatched": {
+            "properties": {
+                "matchId": {
+                    "type": "string"
+                },
+                "rank": {
+                    "type": "integer"
+                },
+                "matchedInfo": {
+                    "items": {
+                        "$ref": "#/definitions/msg.LLKMatchedInfo"
+                    },
+                    "type": "array"
+                },
+                "userInfo": {
+                    "items": {
+                        "$ref": "#/definitions/model.UserBase"
+                    },
+                    "type": "array",
+                    "description": "! 注意：下发对方的时候需要脱敏"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Matched"
+        },
+        "msg.LLKMatchedInfo": {
+            "properties": {
+                "uid": {
+                    "type": "string"
+                },
+                "matchedOpera": {
+                    "enum": [
+                        "ELLKMO_INVALID",
+                        "ELLKMO_CONFIRM",
+                        "ELLKMO_REFUSE",
+                        "ELLKMO_TIME_OUT_START_GAME",
+                        "ELLKMO_TIME_OUT_END_MATCHED",
+                        "ELLKMO_LOGOUT"
+                    ],
+                    "type": "string",
+                    "title": "E Lian Lian Kan Matched Opera"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Matched Info"
+        },
+        "msg.LLKReward": {
+            "properties": {
+                "uin": {
+                    "type": "string"
+                },
+                "itemList": {
+                    "items": {
+                        "$ref": "#/definitions/model.ItemInfo"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Reward"
+        },
+        "msg.LianLianKanGetRsp": {
+            "properties": {
+                "matched": {
+                    "$ref": "#/definitions/msg.LLKMatched",
+                    "additionalProperties": true
+                },
+                "roomId": {
+                    "type": "string"
+                },
+                "gaming": {
+                    "$ref": "#/definitions/model.LLKRoom",
+                    "additionalProperties": true
+                },
+                "userInfo": {
+                    "$ref": "#/definitions/model.UserBase",
+                    "additionalProperties": true,
+                    "description": "! 注意：下发对方的时候需要脱敏  matched操作的时候会下发该数据"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Lian Lian Kan Get Rsp"
+        }
+    }
+}

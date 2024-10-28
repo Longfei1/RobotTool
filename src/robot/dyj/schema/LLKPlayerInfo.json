@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/LLKPlayerInfo",
+    "definitions": {
+        "LLKPlayerInfo": {
+            "properties": {
+                "uin": {
+                    "type": "string"
+                },
+                "status": {
+                    "enum": [
+                        "ELLKPS_INVALID",
+                        "ELLKPS_MATCHING",
+                        "ELLKPS_MATCHED",
+                        "ELLKPS_GAMEING"
+                    ],
+                    "type": "string",
+                    "title": "ELLK Player Status"
+                },
+                "applyId": {
+                    "type": "string",
+                    "description": "用于超时取消的时候，判断当前和异步任务中记录的一致，不一致代表不用超时取消"
+                },
+                "rank": {
+                    "type": "integer"
+                },
+                "matchedId": {
+                    "type": "string"
+                },
+                "roomId": {
+                    "type": "string"
+                },
+                "offFlag": {
+                    "type": "boolean",
+                    "description": "240613 掉线标志 解决玩家中游戏中掉线 然后一直没回来，或者回来一直没操作"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "LLK Player Info"
+        }
+    }
+}

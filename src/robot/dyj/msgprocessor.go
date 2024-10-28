@@ -7,20 +7,19 @@ import (
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/protobuf/proto"
 	"math"
-	"reflect"
 )
 
 type MsgProcessor struct {
 	littleEndian bool
-	msgInfo      map[uint16]reflect.Type
-	msgID        map[reflect.Type]uint16
+	msgInfo      map[uint16]proto.Message
+	msgID        map[proto.Message]uint16
 }
 
 func NewMsgProcessor() *MsgProcessor {
 	p := new(MsgProcessor)
 	p.littleEndian = false
-	p.msgID = make(map[reflect.Type]uint16)
-	p.msgInfo = make(map[uint16]reflect.Type)
+	p.msgID = make(map[proto.Message]uint16)
+	p.msgInfo = make(map[uint16]proto.Message)
 	return p
 }
 
@@ -29,11 +28,7 @@ func (p *MsgProcessor) SetByteOrder(littleEndian bool) {
 }
 
 func (p *MsgProcessor) Register(msg proto.Message, eventType uint16) {
-	msgType := reflect.TypeOf(msg)
-	if msgType == nil || msgType.Kind() != reflect.Ptr {
-		log.Error("protobuf message pointer required")
-		return
-	}
+	msgType := msg
 	if _, ok := p.msgID[msgType]; ok {
 		log.Errorf("message %s is already registered", msgType)
 		return
@@ -47,12 +42,16 @@ func (p *MsgProcessor) Register(msg proto.Message, eventType uint16) {
 	p.msgID[msgType] = eventType
 }
 
-func (p *MsgProcessor) GetMsgType(id uint16) reflect.Type {
+func (p *MsgProcessor) GetMsgType(id uint16) proto.Message {
 	return p.msgInfo[id]
 }
 
-func (p *MsgProcessor) GetMsgId(tp reflect.Type) uint16 {
+func (p *MsgProcessor) GetMsgId(tp proto.Message) uint16 {
 	return p.msgID[tp]
+}
+
+func (p *MsgProcessor) GetAllMsgInfo() map[uint16]proto.Message {
+	return p.msgInfo
 }
 
 func (p *MsgProcessor) Unmarshal(data []byte) (proto.Message, error) {
@@ -73,12 +72,12 @@ func (p *MsgProcessor) Unmarshal(data []byte) (proto.Message, error) {
 	}
 
 	// msg
-	msg := reflect.New(msgType.Elem()).Interface()
-	return msg.(proto.Message), proto.Unmarshal(data[2:], msg.(proto.Message))
+	msg := msgType.ProtoReflect().New().Interface()
+	return msg, proto.Unmarshal(data[2:], msg)
 }
 
-func (p *MsgProcessor) Marshal(msg interface{}) ([]byte, error) {
-	msgType := reflect.TypeOf(msg)
+func (p *MsgProcessor) Marshal(msg proto.Message) ([]byte, error) {
+	msgType := msg
 
 	// id
 	_id, ok := p.msgID[msgType]
@@ -95,7 +94,7 @@ func (p *MsgProcessor) Marshal(msg interface{}) ([]byte, error) {
 	}
 
 	// data
-	data, err := proto.Marshal(msg.(proto.Message))
+	data, err := proto.Marshal(msg)
 
 	// 创建一个新的字节切片来存储 id 和 data
 	combined := make([]byte, 2+len(data))

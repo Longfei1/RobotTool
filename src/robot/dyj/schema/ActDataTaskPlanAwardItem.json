@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActDataTaskPlanAwardItem",
+    "definitions": {
+        "ActDataTaskPlanAwardItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\""
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                },
+                "extraHasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"extraHasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Task Plan Award Item"
+        }
+    }
+}

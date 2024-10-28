@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/InviteNPC",
+    "definitions": {
+        "InviteNPC": {
+            "properties": {
+                "npcId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Invite NPC",
+            "description": "! 邀请npc"
+        }
+    }
+}

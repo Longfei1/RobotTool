@@ -1,0 +1,697 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/S2CActivityOpera",
+    "definitions": {
+        "S2CActivityOpera": {
+            "properties": {
+                "errCode": {
+                    "enum": [
+                        "OK",
+                        "UNKNOWN_ERROR",
+                        "NOT_AUTH",
+                        "TOKEN_INVALID",
+                        "PLAYER_NOT_FOUND",
+                        "REDIRECT",
+                        "IDLE_TIMEOUT",
+                        "DUP_LOGIN",
+                        "PARAM_ERROR",
+                        "SERVER_CLOSED",
+                        "SYSTEM_ERR",
+                        "SCORE_LIMIT",
+                        "BUILDING_NOT_FOUND",
+                        "BUILDING_STATUS_STARTING",
+                        "BUILDING_CAN_NOT_PUT",
+                        "BUILDING_CAN_NOT_REMOVE",
+                        "BUILDING_CAN_NOT_ADD",
+                        "BUILDING_COMFORT_LIMIT",
+                        "BUILDING_USER_LVL_LIMIT",
+                        "BUILDING_NUM_LIMIT",
+                        "BUILDING_COMFORT_ENOUGH",
+                        "PLANT_ATTACH_BUILDING_NOT_FOUND",
+                        "PLANT_ATTACH_BUILDING_TYPE_ERR",
+                        "PLANT_ATTACH_BUILDING_HAVE_ATTACHED",
+                        "PLANT_NOT_FOUND",
+                        "PLANT_NOT_MATURE",
+                        "PLANT_PRUNE_STEP_ERR",
+                        "PLANT_PRUNE_TIME_ZERO",
+                        "PLANT_GRAFT_STEP_ERR",
+                        "PLANT_NOT_FOUND_CAN_DE_BUFFER",
+                        "PLANT_ALREADY_DE_BUFFER",
+                        "ITEM_NOT_FOUND",
+                        "PROP_NOT_FOUND",
+                        "PROP_NOT_ENOUGH",
+                        "ORDER_NOT_FOUND",
+                        "ORDER_SUBMIT_CD",
+                        "WAREHOUSE_CAPACITY_ERR",
+                        "PRODUCT_NOT_FOUND",
+                        "PRODUCT_NOT_END",
+                        "CHANGE_NICK_CD_ERR",
+                        "SHOP_EXCEED_LIMIT",
+                        "TASK_REWARDED",
+                        "TASK_COND_NOT_COM",
+                        "TASK_PRE_NOT_COM",
+                        "FORMULA_NOT_MATCH",
+                        "DELIVERY_GOODS_ALREADY_LOAD",
+                        "DELIVERY_CARGO_FIN",
+                        "DELIVERY_CARGO_NOT_FIN",
+                        "DELIVERY_GOODS_ALREADY_REWARD",
+                        "DELIVERY_CARGO_STARTED",
+                        "XIAO_XIAO_LE_MATCH_TIME_OUT",
+                        "XIAO_XIAO_LE_GAME_END",
+                        "ACTIVITY_LVL_NOT_MET",
+                        "ACTIVITY_NOT_IN_TIME",
+                        "EXCHANGE_CODE_INVALID",
+                        "EXCHANGE_CODE_EXPIRE",
+                        "EXCHANGE_CODE_TIME_NOT_OPEN",
+                        "EXCHANGE_CODE_USED",
+                        "EXCHANGE_CODE_BATCH_COUNT_LIMIT"
+                    ],
+                    "type": "string",
+                    "title": "STATUS",
+                    "description": "protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/msg.proto错误码"
+                },
+                "uiId": {
+                    "type": "integer"
+                },
+                "actType": {
+                    "enum": [
+                        "EAT_Invalid",
+                        "EAT_PersonalCharge",
+                        "EAT_GlobalCharge",
+                        "EAT_LevelUpgrade",
+                        "EAT_TaskPlan",
+                        "EAT_SevenDaySign",
+                        "EAT_SuperRechargeGift",
+                        "EAT_TimeLimitedTask",
+                        "EAT_DailyTask",
+                        "EAT_GlobalRebate",
+                        "EAT_TriggerGift",
+                        "EAT_FoundationInvest",
+                        "EAT_ExchangeCodeGift",
+                        "EAT_Max"
+                    ],
+                    "type": "string",
+                    "title": "E Activity Type"
+                },
+                "rspPersonalCharge": {
+                    "$ref": "#/definitions/msg.ActRspPersonalCharge",
+                    "additionalProperties": true,
+                    "description": "个人累充"
+                },
+                "rspGlobalCharge": {
+                    "$ref": "#/definitions/msg.ActRspGlobalCharge",
+                    "additionalProperties": true,
+                    "description": "全服累充"
+                },
+                "rspLevelUpgrade": {
+                    "$ref": "#/definitions/msg.ActRspLevelUpgrade",
+                    "additionalProperties": true,
+                    "description": "冲级活动"
+                },
+                "rspTaskPlan": {
+                    "$ref": "#/definitions/msg.ActRspTaskPlan",
+                    "additionalProperties": true,
+                    "description": "战令"
+                },
+                "rspSevenDaySign": {
+                    "$ref": "#/definitions/msg.ActRspSevenDaySign",
+                    "additionalProperties": true,
+                    "description": "七日签到"
+                },
+                "rspSuperRechargeGift": {
+                    "$ref": "#/definitions/msg.ActRspSuperRechargeGift",
+                    "additionalProperties": true,
+                    "description": "超值充值礼包"
+                },
+                "rspTimeLimitedTask": {
+                    "$ref": "#/definitions/msg.ActRspTimeLimitedTask",
+                    "additionalProperties": true,
+                    "description": "限时任务"
+                },
+                "rspDailyTask": {
+                    "$ref": "#/definitions/msg.ActRspDailyTask",
+                    "additionalProperties": true,
+                    "description": "每日签到"
+                },
+                "rspGlobalRebate": {
+                    "$ref": "#/definitions/msg.ActRspGlobalRebate",
+                    "additionalProperties": true,
+                    "description": "全民返利"
+                },
+                "rspTriggerGift": {
+                    "$ref": "#/definitions/msg.ActRspTriggerGift",
+                    "additionalProperties": true,
+                    "description": "触发礼包"
+                },
+                "rspFoundationInvest": {
+                    "$ref": "#/definitions/msg.ActRspFoundationInvest",
+                    "additionalProperties": true,
+                    "description": "基金投资"
+                },
+                "rspExchangeCodeGift": {
+                    "$ref": "#/definitions/msg.ActRspExchangeCodeGift",
+                    "additionalProperties": true,
+                    "description": "兑换码礼包"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "rspPersonalCharge"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspGlobalCharge"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspLevelUpgrade"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspTaskPlan"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspSevenDaySign"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspSuperRechargeGift"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspTimeLimitedTask"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspDailyTask"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspGlobalRebate"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspTriggerGift"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspFoundationInvest"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "rspExchangeCodeGift"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "rspPersonalCharge"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspGlobalCharge"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspLevelUpgrade"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspTaskPlan"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspSevenDaySign"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspSuperRechargeGift"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspTimeLimitedTask"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspDailyTask"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspGlobalRebate"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspTriggerGift"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspFoundationInvest"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "rspExchangeCodeGift"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "S 2 C Activity Opera"
+        },
+        "model.ActDataFoundationInvest": {
+            "properties": {
+                "awardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"awardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                },
+                "buyTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"buyTime\"  购买时间（0表示未购买）"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Foundation Invest"
+        },
+        "model.ActDataGlobalRebate": {
+            "properties": {
+                "globalAwardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"globalAwardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                },
+                "personAwardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"personAwardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Global Rebate"
+        },
+        "model.ActDataSevenDaySign": {
+            "properties": {
+                "lastSignTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastSignTime\"  上次签到时间"
+                },
+                "signDays": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"signDays\"  已经签到的天数"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Seven Day Sign"
+        },
+        "model.ActDataSuperRechargeGift": {
+            "properties": {
+                "buyTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"buyTime\"  购买时间"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Super Recharge Gift"
+        },
+        "model.ActDataTaskPlanAwardItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\""
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                },
+                "extraHasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"extraHasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Task Plan Award Item"
+        },
+        "model.ActDataTriggerGift": {
+            "properties": {
+                "items": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/model.DbTriggerGiftItem",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"items\"  礼包数据 \u003cid, item\u003e"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Trigger Gift"
+        },
+        "model.DbTriggerGiftItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\"  对应ActTriggerGift中的ID"
+                },
+                "triggerTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"triggerTime\"  上次触发时间"
+                },
+                "endTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"endTime\"  结束时间（为0）"
+                },
+                "buy": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"buy\"  是否已购买"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Db Trigger Gift Item"
+        },
+        "msg.ActRspDailyTask": {
+            "properties": {
+                "data": {
+                    "items": {
+                        "$ref": "#/definitions/msg.TaskItemInfo"
+                    },
+                    "type": "array",
+                    "description": "任务信息"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Daily Task"
+        },
+        "msg.ActRspExchangeCodeGift": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Exchange Code Gift",
+            "description": "model.ActDataExchangeCodeGift data = 1;"
+        },
+        "msg.ActRspFoundationInvest": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.ActDataFoundationInvest",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Foundation Invest"
+        },
+        "msg.ActRspGlobalCharge": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1拉取, 2领奖"
+                },
+                "totalChargeNum": {
+                    "type": "integer",
+                    "description": "总充值金额"
+                },
+                "totalPlayerNum": {
+                    "type": "integer",
+                    "description": "总充值超过X的认输"
+                },
+                "awardStatus": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "领奖状态(0未领取 1已领取)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Global Charge"
+        },
+        "msg.ActRspGlobalRebate": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.ActDataGlobalRebate",
+                    "additionalProperties": true
+                },
+                "globalNumCond": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object",
+                    "description": "全服充值人数 \u003cday, num\u003e"
+                },
+                "personNumCond": {
+                    "additionalProperties": {
+                        "type": "integer"
+                    },
+                    "type": "object",
+                    "description": "个人充值笔数 \u003cday, num\u003e"
+                },
+                "curDay": {
+                    "type": "integer",
+                    "description": "当前天数"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Global Rebate"
+        },
+        "msg.ActRspLevelUpgrade": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1拉取, 2领奖, 3 一键领取"
+                },
+                "extraUnlock": {
+                    "type": "boolean",
+                    "description": "额外奖励是否解锁"
+                },
+                "awardStatus": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "领奖状态(0未领取 1已领取)"
+                },
+                "extraStatus": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "额外奖励领奖状态(0未领取 1已领取)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Level Upgrade"
+        },
+        "msg.ActRspPersonalCharge": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1拉取, 2领奖"
+                },
+                "totalChargeNum": {
+                    "type": "integer",
+                    "description": "总充值"
+                },
+                "totalChargeDay": {
+                    "type": "integer",
+                    "description": "总充值"
+                },
+                "awardStatus": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "领奖状态(0未领取 1已领取)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Personal Charge"
+        },
+        "msg.ActRspSevenDaySign": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.ActDataSevenDaySign",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Seven Day Sign"
+        },
+        "msg.ActRspSuperRechargeGift": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.ActDataSuperRechargeGift",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Super Recharge Gift"
+        },
+        "msg.ActRspTaskPlan": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1 拉取, 2 完成任务, 3领取奖励 , 4 一键完成任务 , 5 一键领取奖励"
+                },
+                "exp": {
+                    "type": "integer"
+                },
+                "extraUnlock": {
+                    "type": "boolean"
+                },
+                "awardInfo": {
+                    "items": {
+                        "$ref": "#/definitions/model.ActDataTaskPlanAwardItem"
+                    },
+                    "type": "array",
+                    "description": "奖励领取数据"
+                },
+                "questInfo": {
+                    "items": {
+                        "$ref": "#/definitions/msg.ActTaskPlanQuest"
+                    },
+                    "type": "array",
+                    "description": "任务数据"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Task Plan"
+        },
+        "msg.ActRspTimeLimitedTask": {
+            "properties": {
+                "data": {
+                    "items": {
+                        "$ref": "#/definitions/msg.TimeLimitedTaskItemInfo"
+                    },
+                    "type": "array",
+                    "description": "奖励领取情况"
+                },
+                "score": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Time Limited Task"
+        },
+        "msg.ActRspTriggerGift": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.ActDataTriggerGift",
+                    "additionalProperties": true
+                },
+                "triggered": {
+                    "type": "boolean",
+                    "description": "是否触发成功（不满足触发条件时，返回false，柔性处理，避免提示错误）"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Trigger Gift"
+        },
+        "msg.ActTaskPlanQuest": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer"
+                },
+                "progress": {
+                    "type": "integer",
+                    "description": "进度"
+                },
+                "hasGot": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Task Plan Quest",
+            "description": "战令"
+        },
+        "msg.TaskItemInfo": {
+            "properties": {
+                "Id": {
+                    "type": "integer",
+                    "description": "任务id"
+                },
+                "num": {
+                    "type": "string",
+                    "description": "任务进度"
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "是否领奖"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Item Info"
+        },
+        "msg.TimeLimitedTaskItemInfo": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "对应ActTimeLimitTaskQuest中的ID"
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "该任务进度"
+                },
+                "hasGot": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Time Limited Task Item Info"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/SceneOccupationStatsRsp",
+    "definitions": {
+        "SceneOccupationStatsRsp": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Scene Occupation Stats Rsp"
+        }
+    }
+}

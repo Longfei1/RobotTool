@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActReqTaskPlan",
+    "definitions": {
+        "ActReqTaskPlan": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1 拉取, 2 完成任务, 3领取奖励 , 4 一键完成任务 , 5 一键领取奖励"
+                },
+                "tagretId": {
+                    "type": "integer",
+                    "description": "完成任务/领取奖励配置id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Task Plan"
+        }
+    }
+}

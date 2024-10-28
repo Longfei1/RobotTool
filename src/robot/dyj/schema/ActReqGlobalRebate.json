@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActReqGlobalRebate",
+    "definitions": {
+        "ActReqGlobalRebate": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "GRRT_Info",
+                        "GRRT_GlobalReward",
+                        "GRRT_PersonReward"
+                    ],
+                    "type": "string",
+                    "title": "Global Rebate Req Type",
+                    "description": "全民返利"
+                },
+                "taskId": {
+                    "type": "integer",
+                    "description": "领取的任务id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Global Rebate"
+        }
+    }
+}

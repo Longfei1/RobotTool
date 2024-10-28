@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2STask",
+    "definitions": {
+        "C2STask": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "taskOperaCmd": {
+                    "enum": [
+                        "TOC_Get",
+                        "TOC_Accept",
+                        "TOC_Submit",
+                        "TOC_Notify",
+                        "TOC_FetchAll"
+                    ],
+                    "type": "string",
+                    "title": "Task Opera Cmd"
+                },
+                "taskList": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Task"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SEmailReq",
+    "definitions": {
+        "C2SEmailReq": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "type": {
+                    "enum": [
+                        "EMAIL_GET_INFO",
+                        "EMAIL_READ",
+                        "EMIIL_GET_AWARD",
+                        "EMAIL_DELETE"
+                    ],
+                    "type": "string",
+                    "title": "Email Req Type"
+                },
+                "mailId": {
+                    "type": "string",
+                    "description": "传0是一键（拉数据除外）"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Email Req"
+        }
+    }
+}

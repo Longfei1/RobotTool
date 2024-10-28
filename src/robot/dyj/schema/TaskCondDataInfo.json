@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TaskCondDataInfo",
+    "definitions": {
+        "TaskCondDataInfo": {
+            "properties": {
+                "needEventId": {
+                    "enum": [
+                        "ETEI_Invalid",
+                        "ETEI_Bag",
+                        "ETEI_Building",
+                        "ETEI_Exp",
+                        "ETEI_Build",
+                        "ETEI_Plant",
+                        "ETEI_Harvest",
+                        "ETEI_Product",
+                        "ETEI_Order",
+                        "ETEI_LvlUpgrade",
+                        "ETEI_OwnItem",
+                        "ETEI_RepairEnd",
+                        "ETEI_CostItem",
+                        "ETEI_AddItem",
+                        "ETEI_Formula",
+                        "ETEI_DeliveryEnd",
+                        "ETEI_ScienceOpt",
+                        "ETEI_DeliveryStart",
+                        "ETEI_PetAssign",
+                        "ETEI_GotPet",
+                        "ETEI_BuildStart",
+                        "ETEI_PetUpgrade",
+                        "ETEI_RepairStart",
+                        "ETEI_DecorateAdd",
+                        "ETEI_DecorateRem",
+                        "ETEI_RemoveEnd",
+                        "ETEI_RechargeNum",
+                        "ETEI_RechargeAmount"
+                    ],
+                    "type": "string",
+                    "title": "E Task Event Id"
+                },
+                "TaskCondData": {
+                    "$ref": "#/definitions/model.TaskCondData",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Cond Data Info",
+            "description": "用于redis的消息队列的数据载体"
+        },
+        "model.TaskCondData": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Cond Data"
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ProductInfo",
+    "definitions": {
+        "ProductInfo": {
+            "properties": {
+                "buildUid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"buildUid\""
+                },
+                "productList": {
+                    "items": {
+                        "$ref": "#/definitions/model.ProductItem"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"productList\"  ! 长度一定与格子数量相等"
+                },
+                "slotNum": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"slotNum\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Product Info"
+        },
+        "model.ProductItem": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\""
+                },
+                "startTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"startTime\"  ! 时间戳(秒)"
+                },
+                "endTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"endTime\"  ! 时间戳(秒)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Product Item"
+        }
+    }
+}

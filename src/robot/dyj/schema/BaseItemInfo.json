@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/BaseItemInfo",
+    "definitions": {
+        "BaseItemInfo": {
+            "properties": {
+                "itemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"itemId\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Base Item Info"
+        }
+    }
+}

@@ -66,6 +66,7 @@ func (a *App) initUi() error {
 	})
 	_ = ui.Bind("execBevTree", a.execBevTree)
 	_ = ui.Bind("initServerConfig", a.initServerConfig)
+	_ = ui.Bind("getProtoRequest", a.getProtoRequest)
 
 	a.ui = ui
 
@@ -117,6 +118,15 @@ func (a *App) execBevTree(id string) error {
 			}
 
 			log.Infof("bev tree ret:%v", ret)
+			if ret != b3.SUCCESS {
+				err, ok := board.GetMem(common.ErrorStr).(error)
+				if ok {
+					a.ShowPopMsg(fmt.Sprintf("行为树：%v 运行失败\n错误：%v", tree.GetTitile(), err.Error()))
+				} else {
+					a.ShowPopMsg(fmt.Sprintf("行为树：%v 运行失败", tree.GetTitile()))
+				}
+			}
+
 			break
 		}
 	}()
@@ -126,6 +136,10 @@ func (a *App) execBevTree(id string) error {
 func (a *App) initServerConfig(cfg *config.ServerConfig) error {
 	a.serverCfg = cfg
 	return nil
+}
+
+func (a *App) getProtoRequest() []*jsmsg.ProtoMsg {
+	return a.robot.GetProtoRequest()
 }
 
 // **** js函数 ****//
@@ -147,6 +161,14 @@ func (a *App) AddTipTag(tag *jsmsg.TipTag) {
 	}
 
 	_ = a.ui.Eval(fmt.Sprintf("addTipTag('%s')", string(arg)))
+}
+
+func (a *App) AddTipMsg(msg string) {
+	_ = a.ui.Eval(fmt.Sprintf("addTipMsg('%s')", msg))
+}
+
+func (a *App) ShowPopMsg(msg string) {
+	_ = a.ui.Eval(fmt.Sprintf("showPopMsg('%s')", msg))
 }
 
 // **** js函数 ****//

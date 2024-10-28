@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/UserClientContext",
+    "definitions": {
+        "UserClientContext": {
+            "properties": {
+                "Uid": {
+                    "type": "string"
+                },
+                "IP": {
+                    "type": "string"
+                },
+                "gateSeverId": {
+                    "type": "string"
+                },
+                "idNum": {
+                    "type": "integer",
+                    "description": "! 居民证id 登录后下发，然后其他情况下不用下发，其他协议发到gamesvr带上，主要用于gamesvr打印日志"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "User Client Context"
+        }
+    }
+}

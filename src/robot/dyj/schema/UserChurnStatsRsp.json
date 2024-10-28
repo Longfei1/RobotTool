@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/UserChurnStatsRsp",
+    "definitions": {
+        "UserChurnStatsRsp": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "User Churn Stats Rsp"
+        }
+    }
+}

@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PlantInfoList",
+    "definitions": {
+        "PlantInfoList": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "plantList": {
+                    "items": {
+                        "$ref": "#/definitions/model.PlantInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"plantList\""
+                },
+                "seq": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"seq\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Plant Info List"
+        },
+        "model.PlantInfo": {
+            "properties": {
+                "plantUid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"plantUid\""
+                },
+                "buildUid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"buildUid\"  ! 依附的建唯一id, 比如农田的唯一id"
+                },
+                "buildGlobalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"buildGlobalItemId\"  ! 依附建筑的全局id，方便查他的生长速度等"
+                },
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\"  ! 植物的全局id"
+                },
+                "startTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"startTime\"  ! 生效时间"
+                },
+                "plantOperaList": {
+                    "items": {
+                        "$ref": "#/definitions/model.PlantOperaInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"plantOperaList\""
+                },
+                "pruneTimes": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"pruneTimes\"  ! 剪枝 两个状态可以剪"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Plant Info"
+        },
+        "model.PlantOperaInfo": {
+            "properties": {
+                "buffGlobalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\"  ! buff等id"
+                },
+                "startTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"startTime\"  ! 生效时间"
+                },
+                "endTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"endTime\""
+                },
+                "operaBaseValue": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"operaBaseValue\"  ! 如果是0就不用管，如果有值，就是宠物属性计算后的operaValue"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Plant Opera Info"
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/DayBaseSummaryStatsDB",
+    "definitions": {
+        "DayBaseSummaryStatsDB": {
+            "properties": {
+                "day": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"_id\""
+                },
+                "totalRegister": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"totalRegister\"  历史注册"
+                },
+                "registerUser": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"registerUser\"  当日注册"
+                },
+                "activeUser": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"activeUser\"  当日活跃"
+                },
+                "paidUser": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"paidUser\"  当日付费用户数"
+                },
+                "paidTimes": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"paidTimes\"  当日付费次数数"
+                },
+                "paidAmount": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"paidAmount\"  当日付费额度"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Day Base Summary Stats DB",
+            "description": "每天的概况汇总"
+        }
+    }
+}

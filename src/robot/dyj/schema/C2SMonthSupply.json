@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SMonthSupply",
+    "definitions": {
+        "C2SMonthSupply": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "operType": {
+                    "type": "integer",
+                    "description": "1 当日领奖"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Month Supply",
+            "description": "月卡领奖"
+        }
+    }
+}

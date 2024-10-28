@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/DbTriggerGiftItem",
+    "definitions": {
+        "DbTriggerGiftItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\"  对应ActTriggerGift中的ID"
+                },
+                "triggerTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"triggerTime\"  上次触发时间"
+                },
+                "endTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"endTime\"  结束时间（为0）"
+                },
+                "buy": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"buy\"  是否已购买"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Db Trigger Gift Item"
+        }
+    }
+}

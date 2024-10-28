@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActDataTimeLimitedTask",
+    "definitions": {
+        "ActDataTimeLimitedTask": {
+            "properties": {
+                "taskAwardData": {
+                    "items": {
+                        "$ref": "#/definitions/model.TimeLimitedTaskItem"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"taskAwardData\"  礼包和限时任务合为一起 前2条是固定的礼包任务"
+                },
+                "dayId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"dayId\"  玩家当前任务天数 这个每次加1 其实就是任务进度，每天最多可以领取1次进度"
+                },
+                "updateDayId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"updateDayId\"  玩家上一次刷新时间的具体天数"
+                },
+                "lastUpdate": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lastUpdate\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Time Limited Task"
+        },
+        "model.TimeLimitedTaskItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\"  对应ActTimeLimitTaskQuest中的ID   限时任务需要刷新 是否需要刷新是两个条件 1. 刷新周期，2.本周期是否做该任务，没做就不用刷新"
+                },
+                "hasGot": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Time Limited Task Item"
+        }
+    }
+}

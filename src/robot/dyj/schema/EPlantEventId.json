@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "enum": [
+        "EPEI_Invalid",
+        "EPEI_Water",
+        "EPEI_Rip",
+        "EPEI_Weed",
+        "EPEI_DeInsect"
+    ],
+    "type": "string",
+    "title": "E Plant Event Id"
+}

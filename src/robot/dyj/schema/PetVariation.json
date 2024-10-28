@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PetVariation",
+    "definitions": {
+        "PetVariation": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer"
+                },
+                "skillGlobalItemId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Variation",
+            "description": "变异"
+        }
+    }
+}

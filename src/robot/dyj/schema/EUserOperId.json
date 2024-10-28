@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "enum": [
+        "EPOI_Invalid",
+        "EPOI_Act_TaskPlan",
+        "EPOI_Act_LvlUpgrade"
+    ],
+    "type": "string",
+    "title": "E User Oper Id",
+    "description": "玩家操作, 账单用"
+}

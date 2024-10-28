@@ -1,0 +1,90 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Task",
+    "definitions": {
+        "Task": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "index为uid和taskId，唯一id系统生成 @inject_tag: bson:\"uid\""
+                },
+                "taskId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"taskId\""
+                },
+                "updateAt": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"updateAt\"  ! 更新时间"
+                },
+                "taskDataList": {
+                    "items": {
+                        "$ref": "#/definitions/model.TaskCondData"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"taskDataList\"  ! 完成条件的数据"
+                },
+                "taskStatus": {
+                    "enum": [
+                        "ETS_Invalid",
+                        "ETS_Accept",
+                        "ETS_Rewarded"
+                    ],
+                    "type": "string",
+                    "title": "E Task Status"
+                },
+                "needEventId": {
+                    "enum": [
+                        "ETEI_Invalid",
+                        "ETEI_Bag",
+                        "ETEI_Building",
+                        "ETEI_Exp",
+                        "ETEI_Build",
+                        "ETEI_Plant",
+                        "ETEI_Harvest",
+                        "ETEI_Product",
+                        "ETEI_Order",
+                        "ETEI_LvlUpgrade",
+                        "ETEI_OwnItem",
+                        "ETEI_RepairEnd",
+                        "ETEI_CostItem",
+                        "ETEI_AddItem",
+                        "ETEI_Formula",
+                        "ETEI_DeliveryEnd",
+                        "ETEI_ScienceOpt",
+                        "ETEI_DeliveryStart",
+                        "ETEI_PetAssign",
+                        "ETEI_GotPet",
+                        "ETEI_BuildStart",
+                        "ETEI_PetUpgrade",
+                        "ETEI_RepairStart",
+                        "ETEI_DecorateAdd",
+                        "ETEI_DecorateRem",
+                        "ETEI_RemoveEnd",
+                        "ETEI_RechargeNum",
+                        "ETEI_RechargeAmount"
+                    ],
+                    "type": "string",
+                    "title": "E Task Event Id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task"
+        },
+        "model.TaskCondData": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Cond Data"
+        }
+    }
+}

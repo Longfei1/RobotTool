@@ -21,18 +21,11 @@
   let tipTag = ref(new Map())
   let showMsg = ref<any[]>([])
 
-  onBeforeMount(()=> {
-    window.addShowMsg = addShowMsg
-    window.addTipTag = addTipTag
-
-    // addShowMsg({id: 1, protoId: 1001, protoType: "C2SLogin", msg: '{"feagegabraerdfwefdfaef": "feageaefgeafdvaw", "feaghbgerawvwv": "feafaraberbre", "gbrasbedbrefdbvberbdsfbdes": 1343245345345, "feagegabraerdfwef5dfaef": "feageaefgeafdvaw", "feaghbger4awvwv": "feafaraberbre", "feagegabraerdfw3efdfaef": "feageaefgeafd2vaw", "feaghbg1erawvwv": "feafaraberbre"}'})
-    // addShowMsg({id: 2, protoId: 1001, protoType: "C2SLogin", msg: '{"feagegabraerdfwefdfaef": "feageaefgeafdvaw", "feaghbgerawvwv": "feafaraberbre"}'})
-    // addShowMsg({id: 3, protoId: 1001, protoType: "C2SLogin", msg: '{"feagegabraerdfwefdfaef": "feageaefgeafdvaw", "feaghbgerawvwv": "feafaraberbre"}'})
-    // addShowMsg({id: 4, protoId: 1001, protoType: "C2SLogin", msg: '{"feagegabraerdfwefdfaef": "feageaefgeafdvaw", "feaghbgerawvwv": "feafaraberbre"}'})
-    // addShowMsg({id: 5, protoId: 1001, protoType: "C2SLogin", msg: '{"feagegabraerdfwefdfaef": "feageaefgeafdvaw", "feaghbgerawvwv": "feafaraberbre"}'})
-    // addShowMsg({id: 6, protoId: 1001, protoType: "C2SLogin", msg: '{"feagegabraerdfwefdfaef": "feageaefgeafdvaw", "feaghbgerawvwv": "feafaraberbre"}'})
-
-    // addTipTag({name: "uid", msg: "abcdefg", type: "info"})
+  onBeforeMount(async ()=> {
+    window['addShowMsg'] = addShowMsg
+    window['addTipTag'] = addTipTag
+    window['addTipMsg'] = addTipMsg
+    window['showPopMsg'] = showPopMsg
   })
 
   function addShowMsg(msg: string) {
@@ -43,7 +36,17 @@
 
   function addTipTag(tag: string) { 
     let obj = JSON.parse(tag)
+    console.log("addTipTag", obj)
     tipTag.value.set(obj.name, obj)
+  }
+
+  function addTipMsg(msg: string) { 
+    console.log("addTipMsg", msg)
+    tipMsg.value = msg
+  }
+
+  function showPopMsg(msg: string) { 
+    alert(msg)
   }
 </script>
 

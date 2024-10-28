@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActRspFoundationInvest",
+    "definitions": {
+        "ActRspFoundationInvest": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.ActDataFoundationInvest",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Foundation Invest"
+        },
+        "model.ActDataFoundationInvest": {
+            "properties": {
+                "awardStatus": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"awardStatus\"  领奖状态 \u003c配置id, 是否已领取\u003e"
+                },
+                "buyTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"buyTime\"  购买时间（0表示未购买）"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Foundation Invest"
+        }
+    }
+}

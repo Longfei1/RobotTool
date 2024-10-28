@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SUserBaseOpera",
+    "definitions": {
+        "C2SUserBaseOpera": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "changeReq": {
+                    "$ref": "#/definitions/msg.UserBaseChangeReq",
+                    "additionalProperties": true
+                },
+                "headFrame": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "changeReq"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "headFrame"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "changeReq"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "headFrame"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "C 2 S User Base Opera"
+        },
+        "msg.UserBaseChangeReq": {
+            "properties": {
+                "nickName": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "User Base Change Req"
+        }
+    }
+}

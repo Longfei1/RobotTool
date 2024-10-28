@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "enum": [
+        "EC_Invalid",
+        "EC_MaxProductListLen",
+        "EC_MaxPlantEventLen"
+    ],
+    "type": "string",
+    "title": "E Common"
+}

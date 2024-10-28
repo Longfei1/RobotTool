@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActDataGlobalCharge",
+    "definitions": {
+        "ActDataGlobalCharge": {
+            "properties": {
+                "hasGot": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Global Charge"
+        }
+    }
+}

@@ -1,0 +1,422 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SActivityOpera",
+    "definitions": {
+        "C2SActivityOpera": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "actType": {
+                    "enum": [
+                        "EAT_Invalid",
+                        "EAT_PersonalCharge",
+                        "EAT_GlobalCharge",
+                        "EAT_LevelUpgrade",
+                        "EAT_TaskPlan",
+                        "EAT_SevenDaySign",
+                        "EAT_SuperRechargeGift",
+                        "EAT_TimeLimitedTask",
+                        "EAT_DailyTask",
+                        "EAT_GlobalRebate",
+                        "EAT_TriggerGift",
+                        "EAT_FoundationInvest",
+                        "EAT_ExchangeCodeGift",
+                        "EAT_Max"
+                    ],
+                    "type": "string",
+                    "title": "E Activity Type"
+                },
+                "reqPersonalCharge": {
+                    "$ref": "#/definitions/msg.ActReqPersonalCharge",
+                    "additionalProperties": true,
+                    "description": "个人累充"
+                },
+                "reqGlobalCharge": {
+                    "$ref": "#/definitions/msg.ActReqGlobalCharge",
+                    "additionalProperties": true,
+                    "description": "全服累充"
+                },
+                "reqLevelUpgrade": {
+                    "$ref": "#/definitions/msg.ActReqLevelUpgrade",
+                    "additionalProperties": true,
+                    "description": "冲级活动"
+                },
+                "reqTaskPlan": {
+                    "$ref": "#/definitions/msg.ActReqTaskPlan",
+                    "additionalProperties": true,
+                    "description": "战令"
+                },
+                "reqSevenDaySign": {
+                    "$ref": "#/definitions/msg.ActReqSevenDaySign",
+                    "additionalProperties": true,
+                    "description": "七日签到"
+                },
+                "reqSuperRechargeGift": {
+                    "$ref": "#/definitions/msg.ActReqSuperRechargeGift",
+                    "additionalProperties": true,
+                    "description": "超值充值礼包"
+                },
+                "reqTimeLimitedTask": {
+                    "$ref": "#/definitions/msg.ActReqTimeLimitedTask",
+                    "additionalProperties": true,
+                    "description": "限时任务"
+                },
+                "reqDailyTask": {
+                    "$ref": "#/definitions/msg.ActReqDailyTask",
+                    "additionalProperties": true,
+                    "description": "每日签到"
+                },
+                "reqGlobalRebate": {
+                    "$ref": "#/definitions/msg.ActReqGlobalRebate",
+                    "additionalProperties": true,
+                    "description": "全民返利"
+                },
+                "reqTriggerGift": {
+                    "$ref": "#/definitions/msg.ActReqTriggerGift",
+                    "additionalProperties": true,
+                    "description": "触发礼包"
+                },
+                "reqFoundationInvest": {
+                    "$ref": "#/definitions/msg.ActReqFoundationInvest",
+                    "additionalProperties": true,
+                    "description": "基金投资"
+                },
+                "reqExchangeCodeGift": {
+                    "$ref": "#/definitions/msg.ActReqExchangeCodeGift",
+                    "additionalProperties": true,
+                    "description": "兑换码礼包"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "reqPersonalCharge"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqGlobalCharge"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqLevelUpgrade"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqTaskPlan"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqSevenDaySign"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqSuperRechargeGift"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqTimeLimitedTask"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqDailyTask"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqGlobalRebate"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqTriggerGift"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqFoundationInvest"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "reqExchangeCodeGift"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "reqPersonalCharge"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqGlobalCharge"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqLevelUpgrade"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqTaskPlan"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqSevenDaySign"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqSuperRechargeGift"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqTimeLimitedTask"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqDailyTask"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqGlobalRebate"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqTriggerGift"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqFoundationInvest"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "reqExchangeCodeGift"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "C 2 S Activity Opera"
+        },
+        "msg.ActReqDailyTask": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "DTRT_Info",
+                        "DTRT_Reward"
+                    ],
+                    "type": "string",
+                    "title": "Daily Task Req Type",
+                    "description": "每日任务"
+                },
+                "taskId": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Daily Task"
+        },
+        "msg.ActReqExchangeCodeGift": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Exchange Code Gift",
+            "description": "兑换码礼包"
+        },
+        "msg.ActReqFoundationInvest": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "FGRT_Info",
+                        "FGRT_Reward"
+                    ],
+                    "type": "string",
+                    "title": "Foundation Invest Req Type",
+                    "description": "基金投资"
+                },
+                "taskId": {
+                    "type": "integer",
+                    "description": "领取的任务id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Foundation Invest"
+        },
+        "msg.ActReqGlobalCharge": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1 拉取, 2 领奖, 3 一键领取"
+                },
+                "tagretId": {
+                    "type": "integer",
+                    "description": "领奖配置id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Global Charge",
+            "description": "全服累充"
+        },
+        "msg.ActReqGlobalRebate": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "GRRT_Info",
+                        "GRRT_GlobalReward",
+                        "GRRT_PersonReward"
+                    ],
+                    "type": "string",
+                    "title": "Global Rebate Req Type",
+                    "description": "全民返利"
+                },
+                "taskId": {
+                    "type": "integer",
+                    "description": "领取的任务id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Global Rebate"
+        },
+        "msg.ActReqLevelUpgrade": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1 拉取, 2 领奖, 3 一键领取"
+                },
+                "tagretId": {
+                    "type": "integer",
+                    "description": "领奖配置id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Level Upgrade",
+            "description": "冲级活动"
+        },
+        "msg.ActReqPersonalCharge": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1 拉取, 2 领奖, 3 一键领取"
+                },
+                "tagretId": {
+                    "type": "integer",
+                    "description": "领奖配置id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "-------------------- 活动开始 --------------------",
+            "description": "-------------------- 活动开始 --------------------  个人累充"
+        },
+        "msg.ActReqSevenDaySign": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "SDSR_GET_INFO",
+                        "SDSR_SIGN"
+                    ],
+                    "type": "string",
+                    "title": "Seven Day Sign Req Type"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Seven Day Sign"
+        },
+        "msg.ActReqSuperRechargeGift": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Super Recharge Gift"
+        },
+        "msg.ActReqTaskPlan": {
+            "properties": {
+                "operType": {
+                    "type": "integer",
+                    "description": "1 拉取, 2 完成任务, 3领取奖励 , 4 一键完成任务 , 5 一键领取奖励"
+                },
+                "tagretId": {
+                    "type": "integer",
+                    "description": "完成任务/领取奖励配置id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Task Plan"
+        },
+        "msg.ActReqTimeLimitedTask": {
+            "properties": {
+                "operaType": {
+                    "enum": [
+                        "ETLTOY_Invalid",
+                        "ETLTOY_Get",
+                        "ETLTOY_TakeReward"
+                    ],
+                    "type": "string",
+                    "title": "E Time Limited Task Opera Type"
+                },
+                "cfgId": {
+                    "type": "integer",
+                    "description": "领取奖励的id 不用从0开始"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Time Limited Task"
+        },
+        "msg.ActReqTriggerGift": {
+            "properties": {
+                "cmd": {
+                    "enum": [
+                        "TGRT_Info",
+                        "TGRT_Trigger"
+                    ],
+                    "type": "string",
+                    "title": "Trigger Gift Req Type",
+                    "description": "触发礼包"
+                },
+                "giftId": {
+                    "type": "integer",
+                    "description": "触发的礼包id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Req Trigger Gift"
+        }
+    }
+}

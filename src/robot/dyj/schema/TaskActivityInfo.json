@@ -1,0 +1,106 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TaskActivityInfo",
+    "definitions": {
+        "TaskActivityInfo": {
+            "properties": {
+                "activityId": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"activityId\""
+                },
+                "taskId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"taskId\""
+                },
+                "createAt": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"createAt\"  ! 创建时间"
+                },
+                "updateAt": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"updateAt\"  ! 更新时间"
+                },
+                "taskCondData": {
+                    "$ref": "#/definitions/model.TaskActivityCondData",
+                    "additionalProperties": true,
+                    "description": "@inject_tag: bson:\"taskCondData\"  ! 完成条件的数据"
+                },
+                "taskStatus": {
+                    "enum": [
+                        "ETS_Invalid",
+                        "ETS_Accept",
+                        "ETS_Rewarded"
+                    ],
+                    "type": "string",
+                    "title": "E Task Status"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Activity Info"
+        },
+        "model.BaseItemInfo": {
+            "properties": {
+                "itemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"itemId\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Base Item Info"
+        },
+        "model.TaskActivityCondData": {
+            "properties": {
+                "needEventId": {
+                    "enum": [
+                        "ETEI_Invalid",
+                        "ETEI_Bag",
+                        "ETEI_Building",
+                        "ETEI_Exp",
+                        "ETEI_Build",
+                        "ETEI_Plant",
+                        "ETEI_Harvest",
+                        "ETEI_Product",
+                        "ETEI_Order",
+                        "ETEI_LvlUpgrade",
+                        "ETEI_OwnItem",
+                        "ETEI_RepairEnd",
+                        "ETEI_CostItem",
+                        "ETEI_AddItem",
+                        "ETEI_Formula",
+                        "ETEI_DeliveryEnd",
+                        "ETEI_ScienceOpt",
+                        "ETEI_DeliveryStart",
+                        "ETEI_PetAssign",
+                        "ETEI_GotPet",
+                        "ETEI_BuildStart",
+                        "ETEI_PetUpgrade",
+                        "ETEI_RepairStart",
+                        "ETEI_DecorateAdd",
+                        "ETEI_DecorateRem",
+                        "ETEI_RemoveEnd",
+                        "ETEI_RechargeNum",
+                        "ETEI_RechargeAmount"
+                    ],
+                    "type": "string",
+                    "title": "E Task Event Id"
+                },
+                "needPropList": {
+                    "items": {
+                        "$ref": "#/definitions/model.BaseItemInfo"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"needPropList\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Activity Cond Data"
+        }
+    }
+}

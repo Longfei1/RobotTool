@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QQHallGiftRewardReq",
+    "definitions": {
+        "QQHallGiftRewardReq": {
+            "properties": {
+                "rewardId": {
+                    "type": "integer",
+                    "description": "配置里的id"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "QQ Hall Gift Reward Req"
+        }
+    }
+}

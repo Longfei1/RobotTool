@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActDataSuperRechargeGift",
+    "definitions": {
+        "ActDataSuperRechargeGift": {
+            "properties": {
+                "buyTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"buyTime\"  购买时间"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Super Recharge Gift"
+        }
+    }
+}

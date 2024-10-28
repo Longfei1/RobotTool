@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GetNPCInfo",
+    "definitions": {
+        "GetNPCInfo": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Get NPC Info",
+            "description": "! 拉取npc信息"
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActDataLevelUpgrade",
+    "definitions": {
+        "ActDataLevelUpgrade": {
+            "properties": {
+                "extraUnlock": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"extraUnlock\""
+                },
+                "hasGot": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"hasGot\""
+                },
+                "extraHasGot": {
+                    "items": {
+                        "type": "boolean"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"extraHasGot\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Level Upgrade"
+        }
+    }
+}

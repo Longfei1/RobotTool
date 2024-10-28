@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SItemInfo",
+    "definitions": {
+        "C2SItemInfo": {
+            "properties": {
+                "itemChange": {
+                    "enum": [
+                        "ItemAll",
+                        "UpdateTo"
+                    ],
+                    "type": "string",
+                    "title": "Item Change"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Item Info"
+        }
+    }
+}

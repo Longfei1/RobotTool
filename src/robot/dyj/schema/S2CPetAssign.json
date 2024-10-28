@@ -1,0 +1,159 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/S2CPetAssign",
+    "definitions": {
+        "S2CPetAssign": {
+            "properties": {
+                "errCode": {
+                    "enum": [
+                        "OK",
+                        "UNKNOWN_ERROR",
+                        "NOT_AUTH",
+                        "TOKEN_INVALID",
+                        "PLAYER_NOT_FOUND",
+                        "REDIRECT",
+                        "IDLE_TIMEOUT",
+                        "DUP_LOGIN",
+                        "PARAM_ERROR",
+                        "SERVER_CLOSED",
+                        "SYSTEM_ERR",
+                        "SCORE_LIMIT",
+                        "BUILDING_NOT_FOUND",
+                        "BUILDING_STATUS_STARTING",
+                        "BUILDING_CAN_NOT_PUT",
+                        "BUILDING_CAN_NOT_REMOVE",
+                        "BUILDING_CAN_NOT_ADD",
+                        "BUILDING_COMFORT_LIMIT",
+                        "BUILDING_USER_LVL_LIMIT",
+                        "BUILDING_NUM_LIMIT",
+                        "BUILDING_COMFORT_ENOUGH",
+                        "PLANT_ATTACH_BUILDING_NOT_FOUND",
+                        "PLANT_ATTACH_BUILDING_TYPE_ERR",
+                        "PLANT_ATTACH_BUILDING_HAVE_ATTACHED",
+                        "PLANT_NOT_FOUND",
+                        "PLANT_NOT_MATURE",
+                        "PLANT_PRUNE_STEP_ERR",
+                        "PLANT_PRUNE_TIME_ZERO",
+                        "PLANT_GRAFT_STEP_ERR",
+                        "PLANT_NOT_FOUND_CAN_DE_BUFFER",
+                        "PLANT_ALREADY_DE_BUFFER",
+                        "ITEM_NOT_FOUND",
+                        "PROP_NOT_FOUND",
+                        "PROP_NOT_ENOUGH",
+                        "ORDER_NOT_FOUND",
+                        "ORDER_SUBMIT_CD",
+                        "WAREHOUSE_CAPACITY_ERR",
+                        "PRODUCT_NOT_FOUND",
+                        "PRODUCT_NOT_END",
+                        "CHANGE_NICK_CD_ERR",
+                        "SHOP_EXCEED_LIMIT",
+                        "TASK_REWARDED",
+                        "TASK_COND_NOT_COM",
+                        "TASK_PRE_NOT_COM",
+                        "FORMULA_NOT_MATCH",
+                        "DELIVERY_GOODS_ALREADY_LOAD",
+                        "DELIVERY_CARGO_FIN",
+                        "DELIVERY_CARGO_NOT_FIN",
+                        "DELIVERY_GOODS_ALREADY_REWARD",
+                        "DELIVERY_CARGO_STARTED",
+                        "XIAO_XIAO_LE_MATCH_TIME_OUT",
+                        "XIAO_XIAO_LE_GAME_END",
+                        "ACTIVITY_LVL_NOT_MET",
+                        "ACTIVITY_NOT_IN_TIME",
+                        "EXCHANGE_CODE_INVALID",
+                        "EXCHANGE_CODE_EXPIRE",
+                        "EXCHANGE_CODE_TIME_NOT_OPEN",
+                        "EXCHANGE_CODE_USED",
+                        "EXCHANGE_CODE_BATCH_COUNT_LIMIT"
+                    ],
+                    "type": "string",
+                    "title": "STATUS",
+                    "description": "protoc --proto_path=./pb --go_out=./pbgo --go_opt=paths=source_relative ./pb/msg.proto错误码"
+                },
+                "uiId": {
+                    "type": "integer"
+                },
+                "buildUid": {
+                    "type": "string"
+                },
+                "petAssignInfo": {
+                    "$ref": "#/definitions/model.PetAssignInfo",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "S 2 C Pet Assign"
+        },
+        "model.PetAssignInfo": {
+            "properties": {
+                "petUid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"petUid\""
+                },
+                "bufferList": {
+                    "items": {
+                        "$ref": "#/definitions/model.PetBuffer"
+                    },
+                    "type": "array",
+                    "description": "@inject_tag: bson:\"bufferList\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Assign Info"
+        },
+        "model.PetBuffer": {
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"uid\""
+                },
+                "bufferId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"bufferId\""
+                },
+                "bufferValue": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"bufferValue\"  ! 放大10W倍"
+                },
+                "bufferTime": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"bufferTime\"  ! 生效结束时间 0表示永久"
+                },
+                "bufferSrc": {
+                    "enum": [
+                        "EBS_Invalid",
+                        "EBS_Attr",
+                        "EBS_Skill"
+                    ],
+                    "type": "string",
+                    "title": "E Buffer Src"
+                },
+                "ApplyTargetParams": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"ApplyTargetParams\""
+                },
+                "EffectiveConditionID": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"EffectiveConditionID\""
+                },
+                "EffectiveParams": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"EffectiveParams\""
+                },
+                "EffectiveProbability": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"EffectiveProbability\""
+                },
+                "EffectParams": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"EffectParams\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pet Buffer"
+        }
+    }
+}

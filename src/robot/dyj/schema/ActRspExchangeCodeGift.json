@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActRspExchangeCodeGift",
+    "definitions": {
+        "ActRspExchangeCodeGift": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Exchange Code Gift",
+            "description": "model.ActDataExchangeCodeGift data = 1;"
+        }
+    }
+}

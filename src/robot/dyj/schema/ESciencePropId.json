@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "enum": [
+        "ESPI_Invalid",
+        "ESPI_Start",
+        "ESPI_End"
+    ],
+    "type": "string",
+    "title": "E Science Prop Id"
+}

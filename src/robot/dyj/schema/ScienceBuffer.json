@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ScienceBuffer",
+    "definitions": {
+        "ScienceBuffer": {
+            "properties": {
+                "bufferValue": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"bufferValue\"  ! 放大10W倍"
+                },
+                "scienceBuffType": {
+                    "enum": [
+                        "ESBT_Invalid",
+                        "ESBT_ReduceCD",
+                        "ESBT_AddOutPut",
+                        "ESBT_LandBaseSpeed",
+                        "ESBT_LandOutPut",
+                        "ESBT_ExpandWarehouseCap"
+                    ],
+                    "type": "string",
+                    "title": "E Science Buff Type"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Science Buffer"
+        }
+    }
+}

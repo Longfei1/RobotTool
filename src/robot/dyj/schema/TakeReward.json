@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TakeReward",
+    "definitions": {
+        "TakeReward": {
+            "properties": {
+                "npcId": {
+                    "type": "integer"
+                },
+                "itemIndex": {
+                    "type": "integer",
+                    "description": "领取物品的索引 默认从0开始"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Take Reward",
+            "description": "! 领取手信"
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/SkillInfo",
+    "definitions": {
+        "SkillInfo": {
+            "properties": {
+                "skillId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"skillId\""
+                },
+                "lvl": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"lvl\""
+                },
+                "tempSkillId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"tempSkillId\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Skill Info"
+        }
+    }
+}

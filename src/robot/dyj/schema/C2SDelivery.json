@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SDelivery",
+    "definitions": {
+        "C2SDelivery": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "buildUid": {
+                    "type": "string"
+                },
+                "opera": {
+                    "enum": [
+                        "EDO_Get",
+                        "EDO_Load",
+                        "EDO_Flash",
+                        "EDO_Fin",
+                        "EDO_Restock"
+                    ],
+                    "type": "string",
+                    "title": "E Delivery Opera"
+                },
+                "cargoIndex": {
+                    "type": "integer",
+                    "description": "! 货车索引"
+                },
+                "loadIndex": {
+                    "type": "integer",
+                    "description": "! 装货索引999代表是一键装填 现在需求是要不装完，要不只有装一个"
+                },
+                "finRewardIndex": {
+                    "type": "integer",
+                    "description": "! 领取返程后的奖励索引  当索引为999代表是一键领取"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "C 2 S Delivery"
+        }
+    }
+}

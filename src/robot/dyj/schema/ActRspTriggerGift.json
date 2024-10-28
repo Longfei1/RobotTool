@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ActRspTriggerGift",
+    "definitions": {
+        "ActRspTriggerGift": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.ActDataTriggerGift",
+                    "additionalProperties": true
+                },
+                "triggered": {
+                    "type": "boolean",
+                    "description": "是否触发成功（不满足触发条件时，返回false，柔性处理，避免提示错误）"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Rsp Trigger Gift"
+        },
+        "model.ActDataTriggerGift": {
+            "properties": {
+                "items": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/model.DbTriggerGiftItem",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "@inject_tag: bson:\"items\"  礼包数据 \u003cid, item\u003e"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Act Data Trigger Gift"
+        },
+        "model.DbTriggerGiftItem": {
+            "properties": {
+                "cfgId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"cfgId\"  对应ActTriggerGift中的ID"
+                },
+                "triggerTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"triggerTime\"  上次触发时间"
+                },
+                "endTime": {
+                    "type": "string",
+                    "description": "@inject_tag: bson:\"endTime\"  结束时间（为0）"
+                },
+                "buy": {
+                    "type": "boolean",
+                    "description": "@inject_tag: bson:\"buy\"  是否已购买"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Db Trigger Gift Item"
+        }
+    }
+}

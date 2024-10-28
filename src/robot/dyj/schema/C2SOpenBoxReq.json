@@ -1,0 +1,82 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2SOpenBoxReq",
+    "definitions": {
+        "C2SOpenBoxReq": {
+            "properties": {
+                "uid": {
+                    "type": "integer"
+                },
+                "openOperaReq": {
+                    "$ref": "#/definitions/msg.OpenOperaReq",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "openOperaReq"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "openOperaReq"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "C 2 S Open Box Req"
+        },
+        "model.ItemInfo": {
+            "properties": {
+                "globalItemId": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"globalItemId\""
+                },
+                "level": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"level\""
+                },
+                "itemType": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"itemType\""
+                },
+                "num": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"num\""
+                },
+                "invalidTimeStamp": {
+                    "type": "integer",
+                    "description": "@inject_tag: bson:\"invalidTimeStamp\""
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Item Info"
+        },
+        "msg.OpenOperaReq": {
+            "properties": {
+                "itemInfo": {
+                    "items": {
+                        "$ref": "#/definitions/model.ItemInfo"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Open Opera Req"
+        }
+    }
+}

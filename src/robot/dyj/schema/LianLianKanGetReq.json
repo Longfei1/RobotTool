@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/LianLianKanGetReq",
+    "definitions": {
+        "LianLianKanGetReq": {
+            "properties": {
+                "operaType": {
+                    "enum": [
+                        "ELLKG_INVALID",
+                        "ELLKG_MATCHED",
+                        "ELLKG_GAMING"
+                    ],
+                    "type": "string",
+                    "title": "ELLK Get Opera Type"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Lian Lian Kan Get Req"
+        }
+    }
+}
