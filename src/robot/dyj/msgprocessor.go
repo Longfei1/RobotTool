@@ -7,18 +7,19 @@ import (
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/protobuf/proto"
 	"math"
+	"reflect"
 )
 
 type MsgProcessor struct {
 	littleEndian bool
 	msgInfo      map[uint16]proto.Message
-	msgID        map[proto.Message]uint16
+	msgID        map[reflect.Type]uint16
 }
 
 func NewMsgProcessor() *MsgProcessor {
 	p := new(MsgProcessor)
 	p.littleEndian = false
-	p.msgID = make(map[proto.Message]uint16)
+	p.msgID = make(map[reflect.Type]uint16)
 	p.msgInfo = make(map[uint16]proto.Message)
 	return p
 }
@@ -28,7 +29,7 @@ func (p *MsgProcessor) SetByteOrder(littleEndian bool) {
 }
 
 func (p *MsgProcessor) Register(msg proto.Message, eventType uint16) {
-	msgType := msg
+	msgType := reflect.TypeOf(msg)
 	if _, ok := p.msgID[msgType]; ok {
 		log.Errorf("message %s is already registered", msgType)
 		return
@@ -38,7 +39,7 @@ func (p *MsgProcessor) Register(msg proto.Message, eventType uint16) {
 		return
 	}
 
-	p.msgInfo[eventType] = msgType
+	p.msgInfo[eventType] = msg
 	p.msgID[msgType] = eventType
 }
 
@@ -47,7 +48,7 @@ func (p *MsgProcessor) GetMsgType(id uint16) proto.Message {
 }
 
 func (p *MsgProcessor) GetMsgId(tp proto.Message) uint16 {
-	return p.msgID[tp]
+	return p.msgID[reflect.TypeOf(tp)]
 }
 
 func (p *MsgProcessor) GetAllMsgInfo() map[uint16]proto.Message {
@@ -77,7 +78,7 @@ func (p *MsgProcessor) Unmarshal(data []byte) (proto.Message, error) {
 }
 
 func (p *MsgProcessor) Marshal(msg proto.Message) ([]byte, error) {
-	msgType := msg
+	msgType := reflect.TypeOf(msg)
 
 	// id
 	_id, ok := p.msgID[msgType]

@@ -7,7 +7,9 @@ export interface RequestProto {
 }
 
 export interface RequestData {
-    name: string;
+    uid: string; // 存储时的唯一id
+    id: any; // 对应消息号
+    name: string; //名称（别名）
     data: object;
 }
 

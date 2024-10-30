@@ -67,6 +67,7 @@ func (a *App) initUi() error {
 	_ = ui.Bind("execBevTree", a.execBevTree)
 	_ = ui.Bind("initServerConfig", a.initServerConfig)
 	_ = ui.Bind("getProtoRequest", a.getProtoRequest)
+	_ = ui.Bind("executeRequest", a.executeRequest)
 
 	a.ui = ui
 
@@ -140,6 +141,10 @@ func (a *App) initServerConfig(cfg *config.ServerConfig) error {
 
 func (a *App) getProtoRequest() []*jsmsg.ProtoMsg {
 	return a.robot.GetProtoRequest()
+}
+
+func (a *App) executeRequest(req *jsmsg.RequestMsgData) error {
+	return a.robot.SendRequestMsg(req)
 }
 
 // **** js函数 ****//

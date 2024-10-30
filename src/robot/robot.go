@@ -19,4 +19,5 @@ type IRobot interface {
 	RegisterBevMap(mp *behavior3go.RegisterStructMaps)
 	SetAppApi(appApi api.IAppApi)
 	GetProtoRequest() []*jsmsg.ProtoMsg
+	SendRequestMsg(req *jsmsg.RequestMsgData) error
 }

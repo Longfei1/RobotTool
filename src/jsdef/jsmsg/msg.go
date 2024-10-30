@@ -31,3 +31,8 @@ type ProtoMsg struct {
 	Schema       interface{} `json:"schema"`       //描述schema的对象
 	DefaultValue interface{} `json:"defaultValue"` //默认值
 }
+
+type RequestMsgData struct {
+	Id       interface{} `json:"Id"` //消息号，对应ProtoMsg.Id
+	JsonData string      `json:"jsonData"`
+}

@@ -7,8 +7,10 @@ import (
 	"RobotTool/src/network"
 	"RobotTool/src/robot/dyj/pbgo"
 	"errors"
+	"fmt"
 	"github.com/magicsea/behavior3go"
 	log "github.com/sirupsen/logrus"
+	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"os"
 	"reflect"
@@ -140,13 +142,9 @@ func (r *RobotDyj) SendMsg(args ...interface{}) error {
 	}
 
 	err = r.SendData(data)
-	if err != nil {
-		r.addMsgToUi(msg, "SEND FAILED")
-		return err
-	}
 
-	r.addMsgToUi(msg, "OK")
-	return nil
+	r.addMsgToUi(msg, err)
+	return err
 }
 
 func (r *RobotDyj) SendData(data []byte) error {
@@ -175,14 +173,14 @@ func (r *RobotDyj) HandleMessage(data []byte) {
 		return
 	}
 
-	r.addMsgToUi(rsp, "OK")
+	r.addMsgToUi(rsp, nil)
 }
 
 func (r *RobotDyj) OnClose() {
 	log.Info("ws client close")
 }
 
-func (r *RobotDyj) addMsgToUi(msg proto.Message, ret string) {
+func (r *RobotDyj) addMsgToUi(msg proto.Message, err error) {
 	if r.appApi == nil {
 		return
 	}
@@ -194,7 +192,7 @@ func (r *RobotDyj) addMsgToUi(msg proto.Message, ret string) {
 		ProtoType: rtRsp.Elem().Name(),
 		Msg:       msg,
 		Type:      jsmsg.Success,
-		Result:    ret,
+		Result:    "OK",
 	}
 
 	rvRsp := reflect.ValueOf(msg).Elem()
@@ -224,5 +222,35 @@ func (r *RobotDyj) addMsgToUi(msg proto.Message, ret string) {
 		})
 	}
 
+	if err != nil {
+		showMsg.Result = err.Error()
+		showMsg.Type = jsmsg.Danger
+		r.appApi.AddTipMsg(showMsg.Result)
+	}
+
 	r.appApi.AddShowMsg(showMsg)
+}
+
+func (r *RobotDyj) SendRequestMsg(req *jsmsg.RequestMsgData) error {
+	if req == nil {
+		return errors.New("req is nil")
+	}
+
+	msgId, ok := req.Id.(float64) //js默认的数字类型为float64
+	if !ok {
+		return errors.New("req.Id type invalid")
+	}
+
+	msgType := r.msgProcessor.GetMsgType(uint16(msgId))
+	if msgType == nil {
+		return fmt.Errorf("unknown msg id: %d", uint16(msgId))
+	}
+
+	msgData := msgType.ProtoReflect().New().Interface()
+	err := protojson.Unmarshal([]byte(req.JsonData), msgData)
+	if err != nil {
+		return err
+	}
+
+	return r.SendMsg(msgData)
 }
