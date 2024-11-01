@@ -2,7 +2,9 @@
   <el-container>
       <el-header height="25">
         快捷请求
-        <el-button type="primary" size="small" :icon="DocumentAdd" @click="onClickAdd"/>
+        <el-button type="success" size="small" @click="onClickAdd">
+          <el-icon style="scale: 2"> <DocumentAdd/> </el-icon>
+        </el-button>
       </el-header>
       <el-main>
         <BtnRequest v-for="v in reqList" :data="v" :onEdit="onReqBtnEdit" :onDelete="onReqBtnDelete"></BtnRequest>
@@ -16,14 +18,14 @@
   import type { RequestInfo, RequestData, RequestProto } from '@/type/request';
   import CommonFunc from '@/utils/CommonFunc';
   import JsonEditor from '@/utils/JsonEditor';
-  import { DocumentAdd } from '@element-plus/icons-vue'
+  import { } from '@element-plus/icons-vue'
 
   let reqList = ref<RequestInfo[]>([])
   let reqProto: RequestProto[] = []
   let reqData = ref<RequestData[]>([])
 
   onBeforeMount(async () => {
-    getProtoRequest()
+    await getProtoRequest()
 
     loadRequestList()
   })
@@ -36,7 +38,7 @@
     try {
       let ret = await window.getProtoRequest()
       reqProto = ret
-      //console.log(reqProto)
+      console.log(reqProto)
     } catch (e) {
       alert(e);
     }
@@ -59,14 +61,15 @@
         reqList.value.push(info)
       }
     }
+    console.log(reqList.value);
   }
 
   function buildReqInfo(msg: RequestData): (RequestInfo | null) {
     for (let proto of reqProto) {
       if (proto.id == msg.id) {
         //合并一次新模版的值
-        let defaultVal = CommonFunc.CloneObj(proto.defaultValue)
-        msg.data = Object.assign(defaultVal, msg.data) 
+        //let defaultVal = CommonFunc.CloneObj(proto.defaultValue)
+        //msg.data = Object.assign(defaultVal, msg.data) 
 
         let info: RequestInfo = {
           data: msg,
@@ -140,7 +143,6 @@
   }
 
   .el-container .el-header .el-button {
-    margin-left: 0px;
     scale: 0.7;
   }
 

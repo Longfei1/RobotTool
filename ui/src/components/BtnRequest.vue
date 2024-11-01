@@ -1,14 +1,17 @@
 <template>
     <el-button-group>
       <el-button type="primary" size="small" @click="onClickExecute">{{data.data.name}}</el-button>
-      <el-button type="primary" size="small" :icon="Edit" @click="onEdit"/>
-      <el-button type="primary" size="small" :icon="Delete" @click="onDelete"/>
+      <el-button type="primary" size="small" @click="onEdit">
+        <el-icon style="scale: 1.5"> <Edit/> </el-icon>
+      </el-button>
+      <el-button type="primary" size="small" @click="onDelete">
+        <el-icon style="scale: 1.5"> <Delete/> </el-icon>
+      </el-button>
     </el-button-group>
   </template>
   
   <script lang="ts" setup name="BtnBevRequest">
     import { ref } from 'vue';
-    import { Delete, Edit } from '@element-plus/icons-vue'
     import type { RequestInfo } from '@/type/request';
     import JsonEditor from '@/utils/JsonEditor';
   

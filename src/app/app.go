@@ -14,6 +14,8 @@ import (
 	"github.com/magicsea/behavior3go/core"
 	"github.com/magicsea/behavior3go/loader"
 	log "github.com/sirupsen/logrus"
+	"os"
+	"path"
 	"time"
 )
 
@@ -54,8 +56,19 @@ func (a *App) Run() {
 }
 
 func (a *App) initUi() error {
+	//创建缓存目录
+	workDir, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
+	cacheDir := path.Join(workDir, "cache/chrome")
+	if err = os.MkdirAll(cacheDir, 0755); err != nil {
+		return err
+	}
+
 	ui, err := lorca.New("http://localhost:5173",
-		"", 1024, 768)
+		cacheDir, 1024, 768)
 	if err != nil {
 		return err
 	}

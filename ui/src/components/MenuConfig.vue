@@ -12,14 +12,19 @@
   </el-select>
 
   <el-button-group>
-    <el-button type="primary" :icon="DocumentAdd" @click="onClickCreate"/>
-    <el-button type="primary" :icon="Edit" @click="onClickEdit"/>
-    <el-button type="primary" :icon="Delete" @click="onClickDelete"/>
+    <el-button type="primary" @click="onClickCreate">
+      <el-icon style="scale: 1.5"> <DocumentAdd/> </el-icon>
+    </el-button>
+    <el-button type="primary" @click="onClickEdit">
+      <el-icon style="scale: 1.5"> <Edit/> </el-icon>
+    </el-button>
+    <el-button type="primary" @click="onClickDelete">
+      <el-icon style="scale: 1.5"> <Delete/> </el-icon>
+    </el-button>
   </el-button-group>
 </template>
   
 <script lang="ts" setup name="MenuConfig">
-  import { Delete, Edit, DocumentAdd } from '@element-plus/icons-vue'
   import JsonEditor from '@/utils/JsonEditor';
   import { ref, onBeforeMount, watch } from 'vue';
   import type { ServerConfig } from '@/type/server';
