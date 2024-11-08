@@ -2,7 +2,7 @@
   <el-select
   v-model="selectServerStr"
   size="default"
-  style="width: 150px"
+  style="width: 135px"
   >
       <el-option
       v-for="item in serverData"
@@ -25,7 +25,7 @@
 </template>
   
 <script lang="ts" setup name="MenuConfig">
-  import JsonEditor from '@/utils/JsonEditor';
+  import DialogFactory from '@/utils/DialogFactory';
   import { ref, onBeforeMount, watch } from 'vue';
   import type { ServerConfig } from '@/type/server';
 
@@ -93,7 +93,7 @@
     let selectServerData = getSelectServerData()
     if (selectServerData) {
       let editName = selectServerData.name
-      JsonEditor.OpenJsonEditDialog(selectServerData, (data: any) => {
+      DialogFactory.OpenJsonEditDialog(selectServerData, (data: any) => {
         let oldCfg = serverData.value
         if (changeServerJson(editName, data)) {
           localStorage.setItem("serverData", JSON.stringify(serverData.value))
@@ -107,7 +107,7 @@
   }
 
   function onClickCreate() {
-    JsonEditor.OpenJsonEditDialog(serverTemplates[0], (data: any) => {
+    DialogFactory.OpenJsonEditDialog(serverTemplates[0], (data: any) => {
       if (changeServerJson("", data)) {
         localStorage.setItem("serverData", JSON.stringify(serverData.value))
         console.log("create serverjson ", serverData.value)

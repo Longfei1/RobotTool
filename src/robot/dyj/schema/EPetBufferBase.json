@@ -1,9 +1,0 @@
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "enum": [
-        "EPBB_Invalid",
-        "EPBB_Step"
-    ],
-    "type": "string",
-    "title": "E Pet Buffer Base"
-}

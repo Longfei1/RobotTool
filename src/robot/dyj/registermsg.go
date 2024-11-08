@@ -22,21 +22,27 @@ func registerWsMsg(processor *MsgProcessor) {
 }
 
 func registerPckMsg(processor *MsgProcessor) {
-	msgIdMap := pbgo.PCK_name
+	msgMapAry := []map[int32]string{
+		pbgo.PCK_name,
+		pbgo.LLKMsgId_name,
+		pbgo.TetrisMsgId_name,
+	}
 
-	for msgIdItem := range msgIdMap {
-		if msgIdItem < 1000 {
-			continue
-		}
+	for _, msgIdMap := range msgMapAry {
+		for msgIdItem := range msgIdMap {
+			if msgIdItem < 1000 {
+				continue
+			}
 
-		name := msgIdMap[msgIdItem]
-		name = strings.Trim(name, "_ID") // 去掉末尾的_ID
-		msgType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName("msg." + name))
-		if err != nil {
-			log.Warn(err)
-			continue
+			name := msgIdMap[msgIdItem]
+			name = strings.Trim(name, "_ID") // 去掉末尾的_ID
+			msgType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName("msg." + name))
+			if err != nil {
+				log.Warn(err)
+				continue
+			}
+			processor.Register(msgType.New().Interface(), uint16(msgIdItem))
 		}
-		processor.Register(msgType.New().Interface(), uint16(msgIdItem))
 	}
 }
 

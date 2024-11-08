@@ -1,14 +1,14 @@
 <template>
   <el-container>
-      <el-header height="25">
-        快捷请求
-        <el-button type="success" size="small" @click="onClickAdd">
-          <el-icon style="scale: 2"> <DocumentAdd/> </el-icon>
-        </el-button>
-      </el-header>
-      <el-main>
-        <BtnRequest v-for="v in reqList" :data="v" :onEdit="onReqBtnEdit" :onDelete="onReqBtnDelete"></BtnRequest>
-      </el-main>
+    <el-header height="25">
+      快捷请求
+      <el-button type="primary" size="small" @click="onClickAdd">
+        <el-icon style="scale: 2"> <DocumentAdd/> </el-icon>
+      </el-button>
+    </el-header>
+    <el-main>
+      <BtnRequest v-for="v in reqList" :data="v" :key="v.data.uid" :onEdit="onReqBtnEdit" :onDelete="onReqBtnDelete"></BtnRequest>
+    </el-main>
   </el-container>
 </template>
   
@@ -17,7 +17,7 @@
   import BtnRequest from './BtnRequest.vue';
   import type { RequestInfo, RequestData, RequestProto } from '@/type/request';
   import CommonFunc from '@/utils/CommonFunc';
-  import JsonEditor from '@/utils/JsonEditor';
+  import DialogFactory from '@/utils/DialogFactory';
   import { } from '@element-plus/icons-vue'
 
   let reqList = ref<RequestInfo[]>([])
@@ -61,7 +61,7 @@
         reqList.value.push(info)
       }
     }
-    console.log(reqList.value);
+    //console.log("refreshReqList", reqList.value);
   }
 
   function buildReqInfo(msg: RequestData): (RequestInfo | null) {
@@ -83,7 +83,7 @@
   }
 
   function onClickAdd() {
-    JsonEditor.OpenCreateRequestDialog(reqProto, (ret: any) => {
+    DialogFactory.OpenCreateRequestDialog(reqProto, (ret: any) => {
       let retData: RequestData = ret
       if (!retData || !retData.id) {
         alert("创建消息失败！")
@@ -113,6 +113,8 @@
       reqData.value.push(req)
     }
 
+    //console.log("saveRequest", req)
+
     refreshReqList(reqData.value)
   }
 
@@ -128,6 +130,7 @@
       }
     }
 
+    //console.log("onReqBtnDelete reqData", reqData.value)
     refreshReqList(reqData.value)
   }
 </script>

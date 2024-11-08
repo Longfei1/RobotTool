@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "$ref": "#/definitions/S2CFetchActCfg",
+    "$ref": "#/definitions/S2CTetrisAbort",
     "definitions": {
-        "S2CFetchActCfg": {
+        "S2CTetrisAbort": {
             "properties": {
                 "errCode": {
                     "enum": [
@@ -76,109 +76,11 @@
                 },
                 "uiId": {
                     "type": "integer"
-                },
-                "actCfgList": {
-                    "items": {
-                        "$ref": "#/definitions/model.ActivityCfg"
-                    },
-                    "type": "array"
-                },
-                "actTimeList": {
-                    "items": {
-                        "$ref": "#/definitions/model.ActTimeSection"
-                    },
-                    "type": "array"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "S 2 C Fetch Act Cfg"
-        },
-        "model.ActTimeSection": {
-            "properties": {
-                "No": {
-                    "type": "integer"
-                },
-                "BeginTime": {
-                    "type": "integer"
-                },
-                "EndTime": {
-                    "type": "integer"
-                },
-                "EndRewardTime": {
-                    "type": "integer"
-                }
-            },
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Act Time Section"
-        },
-        "model.ActivityCfg": {
-            "properties": {
-                "ID": {
-                    "type": "integer",
-                    "description": "id"
-                },
-                "Type": {
-                    "type": "integer"
-                },
-                "OpenLvl": {
-                    "type": "integer",
-                    "description": "string Name = 3;    // 不读了, csv不是utf8会报错"
-                },
-                "BeginTime": {
-                    "type": "integer"
-                },
-                "EndTime": {
-                    "type": "integer"
-                },
-                "EndRewardTime": {
-                    "type": "integer"
-                },
-                "RankType": {
-                    "type": "integer"
-                },
-                "TimeNo": {
-                    "type": "integer",
-                    "description": "时间编号"
-                },
-                "EffectType": {
-                    "enum": [
-                        "EAET_Always",
-                        "EAET_TimeSection",
-                        "EAET_Period",
-                        "EAET_NewUser"
-                    ],
-                    "type": "string",
-                    "title": "E Act Effect Type",
-                    "description": "生效类型"
-                },
-                "FlushId": {
-                    "enum": [
-                        "EFI_None",
-                        "EFI_Day",
-                        "EFI_Week",
-                        "EFI_Month",
-                        "EFI_Day0",
-                        "EFI_Month2Week",
-                        "EFI_Month4Week"
-                    ],
-                    "type": "string",
-                    "title": "E Flush Id",
-                    "description": "配置文件中的刷新id（定义成枚举，供特定情形下使用）"
-                },
-                "Duration": {
-                    "type": "string",
-                    "description": "持续时间"
-                },
-                "RewardEmailId": {
-                    "type": "integer",
-                    "description": "奖励邮件id"
-                }
-            },
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Activity Cfg"
+            "title": "S 2 C Tetris Abort"
         }
     }
 }

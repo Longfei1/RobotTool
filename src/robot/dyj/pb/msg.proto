@@ -67,6 +67,10 @@ enum STATUS {
   EXCHANGE_CODE_TIME_NOT_OPEN = 1412; // 兑换码-兑换码未开启
   EXCHANGE_CODE_USED = 1413; // 兑换码-已被使用
   EXCHANGE_CODE_BATCH_COUNT_LIMIT = 1414; // 兑换码-批次(期数)使用数量限制
+  SMALL_GAME_NOT_OPEN = 1420; // 小游戏未开放
+  SMALL_GAME_IN_GAME = 1421; // 已经在小游戏中（包括匹配状态）
+  SMALL_GAME_NOT_IN_GAME = 1422; // 未在小游戏中(进行游戏操作，但不在游戏状态)
+  SMALL_GAME_OVER = 1423; // 小游戏已结束(进行游戏操作，但游戏已结束)
 }
 
 // 对时，服务端存活探测探测, id=10000

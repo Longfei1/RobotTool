@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TetrisOpeClearRsp",
+    "definitions": {
+        "TetrisOpeClearRsp": {
+            "properties": {
+                "lvl": {
+                    "type": "integer",
+                    "description": "当前难度等级"
+                },
+                "rows": {
+                    "type": "integer",
+                    "description": "当前消除行数"
+                },
+                "score": {
+                    "type": "integer",
+                    "description": "当前消除得分"
+                },
+                "totalRows": {
+                    "type": "integer",
+                    "description": "总消除行数"
+                },
+                "totalScore": {
+                    "type": "integer",
+                    "description": "总消除得分"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tetris Ope Clear Rsp"
+        }
+    }
+}

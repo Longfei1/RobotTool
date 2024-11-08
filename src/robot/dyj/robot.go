@@ -162,7 +162,7 @@ func (r *RobotDyj) HeartbeatInterval() time.Duration {
 }
 
 func (r *RobotDyj) OnHeartbeat() {
-	req := &pbgo.Ping{Timestamp: time.Now().Unix()}
+	req := &pbgo.Ping{Timestamp: time.Now().UnixMilli()}
 	_ = r.SendMsg(req)
 }
 

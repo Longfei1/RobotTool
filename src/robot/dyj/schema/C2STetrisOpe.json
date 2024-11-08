@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/C2STetrisOpe",
+    "definitions": {
+        "C2STetrisOpe": {
+            "properties": {
+                "uiId": {
+                    "type": "integer"
+                },
+                "opeType": {
+                    "enum": [
+                        "TETRIS_OT_INVALID",
+                        "TETRIS_OT_CLEAR",
+                        "TETRIS_OT_PAUSE",
+                        "TETRIS_OT_RESUME"
+                    ],
+                    "type": "string",
+                    "title": "Tetris Ope Type"
+                },
+                "clear": {
+                    "$ref": "#/definitions/msg.TetrisOpeClearReq",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "clear"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "clear"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "C 2 S Tetris Ope"
+        },
+        "msg.TetrisOpeClearReq": {
+            "properties": {
+                "rows": {
+                    "type": "integer",
+                    "description": "消除行数"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tetris Ope Clear Req"
+        }
+    }
+}

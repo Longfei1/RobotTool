@@ -2,7 +2,7 @@
   <el-container>
       <el-header height="25">行为树</el-header>
       <el-main>
-        <BtnBevTree v-for="btn in cfgData.trees" :data="btn"></BtnBevTree>
+        <BtnBevTree v-for="btn in cfgData.trees" :key="btn.id" :data="btn"></BtnBevTree>
       </el-main>
   </el-container>
 </template>

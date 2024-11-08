@@ -1,8 +1,0 @@
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "enum": [
-        "ETI_Invalid"
-    ],
-    "type": "string",
-    "title": "E Task Id"
-}

@@ -61,8 +61,8 @@
     for (let v of protoList.value) {
       if (v.id == selectProto.value) {
         jsonData.value = CommonFunc.CloneObj(v.defaultValue)
-        options.value.schema = v.schema
-        console.log(editorRef.value)
+        //options.value.schema = v.schema
+        //console.log(editorRef.value)
         editorRef.value.editor.setSchema(v.schema)
         reqName.value = v.name
         break

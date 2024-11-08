@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TetrisOpeClearReq",
+    "definitions": {
+        "TetrisOpeClearReq": {
+            "properties": {
+                "rows": {
+                    "type": "integer",
+                    "description": "消除行数"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tetris Ope Clear Req"
+        }
+    }
+}

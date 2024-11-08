@@ -13,18 +13,18 @@
   <script lang="ts" setup name="BtnBevRequest">
     import { ref } from 'vue';
     import type { RequestInfo } from '@/type/request';
-    import JsonEditor from '@/utils/JsonEditor';
+    import DialogFactory from '@/utils/DialogFactory';
   
     let props = defineProps(["data", "onEdit", "onDelete"]);
   
-    let data = ref<RequestInfo>(props.data);
+    let data: RequestInfo = props.data;
   
     async function onClickExecute() {
-      console.log("execute request", data.value);
+      console.log("execute request", data);
       try {
         let ret = await window.executeRequest({
-            id: data.value.data.id, 
-            jsonData: JSON.stringify(data.value.data.data),
+            id: data.data.id, 
+            jsonData: JSON.stringify(data.data.data),
           }
         );
         //console.log(ret)
@@ -34,14 +34,15 @@
     }
 
     function onEdit() {
-      JsonEditor.OpenJsonEditDialog(data.value.data.data, (jsonData: any) => {
-        data.value.data.data = jsonData;
-        props.onEdit?.(data.value.data) 
-      }, undefined, {schema: data.value.proto.schema}); 
+      DialogFactory.OpenJsonEditDialog(data.data.data, (jsonData: any) => {
+        data.data.data = jsonData;
+        props.onEdit?.(data.data) 
+      }, undefined, {schema: data.proto.schema}); 
     }
 
     function onDelete() {
-      props.onDelete?.(data.value.data.uid) 
+      console.log("onDelete", data)
+      props.onDelete?.(data.data.uid) 
     }
   </script>
   

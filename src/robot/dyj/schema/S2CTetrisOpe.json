@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "$ref": "#/definitions/S2CFetchActCfg",
+    "$ref": "#/definitions/S2CTetrisOpe",
     "definitions": {
-        "S2CFetchActCfg": {
+        "S2CTetrisOpe": {
             "properties": {
                 "errCode": {
                     "enum": [
@@ -77,108 +77,73 @@
                 "uiId": {
                     "type": "integer"
                 },
-                "actCfgList": {
-                    "items": {
-                        "$ref": "#/definitions/model.ActivityCfg"
-                    },
-                    "type": "array"
-                },
-                "actTimeList": {
-                    "items": {
-                        "$ref": "#/definitions/model.ActTimeSection"
-                    },
-                    "type": "array"
-                }
-            },
-            "additionalProperties": true,
-            "type": "object",
-            "title": "S 2 C Fetch Act Cfg"
-        },
-        "model.ActTimeSection": {
-            "properties": {
-                "No": {
-                    "type": "integer"
-                },
-                "BeginTime": {
-                    "type": "integer"
-                },
-                "EndTime": {
-                    "type": "integer"
-                },
-                "EndRewardTime": {
-                    "type": "integer"
-                }
-            },
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Act Time Section"
-        },
-        "model.ActivityCfg": {
-            "properties": {
-                "ID": {
-                    "type": "integer",
-                    "description": "id"
-                },
-                "Type": {
-                    "type": "integer"
-                },
-                "OpenLvl": {
-                    "type": "integer",
-                    "description": "string Name = 3;    // 不读了, csv不是utf8会报错"
-                },
-                "BeginTime": {
-                    "type": "integer"
-                },
-                "EndTime": {
-                    "type": "integer"
-                },
-                "EndRewardTime": {
-                    "type": "integer"
-                },
-                "RankType": {
-                    "type": "integer"
-                },
-                "TimeNo": {
-                    "type": "integer",
-                    "description": "时间编号"
-                },
-                "EffectType": {
+                "opeType": {
                     "enum": [
-                        "EAET_Always",
-                        "EAET_TimeSection",
-                        "EAET_Period",
-                        "EAET_NewUser"
+                        "TETRIS_OT_INVALID",
+                        "TETRIS_OT_CLEAR",
+                        "TETRIS_OT_PAUSE",
+                        "TETRIS_OT_RESUME"
                     ],
                     "type": "string",
-                    "title": "E Act Effect Type",
-                    "description": "生效类型"
+                    "title": "Tetris Ope Type"
                 },
-                "FlushId": {
-                    "enum": [
-                        "EFI_None",
-                        "EFI_Day",
-                        "EFI_Week",
-                        "EFI_Month",
-                        "EFI_Day0",
-                        "EFI_Month2Week",
-                        "EFI_Month4Week"
-                    ],
-                    "type": "string",
-                    "title": "E Flush Id",
-                    "description": "配置文件中的刷新id（定义成枚举，供特定情形下使用）"
-                },
-                "Duration": {
-                    "type": "string",
-                    "description": "持续时间"
-                },
-                "RewardEmailId": {
-                    "type": "integer",
-                    "description": "奖励邮件id"
+                "clear": {
+                    "$ref": "#/definitions/msg.TetrisOpeClearRsp",
+                    "additionalProperties": true
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Activity Cfg"
+            "allOf": [
+                {
+                    "oneOf": [
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "clear"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": [
+                                "clear"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": "S 2 C Tetris Ope"
+        },
+        "msg.TetrisOpeClearRsp": {
+            "properties": {
+                "lvl": {
+                    "type": "integer",
+                    "description": "当前难度等级"
+                },
+                "rows": {
+                    "type": "integer",
+                    "description": "当前消除行数"
+                },
+                "score": {
+                    "type": "integer",
+                    "description": "当前消除得分"
+                },
+                "totalRows": {
+                    "type": "integer",
+                    "description": "总消除行数"
+                },
+                "totalScore": {
+                    "type": "integer",
+                    "description": "总消除得分"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tetris Ope Clear Rsp"
         }
     }
 }

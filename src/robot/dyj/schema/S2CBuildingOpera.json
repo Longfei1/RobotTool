@@ -64,7 +64,11 @@
                         "EXCHANGE_CODE_EXPIRE",
                         "EXCHANGE_CODE_TIME_NOT_OPEN",
                         "EXCHANGE_CODE_USED",
-                        "EXCHANGE_CODE_BATCH_COUNT_LIMIT"
+                        "EXCHANGE_CODE_BATCH_COUNT_LIMIT",
+                        "SMALL_GAME_NOT_OPEN",
+                        "SMALL_GAME_IN_GAME",
+                        "SMALL_GAME_NOT_IN_GAME",
+                        "SMALL_GAME_OVER"
                     ],
                     "type": "string",
                     "title": "STATUS",

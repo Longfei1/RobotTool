@@ -1,35 +1,38 @@
 <template>
   <el-container class="output">
     <el-header class="tip" height="35px">
-      <el-tag v-for="tag in tipTag.values()" :type="tag.type">{{tag.name}}:{{tag.msg}}</el-tag>
-      <el-text class="tipmsg">{{tipMsg}}</el-text>
+      <el-tag v-for="tag in tipTag.values()" :type="tag.type" :key="tag.name">{{tag.name}}:{{tag.msg}}</el-tag>
     </el-header>
 
     <el-main class="msglist"> 
       <el-scrollbar>
-        <ShowMsgItem v-for="msg in showMsg" :data="msg"></ShowMsgItem>
+        <ShowMsgItem v-for="msg in showMsg" :data="msg" :key="msg.id" :onFilter="onMsgBtnFilter"></ShowMsgItem>
       </el-scrollbar>
     </el-main>
 
     <el-footer class="bottom" height="30px">
-      <el-button type="warning" size="small" @click="onClickClear">
-        <el-icon style="scale: 1.5"> <CircleClose/> </el-icon>
-      </el-button>
       <el-button type="warning" size="small" @click="onClickFilter">
         <el-icon style="scale: 1.5"> <Filter/> </el-icon>
       </el-button>
+      <el-button type="warning" size="small" @click="onClickClear">
+        <el-icon style="scale: 1.5"> <CircleClose/> </el-icon>
+      </el-button>
+      <el-text class="tipmsg" type="primary">{{tipMsg}}</el-text>
     </el-footer>
   </el-container>
 </template>
 
 <script lang="ts" setup name="OutPutView">
-  import {ref, onBeforeMount} from "vue";
+  import {ref, onBeforeMount, watch} from "vue";
   import ShowMsgItem from '@/components/ShowMsgItem.vue';
+
+  import type { ShowMessage, FilterMessage } from '@/type/msg';
+import DialogFactory from "@/utils/DialogFactory";
 
   let tipMsg = ref("tip")
   let tipTag = ref(new Map())
-  let showMsg = ref<any[]>([])
-  let filterMsg = ref([])
+  let showMsg = ref<ShowMessage[]>([])
+  let filterMsg = ref<FilterMessage[]>([])
 
   onBeforeMount(async ()=> {
     window['addShowMsg'] = addShowMsg
@@ -37,8 +40,12 @@
     window['addTipMsg'] = addTipMsg
     window['showPopMsg'] = showPopMsg
 
-
+    loadFilterMsg()
   })
+
+  watch(filterMsg, (oldVal, newVal) => {
+    localStorage.setItem("msgFilter", JSON.stringify(filterMsg.value))
+  }, {deep: true})
 
   function loadFilterMsg() {
     let requestStr = localStorage.getItem("msgFilter")
@@ -53,7 +60,7 @@
     for (let i = showMsg.value.length - 1; i >= 0; i--) {
       let find = false
       for (let filter of filterMsg.value) {
-        if (showMsg.value[i].id == filter) {
+        if (showMsg.value[i].protoId == filter.protoId) {
           find = true
           break
         }
@@ -69,9 +76,9 @@
     showMsg.value = []
   }
 
-  function pushShowMsg(msg: any) {
+  function pushShowMsg(msg: ShowMessage) {
     for (let e of filterMsg.value) {
-      if (e == msg.id) {
+      if (e.protoId == msg.protoId) {
         return undefined
       }
     }
@@ -80,18 +87,18 @@
 
   function addShowMsg(msg: string) {
     let obj = JSON.parse(msg)
-    console.log("addShowMsg", obj)
+    //console.log("addShowMsg", obj)
     pushShowMsg(obj)
   }
 
   function addTipTag(tag: string) { 
     let obj = JSON.parse(tag)
-    console.log("addTipTag", obj)
+    //console.log("addTipTag", obj)
     tipTag.value.set(obj.name, obj)
   }
 
   function addTipMsg(msg: string) { 
-    console.log("addTipMsg", msg)
+    //console.log("addTipMsg", msg)
     tipMsg.value = msg
   }
 
@@ -100,11 +107,16 @@
   }
 
   function onClickFilter() {
-
+   DialogFactory.OpenMsgFilterDialog(filterMsg)
   }
 
   function onClickClear() {
     clearShowMsgList()
+  }
+
+  function onMsgBtnFilter(msg: FilterMessage) {
+    filterMsg.value.push(msg)
+    refreshShowMsgList()
   }
 </script>
 
@@ -126,7 +138,7 @@
   }
 
   .tipmsg {
-    margin-left: 5px;
+    margin-left: 15px;
   }
 
   .msglist {
@@ -146,7 +158,6 @@
   }
 
   .bottom {
-    direction: rtl;
     padding: 0 5px 0 0;
   }
 

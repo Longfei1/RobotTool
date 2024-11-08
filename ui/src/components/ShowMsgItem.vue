@@ -10,18 +10,23 @@
 
 <script lang="ts" setup name="ShowMsgItem">
   import { ref } from 'vue';
-  import JsonEditor from '@/utils/JsonEditor';
+  import DialogFactory from '@/utils/DialogFactory';
+  import type { ShowMessage, FilterMessage} from '@/type/msg';
 
-  let props = defineProps(["data"]);
+  let props = defineProps(["data", "onFilter"]);
 
-  let data = ref(props.data);
+  let data = ref<ShowMessage>(props.data);
 
   function onClickFilter() {
-    console.log(data.value);
+    let msg: FilterMessage = {
+      protoId: data.value.protoId,
+      protoType: data.value.protoType,
+    } 
+    props.onFilter?.(msg)
   }
 
   function onClickView() {
-    JsonEditor.OpenJsonViewDialog(data.value.msg);
+    DialogFactory.OpenJsonViewDialog(data.value.msg);
   }
 </script>
 

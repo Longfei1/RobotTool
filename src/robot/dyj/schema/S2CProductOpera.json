@@ -64,7 +64,11 @@
                         "EXCHANGE_CODE_EXPIRE",
                         "EXCHANGE_CODE_TIME_NOT_OPEN",
                         "EXCHANGE_CODE_USED",
-                        "EXCHANGE_CODE_BATCH_COUNT_LIMIT"
+                        "EXCHANGE_CODE_BATCH_COUNT_LIMIT",
+                        "SMALL_GAME_NOT_OPEN",
+                        "SMALL_GAME_IN_GAME",
+                        "SMALL_GAME_NOT_IN_GAME",
+                        "SMALL_GAME_OVER"
                     ],
                     "type": "string",
                     "title": "STATUS",
@@ -86,11 +90,6 @@
                     "$ref": "#/definitions/model.ProductInfo",
                     "additionalProperties": true,
                     "description": "! 全量的，如果领取中间的，中间这个被删除后，后面的会往前"
-                },
-                "scienceInfo": {
-                    "$ref": "#/definitions/model.ScienceInfo",
-                    "additionalProperties": true,
-                    "description": "科技树信息"
                 }
             },
             "additionalProperties": true,
@@ -137,43 +136,6 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Product Item"
-        },
-        "model.ScienceBuffer": {
-            "properties": {
-                "bufferValue": {
-                    "type": "integer",
-                    "description": "@inject_tag: bson:\"bufferValue\"  ! 放大10W倍"
-                },
-                "scienceBuffType": {
-                    "enum": [
-                        "ESBT_Invalid",
-                        "ESBT_ReduceCD",
-                        "ESBT_AddOutPut",
-                        "ESBT_LandBaseSpeed",
-                        "ESBT_LandOutPut",
-                        "ESBT_ExpandWarehouseCap"
-                    ],
-                    "type": "string",
-                    "title": "E Science Buff Type"
-                }
-            },
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Science Buffer"
-        },
-        "model.ScienceInfo": {
-            "properties": {
-                "bufferList": {
-                    "items": {
-                        "$ref": "#/definitions/model.ScienceBuffer"
-                    },
-                    "type": "array",
-                    "description": "@inject_tag: bson:\"bufferList\""
-                }
-            },
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Science Info"
         }
     }
 }
