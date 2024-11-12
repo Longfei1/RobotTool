@@ -25,6 +25,7 @@ type App struct {
 	web *gin.Engine
 
 	robot        robot.IRobot
+	appCfg       *config.AppConfig
 	btProjectCfg *bevCfg.BTProjectCfg
 	serverCfg    *config.ServerConfig
 }
@@ -36,14 +37,21 @@ func NewApp(r robot.IRobot) *App {
 }
 
 func (a *App) Run() {
+	if err := a.initConfig(); err != nil {
+		log.Error(err)
+		return
+	}
+
 	if err := a.initBev(); err != nil {
 		log.Error(err)
 		return
 	}
 
-	if err := a.initWeb(); err != nil {
-		log.Error(err)
-		return
+	if a.currModeConfig().UseWeb {
+		if err := a.initWeb(); err != nil {
+			log.Error(err)
+			return
+		}
 	}
 
 	if err := a.initUi(); err != nil {
@@ -62,6 +70,39 @@ func (a *App) Run() {
 	_ = a.robot.Close()
 }
 
+func (a *App) initConfig() error {
+	var appCfg config.AppConfig
+	file, err := os.ReadFile("conf/app.json")
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(file, &appCfg)
+	if err != nil {
+		return err
+	}
+
+	a.appCfg = &appCfg
+
+	if a.currModeConfig() == nil {
+		return errors.New("currModeConfig is nil")
+	}
+
+	return nil
+}
+
+func (a *App) currModeConfig() *config.AppModeInfo {
+	if a.appCfg == nil {
+		return nil
+	}
+
+	for _, v := range a.appCfg.ModeList {
+		if v.Name == a.appCfg.Mode {
+			return v
+		}
+	}
+	return nil
+}
+
 func (a *App) initWeb() error {
 	workDir, err := os.Getwd()
 	if err != nil {
@@ -72,7 +113,7 @@ func (a *App) initWeb() error {
 
 	a.web.StaticFS("/", gin.Dir(path.Join(workDir, "ui/dist"), true))
 	go func() {
-		err := a.web.Run(":8888")
+		err := a.web.Run(fmt.Sprintf(":%v", a.currModeConfig().WebPort))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -94,7 +135,7 @@ func (a *App) initUi() error {
 	}
 
 	//ui, err := lorca.New(path.Join(workDir, "ui/dist/index.html"),
-	ui, err := lorca.New("http://localhost:8888",
+	ui, err := lorca.New(a.currModeConfig().UiUrl,
 		cacheDir, 1024, 768)
 	if err != nil {
 		return err

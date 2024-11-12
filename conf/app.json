@@ -1,0 +1,17 @@
+{
+  "mode": "build",
+  "modeList": [
+    {
+      "name": "dev",
+      "useWeb": false,
+      "webPort": 0,
+      "uiUrl": "http://localhost:5173"
+    },
+    {
+      "name": "build",
+      "useWeb": true,
+      "webPort": 8888,
+      "uiUrl": "http://localhost:8888"
+    }
+  ]
+}
