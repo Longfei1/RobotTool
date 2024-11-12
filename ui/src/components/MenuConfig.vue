@@ -28,6 +28,7 @@
   import DialogFactory from '@/utils/DialogFactory';
   import { ref, onBeforeMount, watch } from 'vue';
   import type { ServerConfig } from '@/type/server';
+  import CommonFunc from '@/utils/CommonFunc';
 
   let serverData = ref<ServerConfig[]>([])
   let serverTemplates: ServerConfig[] = []
@@ -79,13 +80,25 @@
   })
 
   async function setGoServerConfig() {
-    let selectServerData = getSelectServerData()
-    if (selectServerData) {
-      try {
-        let ret = await window.initServerConfig(selectServerData)
-      } catch (e) {
-        alert(e);
+    let ret = await CommonFunc.tryPromiseFunc(async () => {
+      if (!window.initServerConfig) {
+        console.log("initServerConfig is null, wait excute again")
+        return false
       }
+
+      let selectServerData = getSelectServerData()
+      if (selectServerData) {
+        try {
+          await window.initServerConfig(selectServerData)
+        } catch (e) {
+          alert(e);
+        }
+      }
+      return true
+    }, 30, 300)
+
+    if (!ret) {
+      alert("setGoServerConfig failed, exceed maximum retry times");
     }
   }
 

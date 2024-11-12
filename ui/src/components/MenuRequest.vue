@@ -25,9 +25,19 @@
   let reqData = ref<RequestData[]>([])
 
   onBeforeMount(async () => {
-    await getProtoRequest()
+    let ret = await CommonFunc.tryPromiseFunc(async () => {
+      let ret = await getProtoRequest()
+      if (!ret) {
+        return false
+      }
 
-    loadRequestList()
+      loadRequestList()
+      return true
+    }, 30, 300)
+
+    if (!ret) {
+      alert("setGoServerConfig failed, exceed maximum retry times");
+    }
   })
 
   watch(reqData, (oldVal, newVal) => {
@@ -35,6 +45,10 @@
   }, {deep: true})
 
   async function getProtoRequest() {
+    if (!window.getProtoRequest) {
+      console.log("getProtoRequest is null, wait excute again")
+      return false
+    }
     try {
       let ret = await window.getProtoRequest()
       reqProto = ret
@@ -42,6 +56,7 @@
     } catch (e) {
       alert(e);
     }
+    return true
   }
 
   function loadRequestList() {
