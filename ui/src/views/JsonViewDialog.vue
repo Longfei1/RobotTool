@@ -7,7 +7,7 @@
     :close-on-click-modal="false"
   >
     <json-editor-vue class="editor" v-model="jsonData" 
-      :modeList="['view']"
+      :modeList="['view', 'code', 'text']"
       :currentMode="'view'"
       :options="options">
     </json-editor-vue>
@@ -23,10 +23,15 @@
   let jsonData = ref(props.data)
   let show = ref(true)
   let options = props.options
+  options.onEditable = onEditable
 
   function close() {
     show.value = false
     props.onClose?.(jsonData.value)
+  }
+
+  function onEditable(node?: any): boolean | object {
+    return false
   }
 </script>
 

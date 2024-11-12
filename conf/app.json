@@ -1,5 +1,5 @@
 {
-  "mode": "build",
+  "mode": "dev",
   "modeList": [
     {
       "name": "dev",
