@@ -48,7 +48,9 @@ RobotTool # 项目根目录
 
 - vue.js 3.4.36
 
-- vite
+- vite 
+
+创建vue工程：
 ```
 npm create vue@latest
 ```
