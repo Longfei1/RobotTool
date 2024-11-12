@@ -33,6 +33,6 @@ type ProtoMsg struct {
 }
 
 type RequestMsgData struct {
-	Id       interface{} `json:"Id"` //消息号，对应ProtoMsg.Id
+	Id       interface{} `json:"id"` //消息号，对应ProtoMsg.Id
 	JsonData string      `json:"jsonData"`
 }

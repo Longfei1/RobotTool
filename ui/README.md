@@ -32,8 +32,8 @@ npm run dev
 npm run build
 ```
 
-### 插件
-1. 支持setup中name属性的语法
+## 插件
+1. 支持setup中name属性的语法，自动补全Ref.value
 ```sh
 npm i vite-plugin-vue-setup-extend -D
 ```
@@ -41,3 +41,14 @@ npm i vite-plugin-vue-setup-extend -D
 ```sh
 npm i @originjs/vite-plugin-commonjs -D
 ```
+
+## 第三方库
+三方库的版本信息，可查看package.json
+
+| 库名 | 版本 | 说明 |
+|---|---|---|
+| json-editor-vue3 | 1.1.1 | json编辑器，用于编辑配置、请求json |
+| element-plus | 2.8.0 | ui组件 |
+| pinia | 2.2.2 | 组件共享的数据中心（项目暂未使用，目前都通过prop传递数据） |
+| uuid | 11.0.2 | 唯一id |
+| ajv-draft-04 | 1.0.0 | ajv扩展，支持draft-04 json schema |

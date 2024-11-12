@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Longfei1/lorca"
+	"github.com/gin-gonic/gin"
 	b3 "github.com/magicsea/behavior3go"
 	bevCfg "github.com/magicsea/behavior3go/config"
 	"github.com/magicsea/behavior3go/core"
@@ -20,7 +21,8 @@ import (
 )
 
 type App struct {
-	ui lorca.UI
+	ui  lorca.UI
+	web *gin.Engine
 
 	robot        robot.IRobot
 	btProjectCfg *bevCfg.BTProjectCfg
@@ -35,6 +37,11 @@ func NewApp(r robot.IRobot) *App {
 
 func (a *App) Run() {
 	if err := a.initBev(); err != nil {
+		log.Error(err)
+		return
+	}
+
+	if err := a.initWeb(); err != nil {
 		log.Error(err)
 		return
 	}
@@ -55,6 +62,25 @@ func (a *App) Run() {
 	_ = a.robot.Close()
 }
 
+func (a *App) initWeb() error {
+	workDir, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
+	a.web = gin.Default()
+
+	a.web.StaticFS("/", gin.Dir(path.Join(workDir, "ui/dist"), true))
+	go func() {
+		err := a.web.Run(":8888")
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	return nil
+}
+
 func (a *App) initUi() error {
 	//创建缓存目录
 	workDir, err := os.Getwd()
@@ -67,7 +93,8 @@ func (a *App) initUi() error {
 		return err
 	}
 
-	ui, err := lorca.New("http://localhost:5173",
+	//ui, err := lorca.New(path.Join(workDir, "ui/dist/index.html"),
+	ui, err := lorca.New("http://localhost:8888",
 		cacheDir, 1024, 768)
 	if err != nil {
 		return err

@@ -11,7 +11,7 @@
   import { ref, onBeforeMount } from 'vue';
   import BtnBevTree from './BtnBevTree.vue';
 
-  let cfgData = ref({});
+  let cfgData = ref<any>({});
 
   onBeforeMount(loadConfig);
 

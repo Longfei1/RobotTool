@@ -5,7 +5,7 @@
     </el-header>
 
     <el-main class="msglist"> 
-      <el-scrollbar>
+      <el-scrollbar ref="showMsgScroll" @scroll="onShowMsgEventScroll">
         <ShowMsgItem v-for="msg in showMsg" :data="msg" :key="msg.id" :onFilter="onMsgBtnFilter"></ShowMsgItem>
       </el-scrollbar>
     </el-main>
@@ -27,18 +27,23 @@
   import ShowMsgItem from '@/components/ShowMsgItem.vue';
 
   import type { ShowMessage, FilterMessage } from '@/type/msg';
-import DialogFactory from "@/utils/DialogFactory";
+  import DialogFactory from "@/utils/DialogFactory";
 
   let tipMsg = ref("tip")
   let tipTag = ref(new Map())
   let showMsg = ref<ShowMessage[]>([])
   let filterMsg = ref<FilterMessage[]>([])
 
+  //滚动条相关
+  let showMsgScroll = ref();
+  let bNeedAutoMoveScroll = true
+  let bAutoMoveScroll = false
+
   onBeforeMount(async ()=> {
-    window['addShowMsg'] = addShowMsg
-    window['addTipTag'] = addTipTag
-    window['addTipMsg'] = addTipMsg
-    window['showPopMsg'] = showPopMsg
+    window.addShowMsg = addShowMsg
+    window.addTipTag = addTipTag
+    window.addTipMsg = addTipMsg
+    window.showPopMsg = showPopMsg
 
     loadFilterMsg()
   })
@@ -83,6 +88,8 @@ import DialogFactory from "@/utils/DialogFactory";
       }
     }
     showMsg.value.push(msg)
+
+    scrollShowMsgToBottom()
   }
 
   function addShowMsg(msg: string) {
@@ -117,6 +124,40 @@ import DialogFactory from "@/utils/DialogFactory";
   function onMsgBtnFilter(msg: FilterMessage) {
     filterMsg.value.push(msg)
     refreshShowMsgList()
+  }
+
+  function onShowMsgEventScroll(e: any) {
+    let diff: number = showMsgScroll.value.wrapRef.scrollHeight-showMsgScroll.value.wrapRef.clientHeight
+    if (diff == 0) {
+      bNeedAutoMoveScroll = true
+      bAutoMoveScroll = false
+      return
+    }
+
+    console.log("onShowMsgEventScroll 1", bAutoMoveScroll)
+    if (bAutoMoveScroll) {
+      bAutoMoveScroll = false
+      return
+    }
+
+    // 滑动到最底部时，恢复自动滑动
+    if (e.scrollTop + showMsgScroll.value.wrapRef.clientHeight == showMsgScroll.value.wrapRef.scrollHeight) {
+      bNeedAutoMoveScroll = true
+    } else {
+      bNeedAutoMoveScroll = false
+    }
+  }
+
+  function scrollShowMsgToBottom() {
+    // 滚动条长度未及时发生变化，下一帧在获取
+    setTimeout(() => {
+      if (bNeedAutoMoveScroll) {
+        bAutoMoveScroll = true
+        let diff: number = showMsgScroll.value.wrapRef.scrollHeight-showMsgScroll.value.wrapRef.clientHeight
+        console.log("scrollShowMsgToBottom", diff)
+        showMsgScroll.value.setScrollTop(diff)
+      }
+    }, 0)
   }
 </script>
 

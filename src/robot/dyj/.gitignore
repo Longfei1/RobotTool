@@ -1,0 +1,3 @@
+pb/*.proto
+pbgo/*.pb.go
+schema/*.json

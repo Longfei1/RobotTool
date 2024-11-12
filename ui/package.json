@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@vitejs/plugin-legacy": "^5.4.3",
     "ajv-draft-04": "^1.0.0",
     "element-plus": "^2.8.0",
     "json-editor-vue3": "^1.1.1",
