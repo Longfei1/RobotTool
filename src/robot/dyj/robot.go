@@ -22,6 +22,11 @@ import (
 	"time"
 )
 
+const (
+	ProtoIdConnect = 1
+	ProtoIdClose   = 2
+)
+
 type RobotDyj struct {
 	wsClient     *network.WsClient
 	msgProcessor *MsgProcessor
@@ -176,8 +181,36 @@ func (r *RobotDyj) HandleMessage(data []byte) {
 	r.addMsgToUi(rsp, nil)
 }
 
+func (r *RobotDyj) OnConnect() {
+	log.Info("ws client connect")
+	showMsg := &jsmsg.ShowMessage{
+		Id:        r.msgCounter.Add(1),
+		ProtoId:   ProtoIdConnect,
+		ProtoType: "Net Connect",
+		Msg: map[string]interface{}{
+			"content": "net connect success",
+		},
+		Type:   jsmsg.Success,
+		Result: "OK",
+	}
+	r.appApi.AddShowMsg(showMsg)
+}
+
 func (r *RobotDyj) OnClose() {
 	log.Info("ws client close")
+	showMsg := &jsmsg.ShowMessage{
+		Id:        r.msgCounter.Add(1),
+		ProtoId:   ProtoIdClose,
+		ProtoType: "Net Close",
+		Msg: map[string]interface{}{
+			"content": "net closed",
+		},
+		Type:   jsmsg.Danger,
+		Result: "OK",
+	}
+	r.appApi.AddShowMsg(showMsg)
+
+	r.appApi.AddTipMsg("net closed")
 }
 
 func (r *RobotDyj) addMsgToUi(msg proto.Message, err error) {

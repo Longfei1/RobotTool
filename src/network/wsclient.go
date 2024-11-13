@@ -13,6 +13,7 @@ type IMsgHandle interface {
 	HeartbeatInterval() time.Duration
 	OnHeartbeat()
 	HandleMessage(data []byte)
+	OnConnect()
 	OnClose()
 }
 
@@ -47,6 +48,10 @@ func (w *WsClient) Connect(url string) error {
 
 	go w.read()
 	go w.write()
+
+	if w.msgHandler != nil {
+		w.msgHandler.OnConnect()
+	}
 
 	return nil
 }
@@ -98,7 +103,7 @@ func (w *WsClient) read() {
 	for {
 		t, message, err := w.wsConn.ReadMessage()
 		if err != nil {
-			log.Error(err)
+			log.Info(err)
 			return
 		}
 
@@ -133,7 +138,7 @@ func (w *WsClient) write() {
 		select {
 		case data, ok := <-w.send:
 			if !ok {
-				log.Error("send chan closed")
+				log.Info("send chan closed")
 				return
 			}
 			err := w.wsConn.WriteMessage(websocket.BinaryMessage, data)
