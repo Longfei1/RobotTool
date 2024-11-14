@@ -7,7 +7,13 @@
       </el-button>
     </el-header>
     <el-main>
-      <BtnRequest v-for="v in reqList" :data="v" :key="v.data.uid" :onEdit="onReqBtnEdit" :onDelete="onReqBtnDelete"></BtnRequest>
+      <el-space :size="4" wrap>
+        <BtnRequest v-for="v in reqList" :data="v" :key="v.data.uid" 
+        @edit="onReqBtnEdit" 
+        @move-up="onReqBtnMoveUp"
+        @move-down="onReqBtnMoveDown"
+        @delete="onReqBtnDelete"/>
+      </el-space>
     </el-main>
   </el-container>
 </template>
@@ -137,6 +143,55 @@
     saveRequest(data)
   }
 
+  function onReqBtnMoveUp(uid: string, diff: number) {
+    console.log("onReqBtnMoveUp", uid, diff)
+    moveRequest(uid, -diff)
+  }
+
+  function onReqBtnMoveDown(uid: string, diff: number) {
+    moveRequest(uid, diff)
+  }
+
+  function moveRequest(uid: string, diff: number) {
+    if (diff == 0) {
+      return
+    }
+
+    if (reqData.value.length <= 1) {
+      return
+    }
+
+    let curIdx = -1
+    for (let i = 0; i < reqData.value.length; i++) {
+      if (reqData.value[i].uid == uid) {
+        curIdx = i
+        break
+      }
+    }
+
+    if (diff > 0) {
+      let tmp = reqData.value[curIdx]
+      let lastIdx = curIdx + diff >= reqData.value.length - 1 ? reqData.value.length - 1 : curIdx + diff
+      for (let i = curIdx + 1; i <= lastIdx; i++) {
+        reqData.value[i-1] = reqData.value[i]
+      }
+      if (curIdx != lastIdx) {
+        reqData.value[lastIdx]=tmp
+      }
+    } else if (diff < 0) {
+      let tmp = reqData.value[curIdx]
+      let lastIdx = curIdx + diff > 0 ? curIdx + diff : 0
+      for (let i = curIdx - 1; i >= lastIdx; i--) {
+        reqData.value[i+1] = reqData.value[i]
+      }
+      if (curIdx != lastIdx) {
+        reqData.value[lastIdx]=tmp
+      }
+    }
+
+    refreshReqList(reqData.value)
+  }
+
   function onReqBtnDelete(uid: string) {
     for (let i = 0; i < reqData.value.length; i++) {
       if (reqData.value[i].uid == uid) {
@@ -167,10 +222,5 @@
   .el-container .el-main {
     margin-top: 5px;
     padding: 0;
-  }
-
-  .el-container .el-main .el-button-group {
-    margin-top: 3px;
-    margin-left: 3px;
   }
 </style>

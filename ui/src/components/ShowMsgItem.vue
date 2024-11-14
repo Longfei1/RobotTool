@@ -13,7 +13,9 @@
   import DialogFactory from '@/utils/DialogFactory';
   import type { ShowMessage, FilterMessage} from '@/type/msg';
 
-  let props = defineProps(["data", "onFilter"]);
+  let props = defineProps(["data"]);
+
+  const emit = defineEmits(["filter"])
 
   let data = ref<ShowMessage>(props.data);
 
@@ -22,7 +24,7 @@
       protoId: data.value.protoId,
       protoType: data.value.protoType,
     } 
-    props.onFilter?.(msg)
+    emit("filter", msg)
   }
 
   function onClickView() {

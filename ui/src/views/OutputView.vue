@@ -6,7 +6,7 @@
 
     <el-main class="msglist"> 
       <el-scrollbar ref="showMsgScroll" @scroll="onShowMsgEventScroll">
-        <ShowMsgItem v-for="msg in showMsg" :data="msg" :key="msg.id" :onFilter="onMsgBtnFilter"></ShowMsgItem>
+        <ShowMsgItem v-for="msg in showMsg" :data="msg" :key="msg.id" @filter="onMsgBtnFilter"></ShowMsgItem>
       </el-scrollbar>
     </el-main>
 
