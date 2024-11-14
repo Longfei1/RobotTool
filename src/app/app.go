@@ -72,7 +72,20 @@ func (a *App) Run() {
 
 func (a *App) initConfig() error {
 	var appCfg config.AppConfig
-	file, err := os.ReadFile("conf/app.json")
+
+	// 读取cache目录下的配置，没有的话，就创建
+	pathConf := "cache/conf/app.json"
+	_, err := os.Stat(pathConf)
+	if os.IsNotExist(err) {
+		err = common.CopyFile("conf/app.json", pathConf)
+		if err != nil {
+			return err
+		}
+	} else if err != nil {
+		return err
+	}
+
+	file, err := os.ReadFile(pathConf)
 	if err != nil {
 		return err
 	}

@@ -22,6 +22,6 @@ go.work
 go.work.sum
 .idea
 logs
-cache/chrome
+cache
 
 robot.exe
