@@ -9,7 +9,7 @@
       <el-dropdown-menu>
         <el-dropdown-item command="edit" icon="Edit">编辑</el-dropdown-item>
 
-        <el-dropdown-item command="moveUp" divided>
+        <el-dropdown-item command="moveUp" divided icon="Back">
           前移
           <div @click.stop> <!-- 屏蔽点击事件透传到下拉框中 -->
             <el-input-number size="small" v-model="moveUpNum" :min="1" controls-position="right" style="margin-left: 5px;">
@@ -27,7 +27,7 @@
           </div>
         </el-dropdown-item>
 
-        <el-dropdown-item command="moveDown">
+        <el-dropdown-item command="moveDown" icon="Right">
           后移
           <div @click.stop>  <!-- 屏蔽点击事件透传到下拉框中 -->
             <el-input-number size="small" v-model="moveDownNum" :min="1" controls-position="right" style="margin-left: 5px;">
